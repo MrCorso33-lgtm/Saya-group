@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Nama - Saya Group | Keramika i Kupatilski Proizvodi</title>
+    <meta name="description" content="Saya Group – vaš pouzdani partner za premium keramiku i kupatilsku opremu od 2012. godine. Dva salona, sopstveni vozni park, uvoz i izvoz, profesionalna podrška.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ─── Design Tokens (matches index.html) ─── */
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--secondary);
+            background: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        img { max-width: 100%; display: block; }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── Utility ─── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section { padding: 80px 0; }
+        .section--alt { background: var(--light-gray); }
+        .section--dark { background: var(--secondary); color: var(--white); }
+        .section--primary { background: var(--primary); color: var(--white); }
+        .section--warm { background: var(--background); }
+
+        .label {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .section--dark .label, .section--primary .label { color: rgba(255,255,255,0.7); }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--mid-gray);
+            max-width: 640px;
+            line-height: 1.8;
+        }
+        .section--dark .section-subtitle,
+        .section--primary .section-subtitle { color: rgba(255,255,255,0.75); }
+
+        .divider {
+            width: 48px;
+            height: 3px;
+            background: var(--primary);
+            margin: 20px 0 28px;
+        }
+        .section--dark .divider, .section--primary .divider { background: rgba(255,255,255,0.5); }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--secondary);
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #2a1020 100%);
+        }
+
+        .hero__pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--white) 0,
+                var(--white) 1px,
+                transparent 0,
+                transparent 50%
+            );
+            background-size: 20px 20px;
+        }
+
+        .hero__accent {
+            position: absolute;
+            top: 0; right: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 30%, rgba(197,38,105,0.12) 100%);
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            padding: 80px 0;
+        }
+
+        .hero__eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero__eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .hero__title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .hero__title span { color: var(--primary); }
+
+        .hero__desc {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.72);
+            max-width: 580px;
+            line-height: 1.85;
+            margin-bottom: 40px;
+        }
+
+        .hero__stats {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero__stat-value {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .hero__stat-value span { color: var(--primary); }
+
+        .hero__stat-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb {
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+            font-size: 0.82rem;
+            color: var(--mid-gray);
+        }
+
+        .breadcrumb a { color: var(--primary); }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 8px; }
+
+        /* ─── Mission / Story ─── */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .story-image {
+            position: relative;
+        }
+
+        .story-image__main {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0e8f4 0%, #f9f0f5 100%);
+            color: #bbb;
+            font-size: 0.8rem;
+            gap: 12px;
+        }
+
+        .placeholder-img svg { opacity: 0.4; }
+
+        .story-image__badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(197,38,105,0.35);
+        }
+
+        .story-image__badge-year {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .story-image__badge-text {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .story-content p {
+            color: #444;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        /* ─── Values ─── */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 48px;
+        }
+
+        .value-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .value-card:hover::before { transform: scaleY(1); }
+
+        .value-icon {
+            width: 52px;
+            height: 52px;
+            background: #fdf0f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .value-title {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .value-text {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ─── Numbers / Stats ─── */
+        .stats-band {
+            background: var(--secondary);
+            padding: 64px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 32px 24px;
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .stat-number span { color: var(--primary); }
+
+        .stat-label {
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.45);
+            margin-top: 10px;
+        }
+
+        /* ─── Brands ─── */
+        .brands-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+            margin-bottom: 56px;
+        }
+
+        .brands-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .brand-chip {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--secondary);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .brand-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #fdf5f9;
+        }
+
+        .brand-chip.featured {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #fdf5f9;
+        }
+
+        /* ─── Locations ─── */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .location-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .location-card:hover { box-shadow: var(--shadow-hover); }
+
+        .location-map {
+            width: 100%;
+            height: 200px;
+            background: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .location-map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8f0fe 0%, #f0f4ff 100%);
+            color: #888;
+            font-size: 0.82rem;
+            gap: 10px;
+        }
+
+        .location-body { padding: 28px; }
+
+        .location-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+        }
+
+        .location-name {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .location-info {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .location-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .location-info li svg {
+            flex-shrink: 0;
+            margin-top: 2px;
+            color: var(--primary);
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4px 16px;
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        .hours-day { font-weight: 500; color: var(--secondary); }
+
+        /* ─── Certifications / Trust ─── */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .trust-card {
+            text-align: center;
+            padding: 32px 20px;
+            background: rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .trust-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(197,38,105,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--primary);
+        }
+
+        .trust-title {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .trust-text {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+        }
+
+        /* ─── Team ─── */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 48px;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f0e8f4 0%, #f9f0f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+        }
+
+        .team-body { padding: 24px 20px; }
+
+        .team-name {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .team-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #a01f54 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section .section-title { color: var(--white); margin-bottom: 16px; }
+        .cta-section .section-subtitle { color: rgba(255,255,255,0.8); margin: 0 auto 40px; }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            text-decoration: none;
+        }
+
+        .btn--white {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn--white:hover {
+            background: transparent;
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .btn--outline-white {
+            background: transparent;
+            border-color: rgba(255,255,255,0.5);
+            color: var(--white);
+        }
+
+        .btn--outline-white:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--white);
+        }
+
+        /* ─── Testimonials ─── */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.15;
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 14px;
+        }
+
+        .star { color: var(--accent); font-size: 0.9rem; }
+
+        .testimonial-text {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.75;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--secondary);
+        }
+
+        /* ─── Legal Info ─── */
+        .legal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .legal-block {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px;
+            border: 1px solid var(--border);
+        }
+
+        .legal-block-title {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .legal-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .legal-table tr { border-bottom: 1px solid #f0f0f0; }
+        .legal-table tr:last-child { border-bottom: none; }
+
+        .legal-table td {
+            padding: 8px 0;
+            vertical-align: top;
+        }
+
+        .legal-table td:first-child {
+            color: var(--mid-gray);
+            width: 45%;
+            font-size: 0.82rem;
+        }
+
+        .legal-table td:last-child {
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1100px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
+            .stat-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+            .stat-item:nth-child(4) { border-right: none; }
+            .trust-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 900px) {
+            .section { padding: 60px 0; }
+            .story-grid { grid-template-columns: 1fr; gap: 40px; }
+            .story-image__badge { bottom: -16px; right: 16px; }
+            .brands-intro { grid-template-columns: 1fr; gap: 32px; }
+            .locations-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .legal-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .section { padding: 48px 0; }
+            .container { padding: 0 16px; }
+            .hero__content { padding: 60px 0; }
+            .hero__stats { gap: 24px; }
+            .values-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .trust-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .brands-list { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .story-image__badge { width: 90px; height: 90px; bottom: -12px; right: 12px; }
+            .story-image__badge-year { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Breadcrumb ─── -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Početna</a>
+            <span>›</span>
+            <span>O Nama</span>
+        </div>
+    </nav>
+
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__pattern"></div>
+        <div class="hero__accent"></div>
+        <div class="container">
+            <div class="hero__content">
+                <p class="hero__eyebrow">O Nama</p>
+                <h1 class="hero__title">
+                    Vaš pouzdani partner<br>za <span>premium keramiku</span><br>i kupatilsku opremu
+                </h1>
+                <p class="hero__desc">
+                    Od 2012. godine gradimo poverenje kroz kvalitet, stručnost i posvećenost svakom projektu — 
+                    od privatnih stanova do velikih komercijalnih objekata.
+                </p>
+                <div class="hero__stats">
+                    <div>
+                        <div class="hero__stat-value">13<span>+</span></div>
+                        <div class="hero__stat-label">Godina iskustva</div>
+                    </div>
+                    <div>
+                        <div class="hero__stat-value">2</div>
+                        <div class="hero__stat-label">Salona</div>
+                    </div>
+                    <div>
+                        <div class="hero__stat-value">400<span>+</span></div>
+                        <div class="hero__stat-label">Proizvoda</div>
+                    </div>
+                    <div>
+                        <div class="hero__stat-value">30<span>k</span></div>
+                        <div class="hero__stat-label">Pratilaca na Instagramu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Story / Mission ─── -->
+    <section class="section">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-image">
+                    <div class="story-image__main">
+                        <div class="placeholder-img">
+                            <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <path d="m21 15-5-5L5 21"/>
+                            </svg>
+                            <span>Fotografija salona — placeholder</span>
+                        </div>
+                    </div>
+                    <div class="story-image__badge">
+                        <div class="story-image__badge-year">2012</div>
+                        <div class="story-image__badge-text">Osnivanje</div>
+                    </div>
+                </div>
+                <div class="story-content">
+                    <span class="label">Naša priča</span>
+                    <h2 class="section-title">Više od decenije posvećenosti kvalitetu</h2>
+                    <div class="divider"></div>
+                    <p>
+                        Saya Group je osnovan 22. oktobra 2012. godine u Novom Beogradu sa jasnom misijom — 
+                        doneti premium evropsku keramiku i kupatilsku opremu direktno do srpskog tržišta, 
+                        po pristupačnim cenama i uz profesionalnu podršku.
+                    </p>
+                    <p>
+                        Kroz godine smo izgradili čvrste partnerske odnose sa vodećim španskim i italijanskim 
+                        proizvođačima keramike, kao i sa renomiranim brendovima kupatilske opreme. 
+                        Naš asortiman danas obuhvata više od 400 proizvoda — od elegantnih zidnih i podnih pločica 
+                        do kompletnih kupatilskih rešenja.
+                    </p>
+                    <p>
+                        Pored salona u Novom Beogradu, otvorili smo i salon na Zlatiboru, čime smo proširili 
+                        dostupnost naših proizvoda i usluga izvan prestonice. Sopstveni vozni park omogućava nam 
+                        pouzdanu i pravovremenu dostavu na celoj teritoriji Beograda.
+                    </p>
+                    <p>
+                        Kompanija posluje kao uvoznik i izvoznik, sa aktivnim bankarskim računima kod Banca Intesa 
+                        i UniCredit Bank, što garantuje finansijsku stabilnost i transparentnost u poslovanju 
+                        sa svim partnerima.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Values ─── -->
+    <section class="section section--alt">
+        <div class="container">
+            <span class="label">Naše vrednosti</span>
+            <h2 class="section-title">Šta nas čini drugačijim</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">
+                Svaki aspekt našeg poslovanja vođen je principima koji su važni i za krajnje kupce i za profesionalne partnere.
+            </p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="value-title">Provereni kvalitet</div>
+                    <div class="value-text">Sarađujemo isključivo sa sertifikovanim evropskim proizvođačima. Svaki proizvod u našem asortimanu prolazi strogu selekciju pre nego što dođe do kupca.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="value-title">Stručna podrška</div>
+                    <div class="value-text">Naš tim je na raspolaganju svakom kupcu — od prvog izbora pločice do finalizacije projekta. Pružamo konkretne savete prilagođene svakom prostoru i budžetu.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div class="value-title">Brza isporuka</div>
+                    <div class="value-text">Sopstveni vozni park garantuje brzu i pouzdanu dostavu na celoj teritoriji Beograda. Za porudžbine preko 50.000 RSD — dostava je besplatna.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="value-title">Pristupačne cene</div>
+                    <div class="value-text">Direktan uvoz od proizvođača eliminišu nepotrebne posrednike. Nudimo konkurentne cene uz redovne akcije i popuste tokom cele godine.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+                        </svg>
+                    </div>
+                    <div class="value-title">Uvoz i izvoz</div>
+                    <div class="value-text">Registrovani smo kao uvoznik i izvoznik, sa direktnim vezama ka vodećim evropskim proizvođačima. To nam omogućava fleksibilnost i širi asortiman za B2B partnere.</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <div class="value-title">Transparentno poslovanje</div>
+                    <div class="value-text">Bonitetna ocena AA-- za 2025. godinu potvrđuje visoku finansijsku stabilnost i pouzdanost kompanije. Bez poreskog duga, bez blokade računa.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Stats Band ─── -->
+    <section class="stats-band">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">13<span>+</span></div>
+                    <div class="stat-label">Godina na tržištu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">400<span>+</span></div>
+                    <div class="stat-label">Proizvoda u asortimanu</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Salona (Beograd + Zlatibor)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15<span>+</span></div>
+                    <div class="stat-label">Brendova u ponudi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Brands ─── -->
+    <section class="section">
+        <div class="container">
+            <div class="brands-intro">
+                <div>
+                    <span class="label">Naši partneri</span>
+                    <h2 class="section-title">Premium brendovi koje zastupamo</h2>
+                    <div class="divider"></div>
+                    <p class="section-subtitle">
+                        Pažljivo odabrani portfolio evropskih brendova — pretežno španskih i italijanskih proizvođača 
+                        koji kombinuju dizajn, inovaciju i dugotrajnost. Svaki brend u našoj ponudi prošao je 
+                        rigoroznu selekciju i zadovoljava najviše standarde kvaliteta.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-size:0.9rem; color:#666; line-height:1.8; margin-bottom:16px;">
+                        Kao direktni uvoznik, sarađujemo sa proizvođačima koji imaju decenije iskustva u industriji 
+                        keramike i kupatilske opreme. Naši B2B partneri — arhitekte, investitori i izvođači radova — 
+                        imaju pristup kompletnoj tehničkoj dokumentaciji i uzorcima za svaki brend.
+                    </p>
+                    <p style="font-size:0.9rem; color:#666; line-height:1.8;">
+                        Za profesionalne projekte nudimo posebne uslove saradnje, prioritetnu dostavu i 
+                        tehničku podršku tokom čitavog trajanja projekta.
+                    </p>
+                </div>
+            </div>
+
+            <div class="brands-list">
+                <div class="brand-chip featured">Tau Ceramica</div>
+                <div class="brand-chip featured">Ribesalbes</div>
+                <div class="brand-chip featured">New Tiles</div>
+                <div class="brand-chip featured">Codicer 95</div>
+                <div class="brand-chip featured">Arcana Ceramica</div>
+                <div class="brand-chip featured">WoW Design</div>
+                <div class="brand-chip">Adex 1897</div>
+                <div class="brand-chip">Ascot</div>
+                <div class="brand-chip">Arena Ceramiche</div>
+                <div class="brand-chip">Fanal Ceramica</div>
+                <div class="brand-chip">Onix Mosaico</div>
+                <div class="brand-chip">Zorka Keramika</div>
+                <div class="brand-chip">KolpaSan</div>
+                <div class="brand-chip">ACO</div>
+                <div class="brand-chip">Grohe</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Trust / Credentials ─── -->
+    <section class="section section--dark">
+        <div class="container">
+            <span class="label">Zašto nam veruju</span>
+            <h2 class="section-title">Kredibilitet koji se gradi godinama</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">
+                Za B2B partnere — arhitekte, projektante i investitore — pouzdanost dobavljača je jednako važna 
+                kao i kvalitet proizvoda. Evo šta nas čini sigurnim izborom za vaš projekat.
+            </p>
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div class="trust-title">Bonitet AA-- 2025</div>
+                    <div class="trust-text">Sertifikat bonitetne izvrsnosti potvrđuje visoku finansijsku stabilnost i nizak poslovni rizik.</div>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                        </svg>
+                    </div>
+                    <div class="trust-title">Registrovani uvoznik</div>
+                    <div class="trust-text">Direktan uvoz od evropskih proizvođača — bez posrednika, sa kompletnom carinskom dokumentacijom.</div>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <div class="trust-title">Aktivni bankovni računi</div>
+                    <div class="trust-text">Banca Intesa i UniCredit Bank — transparentno finansijsko poslovanje bez blokada i poreskog duga.</div>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon">
+                        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div class="trust-title">13+ godina poslovanja</div>
+                    <div class="trust-text">Kontinuirano aktivno poslovanje od 2012. godine — stabilnost i iskustvo koje se reflektuje na svaki projekat.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Locations ─── -->
+    <section class="section section--warm">
+        <div class="container">
+            <span class="label">Naši saloni</span>
+            <h2 class="section-title">Posetite nas</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">
+                Dva salona sa kompletnim izložbenim prostorom — na Novom Beogradu i na Zlatiboru. 
+                Naš stručni tim je tu da vam pomogne u odabiru pravog rešenja za vaš prostor.
+            </p>
+            <div class="locations-grid">
+                <!-- Salon 1 -->
+                <div class="location-card">
+                    <div class="location-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2831.5!2d20.3850!3d44.8050!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSur%C4%8Dinska+94%2C+Novi+Beograd!5e0!3m2!1ssr!2srs!4v1"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Saya Group Novi Beograd lokacija">
+                        </iframe>
+                    </div>
+                    <div class="location-body">
+                        <span class="location-badge">Salon 1 — Glavni</span>
+                        <div class="location-name">Novi Beograd</div>
+                        <ul class="location-info">
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <span>Surčinska 94, 11070 Novi Beograd</span>
+                            </li>
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                <div>
+                                    <div>+381 60/700-50-68</div>
+                                    <div>+381 60/700-56-17</div>
+                                    <div>+381 60/700-56-18</div>
+                                </div>
+                            </li>
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <span>office@sayagroup.rs</span>
+                            </li>
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <div class="hours-grid">
+                                    <span class="hours-day">Pon – Pet</span><span>08:00 – 20:00</span>
+                                    <span class="hours-day">Subota</span><span>08:00 – 15:00</span>
+                                    <span class="hours-day">Nedelja</span><span>09:00 – 15:00</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Salon 2 -->
+                <div class="location-card">
+                    <div class="location-map">
+                        <div class="location-map-placeholder">
+                            <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="opacity:0.4">
+                                <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                            </svg>
+                            <span style="font-size:0.8rem; color:#999;">Mapa — Zlatibor salon</span>
+                        </div>
+                    </div>
+                    <div class="location-body">
+                        <span class="location-badge">Salon 2</span>
+                        <div class="location-name">Zlatibor</div>
+                        <ul class="location-info">
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <span>Vranjevina 253, 31315 Zlatibor</span>
+                            </li>
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                <span>+381 60/70-56-04</span>
+                            </li>
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <span>office@sayagroup.rs</span>
+                            </li>
+                            <li>
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span style="color:#888; font-size:0.85rem;">Radno vreme — kontaktirajte nas za detalje</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Testimonials ─── -->
+    <section class="section">
+        <div class="container">
+            <span class="label">Šta kažu kupci</span>
+            <h2 class="section-title">Reči naših klijenata</h2>
+            <div class="divider"></div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">
+                        "Jako ljubazno osoblje, jako strpljivo i predusretljivo. Sve pohvale za profesionalizam na radnom mestu. Odličan izbor, ozbiljno lepih pločica. Asortiman od pristupačnog pa naviše."
+                    </p>
+                    <div class="testimonial-author">Tamara Brčić</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">
+                        "Najbolji, najlepši izbor keramike, preljubazno osoblje, odlične cene, brza isporuka. Ja sam prezadovoljna kao i moji prijatelji. Sve pohvale."
+                    </p>
+                    <div class="testimonial-author">Katarina Subotić</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">
+                        "Profesionalna usluga, pristojne cene. Vrlo brza dostava. Sve u svemu zadovoljan sam."
+                    </p>
+                    <div class="testimonial-author">Alexandar Lazović</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Team ─── -->
+    <section class="section section--alt">
+        <div class="container">
+            <span class="label">Naš tim</span>
+            <h2 class="section-title">Ljudi iza Saya Group</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">
+                Iza svakog uspešnog projekta stoji tim koji se brine o svakom detalju — od prvog kontakta do finalne isporuke.
+            </p>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                            <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <div class="team-body">
+                        <div class="team-name">Slađana Krivokuća</div>
+                        <div class="team-role">Osnivač &amp; Direktor</div>
+                        <div class="team-desc">Osnivač i vlasnik kompanije. Vodi Saya Group od osnivanja 2012. godine sa vizijom da premium evropska keramika bude dostupna svim kupcima u Srbiji.</div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                            <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <div class="team-body">
+                        <div class="team-name">Jelena Simić</div>
+                        <div class="team-role">Prokurista</div>
+                        <div class="team-desc">Ovlašćeni zastupnik kompanije. Koordinira poslovne procese i osigurava da svaki partner i kupac dobije profesionalnu uslugu na najvišem nivou.</div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-photo">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="team-body">
+                        <div class="team-name">Naš tim</div>
+                        <div class="team-role">Prodaja &amp; Podrška</div>
+                        <div class="team-desc">Stručni savetnici u oba salona, dostupni svakim danom u nedelji. Pomažu kupcima u odabiru keramike, kupatilske opreme i kompletnih rešenja za prostor.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Legal Info ─── -->
+    <section class="section">
+        <div class="container">
+            <span class="label">Pravne informacije</span>
+            <h2 class="section-title">Podaci o kompaniji</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">
+                Sve informacije o kompaniji za poslovne partnere, investitore i B2B klijente koji zahtevaju 
+                zvanične podatke za ugovaranje saradnje.
+            </p>
+            <div class="legal-grid">
+                <div class="legal-block">
+                    <div class="legal-block-title">Registarski podaci</div>
+                    <table class="legal-table">
+                        <tr>
+                            <td>Puno ime</td>
+                            <td>Privredno društvo za proizvodnju, trgovinu i usluge SAYA GROUP d.o.o. Beograd-Novi Beograd</td>
+                        </tr>
+                        <tr>
+                            <td>Skraćeno ime</td>
+                            <td>SAYA GROUP d.o.o.</td>
+                        </tr>
+                        <tr>
+                            <td>PIB</td>
+                            <td>107775646</td>
+                        </tr>
+                        <tr>
+                            <td>Matični broj</td>
+                            <td>20870079</td>
+                        </tr>
+                        <tr>
+                            <td>Datum osnivanja</td>
+                            <td>22. oktobar 2012.</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>Aktivan</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="legal-block">
+                    <div class="legal-block-title">Poslovni podaci</div>
+                    <table class="legal-table">
+                        <tr>
+                            <td>Delatnost</td>
+                            <td>4673 — Trgovina na veliko drvetom, građevinskim materijalom i sanitarnom opremom</td>
+                        </tr>
+                        <tr>
+                            <td>Adresa</td>
+                            <td>Surčinska 94, 11070 Beograd (Novi Beograd)</td>
+                        </tr>
+                        <tr>
+                            <td>Direktor</td>
+                            <td>Slađana Krivokuća</td>
+                        </tr>
+                        <tr>
+                            <td>Prokurista</td>
+                            <td>Jelena Simić</td>
+                        </tr>
+                        <tr>
+                            <td>Banke</td>
+                            <td>Banca Intesa A.D. &amp; UniCredit Bank Srbija A.D.</td>
+                        </tr>
+                        <tr>
+                            <td>Bonitet 2025</td>
+                            <td>AA-- (Visoka stabilnost)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CTA ─── -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Spremni za saradnju?</h2>
+            <p class="section-subtitle">
+                Kontaktirajte nas za B2B ponudu, tehničku dokumentaciju ili posetu salonu. 
+                Naš tim je dostupan svakim danom u nedelji.
+            </p>
+            <div class="cta-buttons">
+                <a href="kontakt.html" class="btn btn--white">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    Kontaktirajte nas
+                </a>
+                <a href="index.html" class="btn btn--outline-white">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                    Pogledajte asortiman
+                </a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
