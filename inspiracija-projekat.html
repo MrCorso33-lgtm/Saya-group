@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalistički Spa Retreat — Inspiracija | Saya Group</title>
+    <meta name="description" content="Prostrano kupatilo sa efektom kamena, ugradnom kadom i walk-in tušem. Pogledajte sve upotrebljene proizvode i kreirajte isti izgled u vašem domu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-main); color: var(--secondary); background: var(--white); overflow-x: hidden; line-height: 1.7; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .label {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        /* ─── BREADCRUMB ─── */
+        .breadcrumb {
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            font-size: 0.82rem;
+            color: var(--mid-gray);
+        }
+        .breadcrumb a { color: var(--mid-gray); transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb span { margin: 0 6px; }
+
+        /* ─── PROJECT HERO ─── */
+        .project-hero {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 0;
+            min-height: 520px;
+        }
+        .project-hero__gallery {
+            position: relative;
+            background: #e8e0d8;
+            overflow: hidden;
+        }
+        .project-hero__main-img {
+            width: 100%;
+            height: 100%;
+            min-height: 520px;
+            object-fit: cover;
+        }
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 520px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8e0d8 0%, #d4c9bc 100%);
+            color: #a09080;
+            gap: 16px;
+        }
+        .img-placeholder svg { opacity: 0.35; }
+        .img-placeholder span { font-size: 0.85rem; font-family: var(--font-sans); opacity: 0.55; }
+
+        /* Hotspot tags on image */
+        .hotspot {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: var(--font-sans);
+            transition: var(--transition);
+            z-index: 10;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+        .hotspot:hover { transform: scale(1.2); background: var(--primary); color: var(--white); }
+        .hotspot::after {
+            content: '';
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid rgba(197,38,105,0.3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Thumbnail strip */
+        .project-hero__thumbs {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            gap: 8px;
+        }
+        .thumb {
+            width: 64px;
+            height: 64px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+            background: #d4c9bc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .thumb.active { border-color: var(--white); }
+        .thumb:hover { border-color: rgba(255,255,255,0.7); }
+        .thumb svg { opacity: 0.4; }
+
+        /* Style tag overlay */
+        .project-hero__style-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(26,26,26,0.82);
+            color: var(--white);
+            font-size: 0.72rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ─── PROJECT INFO PANEL ─── */
+        .project-info {
+            background: var(--white);
+            padding: 40px 36px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border);
+            overflow-y: auto;
+        }
+        .project-info__meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .meta-chip {
+            font-size: 0.72rem;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            background: var(--light-gray);
+            color: var(--secondary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .meta-chip--primary { background: rgba(197,38,105,0.08); color: var(--primary); border-color: rgba(197,38,105,0.2); }
+        .project-info__title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+        .project-info__desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+        .project-info__specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+        .spec-item {}
+        .spec-label {
+            font-size: 0.68rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mid-gray);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .spec-value {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        .project-info__cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+        }
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary);
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 14px 24px;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-primary:hover { background: #a81f57; transform: translateY(-2px); }
+        .btn-outline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--secondary);
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .btn-outline:hover { border-color: var(--secondary); }
+        .share-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+        }
+        .share-label { font-size: 0.75rem; color: var(--mid-gray); font-family: var(--font-sans); }
+        .share-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--mid-gray);
+        }
+        .share-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+        /* ─── PRODUCTS IN THIS PROJECT ─── */
+        .products-section { padding: 72px 0; background: var(--background); }
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .section-link {
+            font-size: 0.85rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .section-link:hover { text-decoration: underline; }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .product-card__img {
+            height: 200px;
+            background: #e8e0d8;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-card__img .img-placeholder { min-height: 200px; }
+        .product-card__num {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-card__body { padding: 14px 16px 16px; }
+        .product-card__brand {
+            font-size: 0.68rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mid-gray);
+            margin-bottom: 4px;
+        }
+        .product-card__name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        .product-card__price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: var(--font-sans);
+            margin-bottom: 12px;
+        }
+        .product-card__price span {
+            font-size: 0.75rem;
+            color: var(--mid-gray);
+            font-weight: 400;
+        }
+        .btn-add {
+            width: 100%;
+            background: var(--secondary);
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 9px 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-add:hover { background: var(--primary); }
+
+        /* ─── ADD ALL TO CART BANNER ─── */
+        .add-all-banner {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 28px 0;
+        }
+        .add-all-banner__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .add-all-banner__text h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        .add-all-banner__text p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.65);
+            font-family: var(--font-sans);
+        }
+        .add-all-banner__price {
+            font-family: var(--font-sans);
+            text-align: center;
+        }
+        .add-all-banner__price .from { font-size: 0.75rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; }
+        .add-all-banner__price .amount { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+        .add-all-banner__price .unit { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
+        .btn-add-all {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-add-all:hover { background: #a81f57; transform: translateY(-2px); }
+
+        /* ─── STORY SECTION ─── */
+        .story-section { padding: 72px 0; background: var(--white); }
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .story-content .label { margin-bottom: 12px; }
+        .story-content h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+        .story-content p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .story-img {
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: #e8e0d8;
+        }
+        .story-img .img-placeholder { min-height: 300px; }
+
+        /* ─── SIMILAR PROJECTS ─── */
+        .similar-section { padding: 72px 0; background: var(--background); }
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .similar-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .similar-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .similar-card__img {
+            height: 200px;
+            background: #e8e0d8;
+            position: relative;
+            overflow: hidden;
+        }
+        .similar-card__img .img-placeholder { min-height: 200px; }
+        .similar-card__style {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(26,26,26,0.8);
+            color: var(--white);
+            font-size: 0.68rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        .similar-card__body { padding: 16px 18px 18px; }
+        .similar-card__room {
+            font-size: 0.68rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .similar-card__title {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .similar-card__link {
+            font-size: 0.82rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .similar-card__link:hover { text-decoration: underline; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .project-hero { grid-template-columns: 1fr; }
+            .project-info { border-left: none; border-top: 1px solid var(--border); padding: 32px 24px; }
+            .project-hero__main-img, .project-hero .img-placeholder { min-height: 380px; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .story-grid { grid-template-columns: 1fr; gap: 32px; }
+            .similar-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .project-hero__main-img, .project-hero .img-placeholder { min-height: 280px; }
+            .project-info__specs { grid-template-columns: 1fr 1fr; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .add-all-banner__inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .btn-add-all { width: 100%; justify-content: center; }
+            .similar-grid { grid-template-columns: 1fr; }
+            .section-header { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .project-info__specs { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <a href="index.html">Početna</a>
+            <span>›</span>
+            <a href="inspiracija.html">Inspiracija</a>
+            <span>›</span>
+            <span>Minimalistički Spa Retreat — Beograd</span>
+        </div>
+    </nav>
+
+    <!-- PROJECT HERO: Gallery + Info Panel -->
+    <section>
+        <div class="project-hero">
+
+            <!-- Gallery -->
+            <div class="project-hero__gallery">
+                <div class="img-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    <span>Glavna fotografija projekta</span>
+                </div>
+                <span class="project-hero__style-tag">Moderno · Kupatilo</span>
+
+                <!-- Hotspot tags (numbered product indicators) -->
+                <div class="hotspot" style="top: 30%; left: 25%;" title="Tau Ceramica Marmol — Pločice">1</div>
+                <div class="hotspot" style="top: 55%; left: 60%;" title="Grohe Essence — Baterija">2</div>
+                <div class="hotspot" style="top: 70%; left: 40%;" title="Kolpa San — Kada">3</div>
+                <div class="hotspot" style="top: 20%; left: 70%;" title="Laufen — Sanitarija">4</div>
+
+                <!-- Thumbnail strip -->
+                <div class="project-hero__thumbs">
+                    <div class="thumb active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    </div>
+                    <div class="thumb">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    </div>
+                    <div class="thumb">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    </div>
+                    <div class="thumb">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    </div>
+                    <div class="thumb">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="project-info">
+                <div class="project-info__meta">
+                    <span class="meta-chip meta-chip--primary">Kupatilo</span>
+                    <span class="meta-chip">Moderno</span>
+                    <span class="meta-chip">8 m²</span>
+                    <span class="meta-chip">Beograd</span>
+                </div>
+                <h1 class="project-info__title">Minimalistički Spa Retreat</h1>
+                <p class="project-info__desc">Prostrano kupatilo transformisano u privatni spa prostor. Kombinacija Tau Ceramica Marmol pločica sa efektom kamena, ugradne kade Kolpa San i walk-in tuša sa Grohe Essence armaturama stvara atmosferu luksuznog odmora u srcu doma.</p>
+
+                <div class="project-info__specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Površina</span>
+                        <span class="spec-value">8 m²</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Stil</span>
+                        <span class="spec-value">Moderno / Spa</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Broj proizvoda</span>
+                        <span class="spec-value">8 artikala</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Okvirna cena</span>
+                        <span class="spec-value">od 2.500 RSD/m²</span>
+                    </div>
+                </div>
+
+                <div class="project-info__cta-group">
+                    <a href="#products" class="btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                        Pogledaj sve proizvode
+                    </a>
+                    <a href="kontakt.html" class="btn-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        Zatražite konsultaciju
+                    </a>
+                    <div class="share-row">
+                        <span class="share-label">Podelite:</span>
+                        <button class="share-btn" title="Kopiraj link" onclick="navigator.clipboard.writeText(window.location.href)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                        </button>
+                        <button class="share-btn" title="Sačuvaj u listu želja">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                        </button>
+                        <button class="share-btn" title="Štampaj / PDF">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCTS IN THIS PROJECT -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <span class="label">Kupite ovaj izgled</span>
+                    <h2 class="section-title">Proizvodi iz Ovog Projekta</h2>
+                </div>
+                <a href="plocice.html" class="section-link">
+                    Pogledaj sve pločice
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <div class="products-grid">
+
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">1</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Tau Ceramica</p>
+                        <h3 class="product-card__name">Marmol Blanco Polished 60×60</h3>
+                        <p class="product-card__price">2.580 RSD <span>/ m²</span></p>
+                        <a href="product-carrara-white.html" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">2</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Grohe</p>
+                        <h3 class="product-card__name">Essence Single-Lever Basin Mixer</h3>
+                        <p class="product-card__price">18.900 RSD <span>/ kom</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">3</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Kolpa San</p>
+                        <h3 class="product-card__name">Kopalnica Ugradbena Kada 170×75</h3>
+                        <p class="product-card__price">54.000 RSD <span>/ kom</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">4</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Laufen</p>
+                        <h3 class="product-card__name">Pro S Konzolna WC šolja</h3>
+                        <p class="product-card__price">32.500 RSD <span>/ kom</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">5</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Geberit</p>
+                        <h3 class="product-card__name">Duofix Ugradbeni Rezervoar</h3>
+                        <p class="product-card__price">21.800 RSD <span>/ kom</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">6</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Pino Art</p>
+                        <h3 class="product-card__name">Vento Ogledalo sa LED Osvetljenjem</h3>
+                        <p class="product-card__price">28.400 RSD <span>/ kom</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">7</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">ACO</p>
+                        <h3 class="product-card__name">Showerdrain Tuš Odvod 900mm</h3>
+                        <p class="product-card__price">9.600 RSD <span>/ kom</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="product-card__num">8</span>
+                    </div>
+                    <div class="product-card__body">
+                        <p class="product-card__brand">Tau Ceramica</p>
+                        <h3 class="product-card__name">Marmol Blanco Dekor 30×60</h3>
+                        <p class="product-card__price">3.200 RSD <span>/ m²</span></p>
+                        <a href="#" class="btn-add">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                            Pogledaj proizvod
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ADD ALL TO CART BANNER -->
+    <div class="add-all-banner">
+        <div class="container">
+            <div class="add-all-banner__inner">
+                <div class="add-all-banner__text">
+                    <h3>Kreirajte isti izgled</h3>
+                    <p>Svi proizvodi iz ovog projekta su dostupni u našoj prodavnici</p>
+                </div>
+                <div class="add-all-banner__price">
+                    <span class="from">Ukupno od</span>
+                    <span class="amount">~168.000 RSD</span>
+                    <span class="unit">za 8 m²</span>
+                </div>
+                <button class="btn-add-all" onclick="alert('U WooCommerce verziji ovo dodaje sve u korpu')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                    Dodaj sve u korpu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECT STORY -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-content">
+                    <span class="label">Priča o projektu</span>
+                    <h2>Kako Je Nastao Ovaj Prostor</h2>
+                    <p>Vlasnici su imali jasnu viziju — kupatilo koje funkcioniše kao privatni spa. Polazna tačka bila je odluka da se uklone svi dekorativni elementi i ostavi samo ono što je esencijalno: materijal, svetlost i prostor.</p>
+                    <p>Tau Ceramica Marmol pločice u formatu 60×60 cm odabrane su zbog izuzetne teksture koja imitira prirodni kamen bez hladnoće mermera. Polirana površina reflektuje prirodno svetlo i vizuelno povećava prostor.</p>
+                    <p>Grohe Essence armature u mat hromu donose savremenu liniju bez kompromisa u funkcionalnosti. Kombinacija sa Kolpa San ugradbenom kadom zatvara priču o minimalističkom luksuzu.</p>
+                </div>
+                <div class="story-img">
+                    <div class="img-placeholder" style="min-height: 300px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        <span>Detalj projekta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMILAR PROJECTS -->
+    <section class="similar-section">
+        <div class="container">
+            <span class="label">Možda vas zanima</span>
+            <h2 class="section-title" style="margin-bottom: 0;">Slični Projekti</h2>
+            <div class="similar-grid">
+
+                <a href="inspiracija-projekat.html" class="similar-card">
+                    <div class="similar-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="similar-card__style">Luksuzno</span>
+                    </div>
+                    <div class="similar-card__body">
+                        <span class="similar-card__room">Kupatilo</span>
+                        <h3 class="similar-card__title">Premium Penthouse Kupatilo — Dedinje</h3>
+                        <span class="similar-card__link">
+                            Pogledaj projekat
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="inspiracija-projekat.html" class="similar-card">
+                    <div class="similar-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="similar-card__style">Klasično</span>
+                    </div>
+                    <div class="similar-card__body">
+                        <span class="similar-card__room">Kupatilo</span>
+                        <h3 class="similar-card__title">Elegantno Klasično Kupatilo — Novi Sad</h3>
+                        <span class="similar-card__link">
+                            Pogledaj projekat
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="inspiracija-projekat.html" class="similar-card">
+                    <div class="similar-card__img">
+                        <div class="img-placeholder" style="min-height: 200px;">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <span class="similar-card__style">Skandinavski</span>
+                    </div>
+                    <div class="similar-card__body">
+                        <span class="similar-card__room">Dnevna soba</span>
+                        <h3 class="similar-card__title">Svetli Skandinavski Enterijer — Zemun</h3>
+                        <span class="similar-card__link">
+                            Pogledaj projekat
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Thumbnail switching
+        const thumbs = document.querySelectorAll('.thumb');
+        thumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                thumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+            });
+        });
+
+        // Hotspot tooltip behavior
+        const hotspots = document.querySelectorAll('.hotspot');
+        hotspots.forEach(hs => {
+            hs.addEventListener('click', () => {
+                const num = parseInt(hs.textContent);
+                const productCards = document.querySelectorAll('.product-card');
+                if (productCards[num - 1]) {
+                    productCards[num - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    productCards[num - 1].style.outline = '3px solid var(--primary)';
+                    setTimeout(() => productCards[num - 1].style.outline = '', 2000);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
