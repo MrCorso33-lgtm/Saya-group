@@ -438,7 +438,31 @@
         @media (max-width: 400px) {
             .brands-grid { grid-template-columns: 1fr; }
         }
-    </style>
+    
+        .brand-card__logo-area {
+            padding: 16px 20px;
+            background: #ffffff;
+        }
+        .brand-card__logo-area-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .brand-card__logo-area-img img {
+            max-width: 100%;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+        .brand-card:hover .brand-card__logo-area-img img {
+            filter: grayscale(0%);
+        }
+        </style>
 </head>
 <body>
 
@@ -515,9 +539,7 @@
             <!-- ADEX 1897 -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ADEX 1897</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/adex.webp" alt="ADEX 1897 logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -541,9 +563,7 @@
             <!-- ALCA PLAST -->
             <div class="brand-card" data-categories="oprema">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ALCA PLAST</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/alca-plast.webp" alt="ALCA PLAST logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -567,9 +587,7 @@
             <!-- ALAPLANA -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ALAPLANA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/alaplana.webp" alt="ALAPLANA logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -593,9 +611,7 @@
             <!-- ARCANA CERAMICA -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ARCANA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/arcana.webp" alt="ARCANA logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -619,9 +635,7 @@
             <!-- ARENA -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ARENA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/arena-ceramiche.webp" alt="Arena Ceramiche logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -645,9 +659,7 @@
             <!-- ASCOT CERAMICHE -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ASCOT</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/ascot.webp" alt="ASCOT logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -671,9 +683,7 @@
             <!-- ACO -->
             <div class="brand-card" data-categories="oprema">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ACO</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/aco.webp" alt="ACO logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -697,9 +707,7 @@
             <!-- BATHCO -->
             <div class="brand-card" data-categories="sanitarije namestaj">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">BATHCO</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/bathco.webp" alt="BATHCO logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -723,9 +731,7 @@
             <!-- CERLAT -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">CERLAT</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/cerlat.webp" alt="CERLAT logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -749,9 +755,7 @@
             <!-- COPEN -->
             <div class="brand-card" data-categories="namestaj">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">COPEN</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/copen.webp" alt="COPEN logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -775,9 +779,7 @@
             <!-- FANAL CERAMICA -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">FANAL</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/fanal.webp" alt="FANAL logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -801,9 +803,7 @@
             <!-- GEBERIT -->
             <div class="brand-card" data-categories="sanitarije oprema">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">GEBERIT</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/geberit.webp" alt="GEBERIT logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -827,9 +827,7 @@
             <!-- GROHE -->
             <div class="brand-card" data-categories="baterije">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">GROHE</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/grohe.webp" alt="GROHE logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -853,9 +851,7 @@
             <!-- HANSGROHE -->
             <div class="brand-card" data-categories="baterije">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">HANSGROHE</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/hansgrohe.webp" alt="HANSGROHE logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -879,9 +875,7 @@
             <!-- HATRIA -->
             <div class="brand-card" data-categories="sanitarije">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">HATRIA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/hatria.webp" alt="HATRIA logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -905,9 +899,7 @@
             <!-- HERZ -->
             <div class="brand-card" data-categories="oprema">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">HERZ</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/herz.webp" alt="HERZ logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -931,9 +923,7 @@
             <!-- KOLPA SAN -->
             <div class="brand-card" data-categories="kade">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">KOLPA SAN</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/kolpa-san.webp" alt="KOLPA SAN logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -957,9 +947,7 @@
             <!-- LAUFEN -->
             <div class="brand-card" data-categories="sanitarije namestaj">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">LAUFEN</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/laufen.webp" alt="LAUFEN logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -983,9 +971,7 @@
             <!-- MAIER -->
             <div class="brand-card" data-categories="namestaj">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">MAIER</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/maier.webp" alt="MAIER logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1009,9 +995,7 @@
             <!-- MINOTTI -->
             <div class="brand-card" data-categories="namestaj sanitarije">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">MINOTTI</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/minotti.webp" alt="MINOTTI logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1035,9 +1019,7 @@
             <!-- NATUCER -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">NATUCER</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/natucer.webp" alt="NATUCER logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1061,9 +1043,7 @@
             <!-- NEW TILES -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">NEW TILES</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/new-tiles.webp" alt="NEW TILES logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1087,9 +1067,7 @@
             <!-- ONIX -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ONIX</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/onix.webp" alt="ONIX logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1113,9 +1091,7 @@
             <!-- PAMESA -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">PAMESA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/pamesa.webp" alt="PAMESA logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1139,9 +1115,7 @@
             <!-- PEŠTAN -->
             <div class="brand-card" data-categories="oprema sanitarije">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">PEŠTAN</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/pestan.webp" alt="PEŠTAN logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1165,9 +1139,7 @@
             <!-- PINO ART -->
             <div class="brand-card" data-categories="namestaj">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">PINO ART</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/pino-art.webp" alt="PINO ART logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1191,9 +1163,7 @@
             <!-- RIBESALBES -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">RIBESALBES</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/ribesalbes.webp" alt="RIBESALBES logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1217,9 +1187,7 @@
             <!-- ROCA -->
             <div class="brand-card" data-categories="sanitarije baterije kade">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ROCA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/roca.webp" alt="ROCA logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1243,9 +1211,7 @@
             <!-- ROSAN -->
             <div class="brand-card" data-categories="kade">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ROSAN</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/rosan.webp" alt="ROSAN logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1269,9 +1235,7 @@
             <!-- TAU CERAMICA -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">TAU CERAMICA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/tau.webp" alt="TAU CERAMICA logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1295,9 +1259,7 @@
             <!-- VILLEROY & BOCH -->
             <div class="brand-card" data-categories="sanitarije namestaj baterije">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">VILLEROY&BOCH</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/villeroy-boch.webp" alt="Villeroy & Boch logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1321,9 +1283,7 @@
             <!-- WARME -->
             <div class="brand-card" data-categories="oprema">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">WARME</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/warme.webp" alt="WARME logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1347,9 +1307,7 @@
             <!-- WOW DESIGN -->
             <div class="brand-card" data-categories="plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">WOW DESIGN</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/wow-design.webp" alt="WOW DESIGN logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
@@ -1373,9 +1331,7 @@
             <!-- ZORKA KERAMIKA -->
             <div class="brand-card" data-categories="sanitarije plocice">
                 <div class="brand-card__logo-area">
-                    <div class="brand-card__logo-placeholder">
-                        <span class="brand-card__logo-text">ZORKA</span>
-                    </div>
+                    <div class="brand-card__logo-area-img"><img src="images/logos/zorka.webp" alt="Zorka Keramika logo" width="200" height="80" loading="lazy" decoding="async"></div>
                     <span class="brand-card__badge">Ovlašćeni distributer</span>
                 </div>
                 <div class="brand-card__body">
