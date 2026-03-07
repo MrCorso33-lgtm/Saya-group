@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategorije Proizvoda | Saya Group</title>
+    <style>
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --accent: #D4AF37;
+            --beige: #F7F2EC;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--beige), var(--white));
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .category-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .category-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .category-count {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">SAYA <span>GROUP</span></div>
+            <h1>Kategorije Proizvoda</h1>
+            <p class="subtitle">Izaberite kategoriju da vidite kompletnu stranicu sa filterima i proizvodima</p>
+        </div>
+        
+        <div class="categories-grid">
+            <!-- Pločice -->
+            <a href="plocice.html" class="category-card">
+                <div class="category-icon">🏠</div>
+                <div class="category-title">
+                    Pločice
+                    <span class="status-badge">✓ Kompletno</span>
+                </div>
+                <div class="category-description">
+                    Keramičke i granitne pločice za pod, zid i spoljašnje prostore. Moderne kolekcije sa efektom drveta, mermera i betona.
+                </div>
+                <div class="category-count">📦 487 proizvoda | 🔍 13 filtera</div>
+            </a>
+            
+            <!-- Sanitarije -->
+            <a href="sanitarije.html" class="category-card">
+                <div class="category-icon">🚽</div>
+                <div class="category-title">
+                    Sanitarije
+                    <span class="status-badge">✓ Kompletno</span>
+                </div>
+                <div class="category-description">
+                    WC šolje, lavaboi, bidei i pisoari. Visoki standardi kvaliteta i moderne kolekcije za svaki prostor.
+                </div>
+                <div class="category-count">📦 342 proizvoda | 🔍 11 filtera</div>
+            </a>
+            
+            <!-- Kupatilski Nameštaj -->
+            <a href="kupatilski_namestaj.html" class="category-card">
+                <div class="category-icon">🪞</div>
+                <div class="category-title">
+                    Kupatilski Nameštaj
+                    <span class="status-badge">✓ Kompletno</span>
+                </div>
+                <div class="category-description">
+                    Funkcionalni i stilski kupatilski nameštaj. Ormarići ispod lavaboa, viseći elementi, ogledala i police.
+                </div>
+                <div class="category-count">📦 218 proizvoda | 🔍 7 filtera</div>
+            </a>
+            
+            <!-- Baterije -->
+            <a href="baterije.html" class="category-card">
+                <div class="category-icon">🚿</div>
+                <div class="category-title">
+                    Baterije
+                    <span class="status-badge">✓ Kompletno</span>
+                </div>
+                <div class="category-description">
+                    Kvalitetne baterije za lavabo, kadu, tuš i sudoperu. Moderne kolekcije sa različitim završnim obradama.
+                </div>
+                <div class="category-count">📦 287 proizvoda | 🔍 8 filtera</div>
+            </a>
+            
+            <!-- Kade i Tuš Kabine -->
+            <a href="kade_tus_kabine.html" class="category-card">
+                <div class="category-icon">🛁</div>
+                <div class="category-title">
+                    Kade i Tuš Kabine
+                    <span class="status-badge">✓ Kompletno</span>
+                </div>
+                <div class="category-description">
+                    Širok izbor kada, tuš kabina i paravana. Od klasičnih akrilnih kada do luksuznih hidromasažnih sistema.
+                </div>
+                <div class="category-count">📦 195 proizvoda | 🔍 14 filtera</div>
+            </a>
+            
+            <!-- Oprema za Kupatilo -->
+            <a href="oprema_kupatilo.html" class="category-card">
+                <div class="category-icon">🧴</div>
+                <div class="category-title">
+                    Oprema za Kupatilo
+                    <span class="status-badge">✓ Kompletno</span>
+                </div>
+                <div class="category-description">
+                    Kompletna oprema: galanterija, bojleri, sušači, tuš kanalice i dodatna oprema za funkcionalnost i stil.
+                </div>
+                <div class="category-count">📦 456 proizvoda | 🔍 13 filtera</div>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Ukupno: 6 kategorija | 1,985 proizvoda | 66 filtera</strong></p>
+            <p style="margin-top: 20px; font-size: 0.9rem;">
+                Sve stranice su kreirane na osnovu B2B i B2C istraživanja i filtera iz Excel fajla.<br>
+                Dizajn sistem: Magenta (#C52669) + Charcoal (#1A1A1A) + Gold (#D4AF37) + Beige (#F7F2EC)
+            </p>
+        </div>
+    </div>
+</body>
+</html>

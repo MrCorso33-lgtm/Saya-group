@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oprema za Kupatilo - Galanterija, Bojleri, Susaci | Saya Group</title>
+    <meta name="description" content="Širok izbor keramičkih i granitnih pločica za pod, zid i spoljašnje prostore. Moderne kolekcije sa efektom drveta, mermera i betona.">
+    <style>
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --accent: #D4AF37;
+            --beige: #F7F2EC;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray-medium: #E0E0E0;
+            --gray-dark: #666666;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        /* Header */
+        .header {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            background-color: var(--gray-light);
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumbs-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumbs a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--primary);
+        }
+        
+        /* Category Banner */
+        .category-banner {
+            background: linear-gradient(135deg, rgba(197, 38, 105, 0.9), rgba(26, 26, 26, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23E0E0E0" width="1200" height="400"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .category-banner h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .category-banner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+        
+        .banner-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #A01E54;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--secondary);
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+        
+        /* Sidebar Filters */
+        .filters-sidebar {
+            background-color: var(--gray-light);
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+        
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gray-medium);
+        }
+        
+        .filters-header h2 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+        }
+        
+        .clear-filters {
+            color: var(--primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .clear-filters:hover {
+            text-decoration: underline;
+        }
+        
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        
+        .filter-group h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--secondary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-group h3::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .filter-group.collapsed h3::after {
+            transform: rotate(-90deg);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .filter-group.collapsed .filter-options {
+            display: none;
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+        
+        .filter-option label {
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        
+        .filter-option:hover label {
+            color: var(--primary);
+        }
+        
+        /* Color Swatches */
+        .color-swatches {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-swatch:hover {
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .color-swatch.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary);
+        }
+        
+        /* Price Range Slider */
+        .price-range {
+            margin-top: 15px;
+        }
+        
+        .price-inputs {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .price-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid var(--gray-medium);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        /* Products Section */
+        .products-section {
+            min-height: 800px;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gray-medium);
+        }
+        
+        .results-count {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-options label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .sort-options select {
+            padding: 8px 12px;
+            border: 1px solid var(--gray-medium);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background-color: var(--gray-light);
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+        
+        .product-specs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .spec-badge {
+            background-color: var(--beige);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            flex: 1;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* B2B Call-to-Action */
+        .b2b-cta {
+            background: linear-gradient(135deg, var(--secondary), #2A2A2A);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .b2b-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .b2b-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .b2b-cta .banner-actions {
+            justify-content: center;
+        }
+        
+        /* Inspirational Blocks */
+        .inspiration-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .inspiration-card {
+            position: relative;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .inspiration-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .inspiration-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .inspiration-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 20px;
+            color: var(--white);
+        }
+        
+        .inspiration-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .inspiration-overlay p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0;
+        }
+        
+        .page-number {
+            padding: 10px 15px;
+            border: 1px solid var(--gray-medium);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .page-number:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .page-number.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-sidebar {
+                position: static;
+            }
+            
+            .category-banner h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .category-banner {
+                padding: 50px 20px;
+            }
+            
+            .category-banner h1 {
+                font-size: 1.8rem;
+            }
+            
+            .inspiration-blocks {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">SAYA <span>GROUP</span></a>
+            <nav>
+                <a href="#" style="color: var(--white); text-decoration: none; margin-left: 20px;">🛒 Korpa (0)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-content">
+            <a href="index.html">Početna</a> > <strong>Oprema za Kupatilo</strong>
+        </div>
+    </div>
+
+    <!-- Category Banner -->
+    <section class="category-banner">
+        <h1>Oprema za Kupatilo</h1>
+        <p>Kompletna oprema za kupatilo: galanterija, bojleri, susaci, tus kanalice i dodatna oprema za funkcionalnost i stil.</p>
+        <div class="banner-actions">
+            <a href="#products" class="btn btn-primary">Istražite Kolekciju</a>
+            <a href="#" class="btn btn-outline">Vodič za Odabir</a>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filters-header">
+                <h2>Filteri</h2>
+                <a href="#" class="clear-filters">Obriši sve</a>
+            </div>
+
+            <!-- Cena (Global) -->
+            <div class="filter-group">
+                <h3>Cena</h3>
+                <div class="filter-options">
+                    <div class="price-range">
+                        <input type="range" min="0" max="100000" value="50000" style="width: 100%;">
+                        <div class="price-inputs">
+                            <input type="number" class="price-input" placeholder="Min" value="0">
+                            <input type="number" class="price-input" placeholder="Max" value="100000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boja (Global - Visual Swatches) -->
+            <div class="filter-group">
+                <h3>Boja</h3>
+                <div class="filter-options">
+                    <div class="color-swatches">
+                        <div class="color-swatch" style="background-color: #FFFFFF; border: 1px solid #E0E0E0;" title="Bela"></div>
+                        <div class="color-swatch" style="background-color: #F5F5DC;" title="Bez"></div>
+                        <div class="color-swatch" style="background-color: #D3D3D3;" title="Siva"></div>
+                        <div class="color-swatch" style="background-color: #000000;" title="Crna"></div>
+                        <div class="color-swatch" style="background-color: #87CEEB;" title="Plava"></div>
+                        <div class="color-swatch" style="background-color: #228B22;" title="Zelena"></div>
+                        <div class="color-swatch" style="background-color: #FFD700;" title="Zlatna"></div>
+                        <div class="color-swatch" style="background-color: #C0C0C0;" title="Srebrna"></div>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="filter-group">
+    <h3>Materijal</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="inox" value="inox">
+            <span>Inox</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="mesing" value="mesing">
+            <span>Mesing</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="hrom" value="hrom">
+            <span>Hrom</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="aluminijum" value="aluminijum">
+            <span>Aluminijum</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="plastika" value="plastika">
+            <span>Plastika</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="drvo" value="drvo">
+            <span>Drvo</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="keramika" value="keramika">
+            <span>Keramika</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Tip Montaze</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="zidna-srafljenje" value="zidna-srafljenje">
+            <span>Zidna (srafljenje)</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="zidna-lepljenje" value="zidna-lepljenje">
+            <span>Zidna (lepljenje)</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="samostojeca" value="samostojeca">
+            <span>Samostojeca</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Zapremina Bojlera</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="5l" value="5l">
+            <span>5L</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="10l" value="10l">
+            <span>10L</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="30l" value="30l">
+            <span>30L</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="50l" value="50l">
+            <span>50L</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="80l" value="80l">
+            <span>80L</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="100l" value="100l">
+            <span>100L</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="120l" value="120l">
+            <span>120L</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Tip Bojlera</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="protocni" value="protocni">
+            <span>Protocni</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="akumulacioni" value="akumulacioni">
+            <span>Akumulacioni</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="kombinovani" value="kombinovani">
+            <span>Kombinovani</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Energetski Razred</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="a" value="a">
+            <span>A</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="b" value="b">
+            <span>B</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="c" value="c">
+            <span>C</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="d" value="d">
+            <span>D</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Snaga Susaca</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="300w" value="300w">
+            <span>300W</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="500w" value="500w">
+            <span>500W</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="750w" value="750w">
+            <span>750W</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="1000wplus" value="1000wplus">
+            <span>1000W+</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Tip Susaca</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="elektricni" value="elektricni">
+            <span>Elektricni</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="za-centralno-grejanje" value="za-centralno-grejanje">
+            <span>Za centralno grejanje</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="kombinovani" value="kombinovani">
+            <span>Kombinovani</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Duzina Kanalice</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="50cm" value="50cm">
+            <span>50cm</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="60cm" value="60cm">
+            <span>60cm</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="70cm" value="70cm">
+            <span>70cm</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="80cm" value="80cm">
+            <span>80cm</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="90cm" value="90cm">
+            <span>90cm</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="100cm" value="100cm">
+            <span>100cm</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Materijal Resetke</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="inox" value="inox">
+            <span>Inox</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="staklo" value="staklo">
+            <span>Staklo</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="keramika" value="keramika">
+            <span>Keramika</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Dimenzije Susaca (VxS)</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="50x40" value="50x40">
+            <span>50x40</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="60x40" value="60x40">
+            <span>60x40</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="120x60" value="120x60">
+            <span>120x60</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="180x60-cm" value="180x60-cm">
+            <span>180x60 cm</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Set / Pojedinacno</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="set-komplet" value="set-komplet">
+            <span>Set (komplet)</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="pojedinacno" value="pojedinacno">
+            <span>Pojedinacno</span>
+        </label>
+    </div>
+</div>
+
+<div class="filter-group">
+    <h3>Duzina</h3>
+    <div class="filter-options">
+        <label class="filter-option">
+            <input type="checkbox" name="30" value="30">
+            <span>30</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="40" value="40">
+            <span>40</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="50" value="50">
+            <span>50</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="60" value="60">
+            <span>60</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="70" value="70">
+            <span>70</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="80" value="80">
+            <span>80</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="90" value="90">
+            <span>90</span>
+        </label>
+        <label class="filter-option">
+            <input type="checkbox" name="100-cm" value="100-cm">
+            <span>100 cm</span>
+        </label>
+    </div>
+</div>
+
+
+
+            <!-- Brend (Global) -->
+            <div class="filter-group collapsed">
+                <h3>Brend</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" name="brend" value="ideal-standard">
+                        <span>Ideal Standard</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="brend" value="geberit">
+                        <span>Geberit</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="brend" value="villeroy-boch">
+                        <span>Villeroy & Boch</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="brend" value="roca">
+                        <span>Roca</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dostupnost (Global) -->
+
+            <!-- Stil/Dizajn -->
+            <div class="filter-group">
+                <h3>Stil / Dizajn</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" name="stil" value="moderni">
+                        <span>Moderni</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="stil" value="klasicni">
+                        <span>Klasični</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="stil" value="minimalisticki">
+                        <span>Minimalistički</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="stil" value="rusticni">
+                        <span>Rustični</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="stil" value="industrijski">
+                        <span>Industrijski</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Zemlja Porekla -->
+            <div class="filter-group">
+                <h3>Zemlja Porekla</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" name="zemlja" value="spanija">
+                        <span>🇪🇸 Španija</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="zemlja" value="italija">
+                        <span>🇮🇹 Italija</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="zemlja" value="nemacka">
+                        <span>🇩🇪 Nemačka</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="zemlja" value="srbija">
+                        <span>🇷🇸 Srbija</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" name="zemlja" value="kina">
+                        <span>🇨🇳 Kina</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Products Section -->
+        <section class="products-section" id="products">
+            <!-- Products Header -->
+            <div class="products-header">
+                <div class="results-count">
+                    Prikazano <strong>1-24</strong> od <strong>456</strong> proizvoda
+                </div>
+                <div class="sort-options">
+                    <label for="sort">Sortiraj:</label>
+                    <select id="sort">
+                        <option value="popularity">Po popularnosti</option>
+                        <option value="price-asc">Cena: od najniže</option>
+                        <option value="price-desc">Cena: od najviše</option>
+                        <option value="newest">Najnovije</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-badge">AKCIJA</div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23D2B48C' width='400' height='400'/%3E%3Cpath d='M0 100h400M0 200h400M0 300h400' stroke='%23A0826D' stroke-width='2'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Atlas Oak Natural</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">60x120 cm</span>
+                            <span class="spec-badge">Podna</span>
+                            <span class="spec-badge">R10</span>
+                        </div>
+                        <div class="product-price">2.890 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23F5F5F5' width='400' height='400'/%3E%3Cpath d='M50 50L350 350M350 50L50 350' stroke='%23D3D3D3' stroke-width='3' opacity='0.3'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Carrara Marble White</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">60x60 cm</span>
+                            <span class="spec-badge">Zidna</span>
+                            <span class="spec-badge">Polirana</span>
+                        </div>
+                        <div class="product-price">3.490 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23696969' width='400' height='400'/%3E%3Crect fill='%235A5A5A' x='0' y='0' width='200' height='200'/%3E%3Crect fill='%235A5A5A' x='200' y='200' width='200' height='200'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Industrial Concrete Grey</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">30x60 cm</span>
+                            <span class="spec-badge">Univerzalna</span>
+                            <span class="spec-badge">Mat</span>
+                        </div>
+                        <div class="product-price">1.990 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <div class="product-badge">NOVO</div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23000000' width='400' height='400'/%3E%3Cpath d='M0 0L400 400M400 0L0 400' stroke='%23333333' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Absolute Black Polished</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">60x60 cm</span>
+                            <span class="spec-badge">Podna</span>
+                            <span class="spec-badge">PEI 5</span>
+                        </div>
+                        <div class="product-price">4.290 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23F0E68C' width='400' height='400'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%23DAA520' opacity='0.3'/%3E%3Ccircle cx='150' cy='150' r='25' fill='%23DAA520' opacity='0.3'/%3E%3Ccircle cx='250' cy='100' r='15' fill='%23DAA520' opacity='0.3'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Terrazzo Mix Beige</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">60x60 cm</span>
+                            <span class="spec-badge">Podna</span>
+                            <span class="spec-badge">R11</span>
+                        </div>
+                        <div class="product-price">3.790 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23CD853F' width='400' height='400'/%3E%3Cpath d='M0 0h100v400H0zM100 0h100v400H100zM200 0h100v400H200zM300 0h100v400H300z' fill='%23A0522D' opacity='0.2'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Walnut Wood Effect</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">20x120 cm</span>
+                            <span class="spec-badge">Podna</span>
+                            <span class="spec-badge">R9</span>
+                        </div>
+                        <div class="product-price">3.290 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 7 -->
+                <div class="product-card">
+                    <div class="product-badge">AKCIJA</div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23B0C4DE' width='400' height='400'/%3E%3Cpath d='M0 50h400M0 150h400M0 250h400M0 350h400' stroke='%238FA8C8' stroke-width='3'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Azure Blue Glossy</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">30x60 cm</span>
+                            <span class="spec-badge">Zidna</span>
+                            <span class="spec-badge">Sjajna</span>
+                        </div>
+                        <div class="product-price">2.190 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 8 -->
+                <div class="product-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23BC8F8F' width='400' height='400'/%3E%3Crect fill='%23A0826D' x='0' y='0' width='200' height='200'/%3E%3Crect fill='%23A0826D' x='200' y='200' width='200' height='200'/%3E%3C/svg%3E" alt="Pločica" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Rustic Stone Beige</div>
+                        <div class="product-specs">
+                            <span class="spec-badge">60x60 cm</span>
+                            <span class="spec-badge">Spoljašnja</span>
+                            <span class="spec-badge">R13</span>
+                        </div>
+                        <div class="product-price">2.690 RSD/m²</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-small">Dodaj u korpu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B2B Call-to-Action -->
+            <div class="b2b-cta">
+                <h2>Da li ste Arhitekta ili Izvođač Radova?</h2>
+                <p>Registrujte se na naš B2B portal i ostvarite pristup projektnim cenama, tehničkoj dokumentaciji, BIM/CAD modelima i brzom naručivanju uzoraka.</p>
+                <div class="banner-actions">
+                    <a href="#" class="btn btn-primary">Saznajte Više</a>
+                    <a href="#" class="btn btn-outline">Prijavite se / Registrujte se</a>
+                </div>
+            </div>
+
+            <!-- Inspirational Blocks -->
+            <div class="inspiration-blocks">
+                <div class="inspiration-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23D2B48C' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23FFFFFF' font-size='48' font-family='Arial'%3EPločice sa Efektom Drveta%3C/text%3E%3C/svg%3E" alt="Efekat Drveta">
+                    <div class="inspiration-overlay">
+                        <h3>Pločice sa Efektom Drveta</h3>
+                        <p>Toplina prirodnog drveta sa izdržljivošću keramike</p>
+                    </div>
+                </div>
+
+                <div class="inspiration-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23696969' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23FFFFFF' font-size='48' font-family='Arial'%3EVeliki Formati%3C/text%3E%3C/svg%3E" alt="Veliki Formati">
+                    <div class="inspiration-overlay">
+                        <h3>Veliki Formati: Moderan i Luksuzan Izgled</h3>
+                        <p>Minimalne fuge, maksimalan efekat prostora</p>
+                    </div>
+                </div>
+
+                <div class="inspiration-card">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23BC8F8F' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23FFFFFF' font-size='48' font-family='Arial'%3ESpoljašnje Pločice%3C/text%3E%3C/svg%3E" alt="Spoljašnje">
+                    <div class="inspiration-overlay">
+                        <h3>Spoljašnje Pločice: Rešenja za Vašu Terasu</h3>
+                        <p>Otporne na mraz i klizanje za bezbednost</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="page-number active">1</a>
+                <a href="#" class="page-number">2</a>
+                <a href="#" class="page-number">3</a>
+                <a href="#" class="page-number">4</a>
+                <a href="#" class="page-number">...</a>
+                <a href="#" class="page-number">21</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Filter collapse/expand functionality
+        document.querySelectorAll('.filter-group h3').forEach(header => {
+            header.addEventListener('click', function() {
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        // Color swatch selection
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+
+        // Clear all filters
+        document.querySelector('.clear-filters').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.color-swatch').forEach(swatch => swatch.classList.remove('selected'));
+        });
+    </script>
+</body>
+</html>
