@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - Saya Group | Keramika i Kupatilski Proizvodi</title>
+    <meta name="description" content="Kontaktirajte Saya Group — salon u Novom Beogradu, telefon, email, WhatsApp, ili pošaljite upit za B2B ponudu. Dostupni svakim danom u nedelji.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ─── Design Tokens ─── */
+        :root {
+            --primary: #C52669;
+            --primary-dark: #a01f54;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --radius-lg: 16px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-main); color: var(--secondary); background: var(--white); overflow-x: hidden; line-height: 1.7; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── Utility ─── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 72px 0; }
+        .section--alt { background: var(--light-gray); }
+        .section--warm { background: var(--background); }
+        .section--dark { background: var(--secondary); color: var(--white); }
+
+        .label {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .section--dark .label { color: rgba(255,255,255,0.6); }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--mid-gray);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+        .section--dark .section-subtitle { color: rgba(255,255,255,0.65); }
+
+        .divider {
+            width: 44px; height: 3px;
+            background: var(--primary);
+            margin: 16px 0 24px;
+        }
+        .section--dark .divider { background: rgba(255,255,255,0.4); }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb {
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+            font-size: 0.82rem;
+            color: var(--mid-gray);
+        }
+        .breadcrumb a { color: var(--primary); }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { margin: 0 8px; }
+
+        /* ─── Hero ─── */
+        .hero {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 60%, #2a1020 100%);
+            padding: 72px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero__pattern {
+            position: absolute; inset: 0;
+            opacity: 0.04;
+            background-image: repeating-linear-gradient(45deg, var(--white) 0, var(--white) 1px, transparent 0, transparent 50%);
+            background-size: 20px 20px;
+        }
+        .hero__accent {
+            position: absolute; top: 0; right: 0;
+            width: 40%; height: 100%;
+            background: linear-gradient(135deg, transparent 30%, rgba(197,38,105,0.1) 100%);
+        }
+        .hero__content { position: relative; z-index: 2; }
+        .hero__eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--primary); margin-bottom: 16px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .hero__eyebrow::before {
+            content: ''; display: inline-block;
+            width: 32px; height: 2px; background: var(--primary);
+        }
+        .hero__title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            font-weight: 700; color: var(--white);
+            line-height: 1.15; margin-bottom: 20px;
+        }
+        .hero__title span { color: var(--primary); }
+        .hero__desc {
+            font-size: 1.05rem; color: rgba(255,255,255,0.7);
+            max-width: 560px; line-height: 1.85; margin-bottom: 40px;
+        }
+
+        /* ─── Quick Contact Chips ─── */
+        .quick-chips {
+            display: flex; flex-wrap: wrap; gap: 12px;
+        }
+        .chip {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: var(--font-sans);
+            font-size: 0.82rem; font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer; border: none; text-decoration: none;
+        }
+        .chip--primary {
+            background: var(--primary); color: var(--white);
+        }
+        .chip--primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .chip--outline {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--white);
+        }
+        .chip--outline:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+        .chip--whatsapp { background: #25D366; color: var(--white); }
+        .chip--whatsapp:hover { background: #1da851; transform: translateY(-2px); }
+        .chip--viber { background: #7360F2; color: var(--white); }
+        .chip--viber:hover { background: #5b4bd4; transform: translateY(-2px); }
+
+        /* ─── Main Contact Grid ─── */
+        .contact-main {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        /* ─── Contact Info Panel ─── */
+        .info-panel { display: flex; flex-direction: column; gap: 20px; }
+
+        .info-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: var(--transition);
+        }
+        .info-card:hover { box-shadow: var(--shadow-hover); }
+
+        .info-card__header {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 16px;
+        }
+        .info-card__icon {
+            width: 44px; height: 44px;
+            background: #fdf0f5;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); flex-shrink: 0;
+        }
+        .info-card__title {
+            font-family: var(--font-sans);
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .info-card__body { display: flex; flex-direction: column; gap: 10px; }
+
+        .info-row {
+            display: flex; align-items: flex-start; gap: 12px;
+            font-size: 0.92rem; color: #444;
+        }
+        .info-row svg { flex-shrink: 0; margin-top: 2px; color: var(--mid-gray); }
+        .info-row a { color: var(--secondary); font-weight: 500; }
+        .info-row a:hover { color: var(--primary); }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+        .hours-table tr { border-bottom: 1px solid #f5f5f5; }
+        .hours-table tr:last-child { border-bottom: none; }
+        .hours-table td { padding: 7px 0; }
+        .hours-table td:first-child { color: #666; width: 55%; }
+        .hours-table td:last-child { font-weight: 600; color: var(--secondary); text-align: right; }
+        .hours-open { color: #2e7d32 !important; }
+
+        /* ─── Social Links ─── */
+        .social-links {
+            display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px;
+        }
+        .social-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.78rem; font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            color: var(--secondary);
+            background: var(--white);
+        }
+        .social-btn:hover { border-color: var(--primary); color: var(--primary); background: #fdf5f9; }
+        .social-btn--ig:hover { border-color: #E1306C; color: #E1306C; background: #fff5f8; }
+        .social-btn--fb:hover { border-color: #1877F2; color: #1877F2; background: #f0f5ff; }
+
+        /* ─── Contact Form ─── */
+        .form-panel {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-tabs {
+            display: flex;
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 28px;
+            gap: 4px;
+        }
+        .form-tab {
+            flex: 1;
+            padding: 10px 16px;
+            border: none; background: transparent;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.82rem; font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--mid-gray);
+            text-align: center;
+        }
+        .form-tab.active {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .form-tab:hover:not(.active) { color: var(--secondary); }
+
+        .form-body { display: none; }
+        .form-body.active { display: block; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group:last-of-type { margin-bottom: 0; }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.78rem; font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 6px;
+        }
+        .form-label .req { color: var(--primary); margin-left: 2px; }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            color: var(--secondary);
+            background: var(--white);
+            transition: var(--transition);
+            outline: none;
+            appearance: none;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(197,38,105,0.1);
+        }
+        .form-input::placeholder, .form-textarea::placeholder { color: #bbb; }
+        .form-textarea { resize: vertical; min-height: 120px; }
+        .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23888' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+
+        .form-hint {
+            font-size: 0.76rem; color: var(--mid-gray);
+            margin-top: 5px; line-height: 1.5;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem; font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .form-submit:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(197,38,105,0.3); }
+
+        .form-note {
+            font-size: 0.76rem; color: var(--mid-gray);
+            text-align: center; margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        /* ─── Map Section ─── */
+        .map-section { padding: 0; }
+        .map-wrapper {
+            width: 100%; height: 420px;
+            position: relative; overflow: hidden;
+        }
+        .map-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
+        .map-overlay {
+            position: absolute;
+            top: 24px; left: 24px;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-hover);
+            max-width: 280px;
+        }
+        .map-overlay__name {
+            font-family: var(--font-serif);
+            font-size: 1.05rem; font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .map-overlay__addr {
+            font-size: 0.85rem; color: #555; line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .map-overlay__link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.78rem; font-weight: 600;
+            color: var(--primary);
+        }
+        .map-overlay__link:hover { text-decoration: underline; }
+
+        /* ─── FAQ ─── */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 40px;
+        }
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%; text-align: left;
+            padding: 18px 20px;
+            background: none; border: none;
+            font-family: var(--font-main);
+            font-size: 0.92rem; font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            transition: var(--transition);
+        }
+        .faq-question:hover { color: var(--primary); }
+        .faq-question.open { color: var(--primary); }
+        .faq-icon {
+            flex-shrink: 0; width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+            color: var(--mid-gray);
+        }
+        .faq-question.open .faq-icon {
+            background: var(--primary); color: var(--white); transform: rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 20px;
+        }
+        .faq-answer.open {
+            max-height: 200px;
+            padding: 0 20px 18px;
+        }
+        .faq-answer p { font-size: 0.88rem; color: #555; line-height: 1.75; }
+
+        /* ─── B2B CTA ─── */
+        .b2b-cta {
+            background: linear-gradient(135deg, var(--secondary) 0%, #2a1020 100%);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+            margin-top: 48px;
+        }
+        .b2b-cta__title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; font-weight: 700;
+            color: var(--white); margin-bottom: 10px;
+        }
+        .b2b-cta__text {
+            font-size: 0.92rem; color: rgba(255,255,255,0.65);
+            line-height: 1.7; max-width: 480px;
+        }
+        .b2b-cta__btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px;
+            background: var(--primary); color: var(--white);
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.88rem; font-weight: 600;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        .b2b-cta__btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* ─── Response Time Banner ─── */
+        .response-banner {
+            background: #fdf5f9;
+            border: 1px solid rgba(197,38,105,0.15);
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            display: flex; align-items: center; gap: 16px;
+            margin-bottom: 24px;
+        }
+        .response-banner__icon {
+            width: 40px; height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); flex-shrink: 0;
+        }
+        .response-banner__text { font-size: 0.88rem; color: #555; line-height: 1.5; }
+        .response-banner__text strong { color: var(--primary); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+            .contact-main { grid-template-columns: 1fr; gap: 32px; }
+            .form-panel { padding: 28px; }
+            .b2b-cta { grid-template-columns: 1fr; gap: 24px; }
+        }
+        @media (max-width: 768px) {
+            .section { padding: 52px 0; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .map-wrapper { height: 320px; }
+            .map-overlay { max-width: 220px; padding: 14px 16px; }
+            .hero { padding: 52px 0; }
+            .b2b-cta { padding: 28px; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .form-panel { padding: 20px; }
+            .quick-chips { gap: 8px; }
+            .chip { padding: 9px 14px; font-size: 0.78rem; }
+            .map-overlay { display: none; }
+            .b2b-cta { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Breadcrumb ─── -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Početna</a>
+            <span>›</span>
+            <span>Kontakt</span>
+        </div>
+    </nav>
+
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+        <div class="hero__pattern"></div>
+        <div class="hero__accent"></div>
+        <div class="container">
+            <div class="hero__content">
+                <p class="hero__eyebrow">Kontakt</p>
+                <h1 class="hero__title">
+                    Tu smo za vas —<br><span>svakim danom</span> u nedelji
+                </h1>
+                <p class="hero__desc">
+                    Imate pitanje o proizvodu, trebate ponudu za projekat ili želite da zakažete posetu salonu?
+                    Kontaktirajte nas na način koji vam najviše odgovara.
+                </p>
+                <div class="quick-chips">
+                    <a href="tel:+381607005617" class="chip chip--primary">
+                        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        Pozovite nas
+                    </a>
+                    <a href="https://wa.me/381607005617" target="_blank" rel="noopener" class="chip chip--whatsapp">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp
+                    </a>
+                    <a href="viber://chat?number=381607005617" class="chip chip--viber">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 0C5.5 0 .5 4.8.5 10.7c0 3.2 1.4 6.1 3.8 8.1v3.7l3.5-1.9c1 .3 2.1.4 3.2.4 5.9 0 10.9-4.8 10.9-10.7C21.9 4.8 17.3 0 11.4 0zm1.1 14.4c-.3.3-.7.5-1.1.5-.4 0-.8-.2-1.1-.5L7.5 11.6c-.6-.6-.6-1.6 0-2.2.6-.6 1.6-.6 2.2 0l1.7 1.7 4.3-4.3c.6-.6 1.6-.6 2.2 0 .6.6.6 1.6 0 2.2l-5.4 5.4z"/></svg>
+                        Viber
+                    </a>
+                    <a href="mailto:office@sayagroup.rs" class="chip chip--outline">
+                        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Main Contact Section ─── -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-main">
+
+                <!-- Left: Info Panel -->
+                <div class="info-panel">
+
+                    <!-- Phone Numbers -->
+                    <div class="info-card">
+                        <div class="info-card__header">
+                            <div class="info-card__icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <div class="info-card__title">Telefon</div>
+                        </div>
+                        <div class="info-card__body">
+                            <div class="info-row">
+                                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <div>
+                                    <a href="tel:+381607005617">060/700-56-17</a><br>
+                                    <a href="tel:+381607005618">060/700-56-18</a><br>
+                                    <a href="tel:+381607005068">060/700-50-68</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email & Web -->
+                    <div class="info-card">
+                        <div class="info-card__header">
+                            <div class="info-card__icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div class="info-card__title">Email & Web</div>
+                        </div>
+                        <div class="info-card__body">
+                            <div class="info-row">
+                                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <a href="mailto:office@sayagroup.rs">office@sayagroup.rs</a>
+                            </div>
+                            <div class="info-row">
+                                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+                                <a href="https://sayagroup.rs" target="_blank" rel="noopener">www.sayagroup.rs</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="info-card">
+                        <div class="info-card__header">
+                            <div class="info-card__icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div class="info-card__title">Adresa salona</div>
+                        </div>
+                        <div class="info-card__body">
+                            <div class="info-row">
+                                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <div>
+                                    <strong>Surčinska 94</strong><br>
+                                    11070 Novi Beograd, Srbija
+                                </div>
+                            </div>
+                            <div class="info-row" style="margin-top:4px;">
+                                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                                <a href="https://maps.google.com/?q=Surčinska+94,+Novi+Beograd" target="_blank" rel="noopener" style="color:var(--primary); font-size:0.85rem;">Otvori u Google Maps →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Working Hours -->
+                    <div class="info-card">
+                        <div class="info-card__header">
+                            <div class="info-card__icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div class="info-card__title">Radno vreme</div>
+                        </div>
+                        <div class="info-card__body">
+                            <table class="hours-table">
+                                <tr>
+                                    <td>Ponedeljak – Petak</td>
+                                    <td class="hours-open">08:00 – 20:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Subota</td>
+                                    <td class="hours-open">08:00 – 15:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Nedelja</td>
+                                    <td class="hours-open">09:00 – 15:00</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="info-card">
+                        <div class="info-card__header">
+                            <div class="info-card__icon">
+                                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+                            </div>
+                            <div class="info-card__title">Pratite nas</div>
+                        </div>
+                        <div class="info-card__body">
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/sayakeramika/" target="_blank" rel="noopener" class="social-btn social-btn--ig">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                                    @sayakeramika
+                                </a>
+                                <a href="https://www.facebook.com/SAYA-Keramika-I-Kupatila-115657941848361" target="_blank" rel="noopener" class="social-btn social-btn--fb">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                    Facebook
+                                </a>
+                            </div>
+                            <p style="font-size:0.8rem; color:#888; margin-top:10px; line-height:1.5;">
+                                30.000+ pratilaca na Instagramu. Pratite nas za inspiraciju, nove kolekcije i aktuelne akcije.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right: Contact Form -->
+                <div class="form-panel">
+
+                    <div class="response-banner">
+                        <div class="response-banner__icon">
+                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <div class="response-banner__text">
+                            Odgovaramo u roku od <strong>nekoliko sati</strong> tokom radnog vremena. Za hitne upite — pozovite nas direktno.
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="form-tabs">
+                        <button class="form-tab active" onclick="switchTab('general', this)">Opšti upit</button>
+                        <button class="form-tab" onclick="switchTab('b2b', this)">B2B / Projekat</button>
+                        <button class="form-tab" onclick="switchTab('visit', this)">Zakaži posetu</button>
+                    </div>
+
+                    <!-- Tab 1: General -->
+                    <div id="tab-general" class="form-body active">
+                        <form onsubmit="handleSubmit(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Ime i prezime <span class="req">*</span></label>
+                                    <input type="text" class="form-input" placeholder="Vaše ime" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Telefon</label>
+                                    <input type="tel" class="form-input" placeholder="+381 6X XXX XXXX">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email adresa <span class="req">*</span></label>
+                                <input type="email" class="form-input" placeholder="vasa@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tema upita</label>
+                                <select class="form-select">
+                                    <option value="">Izaberite temu...</option>
+                                    <option>Informacije o proizvodu</option>
+                                    <option>Dostupnost na lageru</option>
+                                    <option>Cena i popusti</option>
+                                    <option>Dostava i isporuka</option>
+                                    <option>Reklamacija / Povrat</option>
+                                    <option>Ostalo</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Poruka <span class="req">*</span></label>
+                                <textarea class="form-textarea" placeholder="Opišite vaš upit što detaljnije..." required></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                                Pošaljite poruku
+                            </button>
+                            <p class="form-note">Vaši podaci su zaštićeni i neće biti prosleđeni trećim licima.</p>
+                        </form>
+                    </div>
+
+                    <!-- Tab 2: B2B -->
+                    <div id="tab-b2b" class="form-body">
+                        <form onsubmit="handleSubmit(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Ime i prezime <span class="req">*</span></label>
+                                    <input type="text" class="form-input" placeholder="Vaše ime" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Naziv firme <span class="req">*</span></label>
+                                    <input type="text" class="form-input" placeholder="Naziv kompanije" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Email <span class="req">*</span></label>
+                                    <input type="email" class="form-input" placeholder="vasa@firma.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Telefon <span class="req">*</span></label>
+                                    <input type="tel" class="form-input" placeholder="+381 6X XXX XXXX" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Tip saradnje</label>
+                                    <select class="form-select">
+                                        <option value="">Izaberite...</option>
+                                        <option>Arhitekta / Projektant</option>
+                                        <option>Izvođač radova</option>
+                                        <option>Investitor / Developer</option>
+                                        <option>Preprodavac</option>
+                                        <option>Ostalo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Okvirna vrednost projekta</label>
+                                    <select class="form-select">
+                                        <option value="">Izaberite...</option>
+                                        <option>Do 500.000 RSD</option>
+                                        <option>500.000 – 2.000.000 RSD</option>
+                                        <option>2.000.000 – 10.000.000 RSD</option>
+                                        <option>Preko 10.000.000 RSD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Opis projekta <span class="req">*</span></label>
+                                <textarea class="form-textarea" placeholder="Opišite projekat: tip objekta, površina, željeni materijali, rokovi..." required style="min-height:140px;"></textarea>
+                                <p class="form-hint">Što detaljniji opis — brže i preciznije možemo da vam dostavimo ponudu.</p>
+                            </div>
+                            <button type="submit" class="form-submit">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                                Pošaljite zahtev za ponudu
+                            </button>
+                            <p class="form-note">Odgovaramo u roku od 24h sa prilagođenom ponudom za vaš projekat.</p>
+                        </form>
+                    </div>
+
+                    <!-- Tab 3: Visit -->
+                    <div id="tab-visit" class="form-body">
+                        <form onsubmit="handleSubmit(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Ime i prezime <span class="req">*</span></label>
+                                    <input type="text" class="form-input" placeholder="Vaše ime" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Telefon <span class="req">*</span></label>
+                                    <input type="tel" class="form-input" placeholder="+381 6X XXX XXXX" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email adresa</label>
+                                <input type="email" class="form-input" placeholder="vasa@email.com">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Željeni datum <span class="req">*</span></label>
+                                    <input type="date" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Željeno vreme</label>
+                                    <select class="form-select">
+                                        <option value="">Izaberite...</option>
+                                        <option>08:00 – 10:00</option>
+                                        <option>10:00 – 12:00</option>
+                                        <option>12:00 – 14:00</option>
+                                        <option>14:00 – 16:00</option>
+                                        <option>16:00 – 18:00</option>
+                                        <option>18:00 – 20:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Šta vas zanima?</label>
+                                <select class="form-select">
+                                    <option value="">Izaberite...</option>
+                                    <option>Keramičke pločice</option>
+                                    <option>Kupatilska oprema</option>
+                                    <option>Kompletno opremanje kupatila</option>
+                                    <option>B2B / Projektna saradnja</option>
+                                    <option>Opšti pregled asortimana</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Napomena</label>
+                                <textarea class="form-textarea" placeholder="Opcionalno — opišite šta planirate ili imate li posebnih zahteva..." style="min-height:90px;"></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                Zakažite posetu
+                            </button>
+                            <p class="form-note">Potvrda termina stižeće telefonom ili emailom u roku od nekoliko sati.</p>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- B2B CTA -->
+            <div class="b2b-cta">
+                <div>
+                    <div class="b2b-cta__title">Arhitekte, investitori i izvođači — posebni uslovi saradnje</div>
+                    <p class="b2b-cta__text">
+                        Za profesionalne projekte nudimo prilagođene cene, prioritetnu dostavu, tehničku dokumentaciju i 
+                        posvećenog savetnika za vaš projekat. Kontaktirajte nas za detalje o B2B saradnji.
+                    </p>
+                </div>
+                <a href="#" onclick="switchTabById('b2b'); return false;" class="b2b-cta__btn">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Pošaljite B2B upit
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Map ─── -->
+    <div class="map-section">
+        <div class="map-wrapper">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2831.5!2d20.3850!3d44.8050!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSur%C4%8Dinska+94%2C+Novi+Beograd!5e0!3m2!1ssr!2srs!4v1"
+                allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Saya Group lokacija — Surčinska 94, Novi Beograd">
+            </iframe>
+            <div class="map-overlay">
+                <div class="map-overlay__name">Saya Group — Salon</div>
+                <div class="map-overlay__addr">Surčinska 94<br>11070 Novi Beograd</div>
+                <a href="https://maps.google.com/?q=Surčinska+94,+Novi+Beograd" target="_blank" rel="noopener" class="map-overlay__link">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Otvori u Google Maps
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── FAQ ─── -->
+    <section class="section section--alt">
+        <div class="container">
+            <span class="label">Česta pitanja</span>
+            <h2 class="section-title">Brzi odgovori</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Najčešća pitanja naših kupaca. Ako ne pronađete odgovor — slobodno nas kontaktirajte.</p>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Da li vršite dostavu van Beograda?
+                        <span class="faq-icon"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Da — za celu teritoriju Srbije dostavljamo putem kurirske službe. Cena dostave se obračunava prema težini i mestu isporuke. Sopstvenim vozilom dostavljamo na teritoriji Beograda, besplatno za porudžbine preko 50.000 RSD.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Koliko traje isporuka?
+                        <span class="faq-icon"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Period obrade porudžbine je 2–3 radna dana. Od tog trenutka rok isporuke je 3 radna dana za robu na lageru. Za robu koja se čeka, rok isporuke se dogovara individualno.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Mogu li da vidim uzorke pre kupovine?
+                        <span class="faq-icon"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Apsolutno — naš salon u Novom Beogradu ima kompletan izložbeni prostor sa uzorcima svih brendova. Preporučujemo posetu pre kupovine, posebno za veće projekte. Možete zakazati posetu putem forme na ovoj stranici.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Koji su načini plaćanja?
+                        <span class="faq-icon"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Prihvatamo plaćanje karticom (Visa, MasterCard, American Express), uplatom na račun (virman, e-banking) i gotovinom u salonu. Za B2B klijente dostupno je plaćanje po fakturi uz dogovorene uslove.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Da li nudite popuste za veće količine?
+                        <span class="faq-icon"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Da — za veće porudžbine i B2B projekte nudimo posebne uslove. Kontaktirajte nas telefonom ili pošaljite B2B upit putem forme, i naš tim će vam dostaviti prilagođenu ponudu.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Kakva je politika povrata robe?
+                        <span class="faq-icon"><svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Kupac je dužan da pri preuzimanju pregleda robu i odmah prijavi vidljive nedostatke. Za online kupovine, primedbe se podnose u roku od 8 dana od prijema. Za sve reklamacije kontaktirajte nas na office@sayagroup.rs ili telefonom.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tab switching
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.form-body').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        function switchTabById(tabId) {
+            const tabs = document.querySelectorAll('.form-tab');
+            const bodies = document.querySelectorAll('.form-body');
+            const ids = ['general', 'b2b', 'visit'];
+            const idx = ids.indexOf(tabId);
+            tabs.forEach(t => t.classList.remove('active'));
+            bodies.forEach(b => b.classList.remove('active'));
+            if (idx >= 0) {
+                tabs[idx].classList.add('active');
+                bodies[idx].classList.add('active');
+            }
+            document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // FAQ accordion
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const isOpen = btn.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-question.open').forEach(q => {
+                q.classList.remove('open');
+                q.nextElementSibling.classList.remove('open');
+            });
+            // Open clicked if it was closed
+            if (!isOpen) {
+                btn.classList.add('open');
+                answer.classList.add('open');
+            }
+        }
+
+        // Form submit placeholder
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.form-submit');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg> Poruka poslata!';
+            btn.style.background = '#2e7d32';
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.style.background = '';
+                e.target.reset();
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
