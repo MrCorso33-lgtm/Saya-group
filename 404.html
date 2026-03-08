@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Stranica nije pronađena | Saya Group</title>
+    <meta name="description" content="Stranica koju tražite nije pronađena. Pronađite premium keramiku i kupatilsku opremu na Saya Group sajtu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ─── Design Tokens ─── */
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body {
+            font-family: var(--font-main);
+            color: var(--secondary);
+            background: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb-nav {
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--mid-gray);
+            flex-wrap: wrap;
+        }
+        .breadcrumb a { color: var(--mid-gray); transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb .sep { color: var(--border); font-size: 0.7rem; }
+        .breadcrumb .current { color: var(--secondary); font-weight: 500; }
+
+        /* ─── 404 Hero ─── */
+        .error-hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background tile pattern */
+        .error-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 59px,
+                    rgba(197,38,105,0.04) 59px,
+                    rgba(197,38,105,0.04) 60px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 59px,
+                    rgba(197,38,105,0.04) 59px,
+                    rgba(197,38,105,0.04) 60px
+                );
+            pointer-events: none;
+        }
+
+        .error-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* ─── Big 404 Number ─── */
+        .error-number {
+            font-family: var(--font-serif);
+            font-size: clamp(120px, 20vw, 220px);
+            font-weight: 700;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--border);
+            position: relative;
+            margin-bottom: 8px;
+            user-select: none;
+        }
+        .error-number::after {
+            content: '404';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-text-stroke: 0;
+            opacity: 0.12;
+        }
+
+        /* ─── Tile Icon ─── */
+        .error-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+        .tile-sq {
+            border-radius: 4px;
+            animation: tilePulse 2s ease-in-out infinite;
+        }
+        .tile-sq:nth-child(1) { background: var(--primary); animation-delay: 0s; }
+        .tile-sq:nth-child(2) { background: var(--accent); animation-delay: 0.2s; }
+        .tile-sq:nth-child(3) { background: var(--accent); animation-delay: 0.4s; }
+        .tile-sq:nth-child(4) { background: var(--primary); opacity: 0.3; animation-delay: 0.6s; }
+
+        @keyframes tilePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.92); }
+        }
+
+        .error-label {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .error-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .error-desc {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--mid-gray);
+            font-weight: 300;
+            max-width: 480px;
+            margin: 0 auto 40px;
+        }
+
+        /* ─── CTA Buttons ─── */
+        .error-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius);
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+        }
+        .btn--primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn--primary:hover {
+            background: #a81e58;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(197,38,105,0.3);
+        }
+        .btn--outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 1.5px solid var(--border);
+        }
+        .btn--outline:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ─── Quick Links ─── */
+        .quick-links {
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+        }
+        .quick-links__label {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 20px;
+        }
+        .quick-links__grid {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--light-gray);
+            border-radius: 50px;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--secondary);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        .quick-link:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .quick-link svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ─── Search Bar ─── */
+        .error-search {
+            margin-bottom: 40px;
+        }
+        .error-search__form {
+            display: flex;
+            max-width: 440px;
+            margin: 0 auto;
+            border: 1.5px solid var(--border);
+            border-radius: 50px;
+            overflow: hidden;
+            background: var(--white);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .error-search__form:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(197,38,105,0.1);
+        }
+        .error-search__input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 20px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--secondary);
+            background: transparent;
+        }
+        .error-search__input::placeholder { color: var(--mid-gray); }
+        .error-search__btn {
+            background: var(--primary);
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .error-search__btn:hover { background: #a81e58; }
+        .error-search__btn svg { width: 18px; height: 18px; color: var(--white); }
+
+        /* ─── Popular Categories Strip ─── */
+        .categories-strip {
+            background: var(--background);
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+        .categories-strip__inner {
+            text-align: center;
+        }
+        .categories-strip__title {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 24px;
+        }
+        .categories-strip__row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cat-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 24px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            min-width: 120px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--secondary);
+        }
+        .cat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .cat-card:hover .cat-card__icon { background: var(--primary); color: var(--white); }
+        .cat-card__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        .cat-card__icon svg { width: 22px; height: 22px; }
+        .cat-card__name {
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .error-hero { padding: 60px 20px; }
+            .error-actions { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 320px; justify-content: center; }
+            .quick-links__grid { gap: 8px; }
+            .quick-link { font-size: 0.78rem; padding: 8px 14px; }
+            .categories-strip { padding: 36px 0; }
+            .cat-card { min-width: 100px; padding: 16px 16px; }
+        }
+        @media (max-width: 480px) {
+            .error-search__form { border-radius: var(--radius); }
+            .categories-strip__row { gap: 10px; }
+            .cat-card { min-width: 90px; padding: 14px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── Breadcrumb ─── -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Početna</a></li>
+                <li class="sep">›</li>
+                <li class="current">404 Greška</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- ─── Main Error Section ─── -->
+    <main class="error-hero" role="main">
+        <div class="error-content">
+
+            <!-- Animated tile icon -->
+            <div class="error-icon" aria-hidden="true">
+                <div class="tile-sq"></div>
+                <div class="tile-sq"></div>
+                <div class="tile-sq"></div>
+                <div class="tile-sq"></div>
+            </div>
+
+            <!-- 404 number -->
+            <div class="error-number" aria-hidden="true">404</div>
+
+            <span class="error-label">Greška 404</span>
+            <h1 class="error-title">Ova stranica nije pronađena</h1>
+            <p class="error-desc">
+                Stranica koju tražite je možda premeštena, obrisana ili nikada nije postojala.
+                Proverite URL ili se vratite na početnu stranicu.
+            </p>
+
+            <!-- Search -->
+            <div class="error-search">
+                <form class="error-search__form" role="search" onsubmit="handleSearch(event)">
+                    <input
+                        type="search"
+                        class="error-search__input"
+                        placeholder="Pretražite proizvode, brendove..."
+                        aria-label="Pretraga"
+                        id="errorSearchInput"
+                    >
+                    <button type="submit" class="error-search__btn" aria-label="Pretraži">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="error-actions">
+                <a href="index.html" class="btn btn--primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Početna stranica
+                </a>
+                <a href="categories.html" class="btn btn--outline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    Sve kategorije
+                </a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <p class="quick-links__label">Brzi linkovi</p>
+                <div class="quick-links__grid">
+                    <a href="brendovi.html" class="quick-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        Brendovi
+                    </a>
+                    <a href="inspiracija.html" class="quick-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                        Inspiracija
+                    </a>
+                    <a href="blog.html" class="quick-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        Blog
+                    </a>
+                    <a href="kontakt.html" class="quick-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1 19.79 19.79 0 0 1 1.6 4.53 2 2 0 0 1 3.57 2.34h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 17z"/>
+                        </svg>
+                        Kontakt
+                    </a>
+                    <a href="o-nama.html" class="quick-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        O Nama
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ─── Popular Categories ─── -->
+    <section class="categories-strip">
+        <div class="container">
+            <div class="categories-strip__inner">
+                <p class="categories-strip__title">Popularne kategorije</p>
+                <div class="categories-strip__row">
+                    <a href="plocice.html" class="cat-card">
+                        <div class="cat-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="8" height="8" rx="1"/>
+                                <rect x="13" y="3" width="8" height="8" rx="1"/>
+                                <rect x="3" y="13" width="8" height="8" rx="1"/>
+                                <rect x="13" y="13" width="8" height="8" rx="1"/>
+                            </svg>
+                        </div>
+                        <span class="cat-card__name">Pločice</span>
+                    </a>
+                    <a href="sanitarije.html" class="cat-card">
+                        <div class="cat-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 12h16M4 12a8 8 0 0 1 16 0M4 12v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/>
+                            </svg>
+                        </div>
+                        <span class="cat-card__name">Sanitarije</span>
+                    </a>
+                    <a href="baterije.html" class="cat-card">
+                        <div class="cat-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M5 12h14M12 5v14"/>
+                                <circle cx="12" cy="12" r="9"/>
+                            </svg>
+                        </div>
+                        <span class="cat-card__name">Baterije</span>
+                    </a>
+                    <a href="kade_tus_kabine.html" class="cat-card">
+                        <div class="cat-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+                                <line x1="10" y1="5" x2="8" y2="7"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                            </svg>
+                        </div>
+                        <span class="cat-card__name">Kade i Tuš</span>
+                    </a>
+                    <a href="kupatilski_namestaj.html" class="cat-card">
+                        <div class="cat-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                                <line x1="12" y1="12" x2="12" y2="16"/>
+                                <line x1="10" y1="14" x2="14" y2="14"/>
+                            </svg>
+                        </div>
+                        <span class="cat-card__name">Nameštaj</span>
+                    </a>
+                    <a href="oprema_kupatilo.html" class="cat-card">
+                        <div class="cat-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                            </svg>
+                        </div>
+                        <span class="cat-card__name">Oprema</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function handleSearch(e) {
+            e.preventDefault();
+            const q = document.getElementById('errorSearchInput').value.trim();
+            if (q) {
+                window.location.href = 'pretraga.html?q=' + encodeURIComponent(q);
+            }
+        }
+    </script>
+
+</body>
+</html>
