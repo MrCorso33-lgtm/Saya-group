@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Pretraga — Saya Group</title>
+    <meta name="description" content="Rezultati pretrage na Saya Group — keramičke pločice, sanitarije, baterije i kupatilska oprema.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C52669;
+            --primary-dark: #a01f56;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-main); color: var(--secondary); background: var(--light-gray); line-height: 1.7; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 0; }
+        .breadcrumb__inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mid-gray); }
+        .breadcrumb__inner a { color: var(--mid-gray); transition: color 0.2s; }
+        .breadcrumb__inner a:hover { color: var(--primary); }
+        .breadcrumb__sep { color: #ccc; }
+        .breadcrumb__current { color: var(--secondary); font-weight: 500; }
+
+        /* ─── Search Header Bar ─── */
+        .search-header { background: var(--white); border-bottom: 1px solid var(--border); padding: 20px 0; }
+        .search-header__inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .search-header__query { font-size: 13px; color: var(--mid-gray); margin-bottom: 10px; }
+        .search-header__query strong { color: var(--secondary); }
+        .search-bar-wrap { display: flex; gap: 0; max-width: 700px; }
+        .search-bar-input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 2px solid var(--secondary);
+            border-right: none;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-size: 15px;
+            font-family: var(--font-main);
+            color: var(--secondary);
+            background: var(--white);
+        }
+        .search-bar-input:focus { outline: none; border-color: var(--primary); }
+        .search-bar-btn {
+            padding: 12px 22px;
+            background: var(--secondary);
+            color: var(--white);
+            border: 2px solid var(--secondary);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: var(--font-main);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .search-bar-btn:hover { background: var(--primary); border-color: var(--primary); }
+
+        /* ─── Main Layout ─── */
+        .search-page { max-width: 1280px; margin: 0 auto; padding: 28px 24px 80px; display: grid; grid-template-columns: 260px 1fr; gap: 28px; align-items: start; }
+
+        /* ─── Sidebar Filters ─── */
+        .sidebar { position: sticky; top: 24px; }
+        .filter-panel { background: var(--white); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
+        .filter-panel__title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--secondary); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+        .filter-panel__title svg { transition: transform 0.3s; }
+        .filter-panel.collapsed .filter-panel__title svg { transform: rotate(-90deg); }
+        .filter-panel__body { }
+        .filter-panel.collapsed .filter-panel__body { display: none; }
+
+        .filter-checkbox { display: flex; align-items: center; gap: 10px; padding: 6px 0; cursor: pointer; font-size: 14px; color: var(--secondary); transition: color 0.2s; }
+        .filter-checkbox:hover { color: var(--primary); }
+        .filter-checkbox input[type="checkbox"] { accent-color: var(--primary); width: 15px; height: 15px; flex-shrink: 0; }
+        .filter-checkbox__count { margin-left: auto; font-size: 12px; color: var(--mid-gray); background: var(--light-gray); padding: 1px 7px; border-radius: 20px; }
+
+        .price-range { margin-top: 4px; }
+        .price-range input[type="range"] { width: 100%; accent-color: var(--primary); }
+        .price-range__labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--mid-gray); margin-top: 6px; }
+
+        .filter-clear { display: block; width: 100%; text-align: center; padding: 9px; background: none; border: 1.5px solid var(--border); border-radius: var(--radius); font-size: 13px; font-weight: 600; color: var(--mid-gray); cursor: pointer; font-family: var(--font-main); transition: var(--transition); }
+        .filter-clear:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* ─── Results Area ─── */
+        .results-area { min-width: 0; }
+
+        /* ─── Results Meta Bar ─── */
+        .results-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .results-count { font-size: 14px; color: var(--mid-gray); }
+        .results-count strong { color: var(--secondary); font-size: 16px; }
+        .results-controls { display: flex; align-items: center; gap: 12px; }
+        .sort-select { padding: 8px 14px; border: 1.5px solid var(--border); border-radius: var(--radius); font-size: 13px; font-family: var(--font-main); color: var(--secondary); background: var(--white); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23888' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; }
+        .sort-select:focus { outline: none; border-color: var(--primary); }
+        .view-toggle { display: flex; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .view-btn { width: 34px; height: 34px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--mid-gray); transition: var(--transition); }
+        .view-btn.active { background: var(--secondary); color: var(--white); }
+        .view-btn:hover:not(.active) { background: var(--light-gray); }
+
+        /* ─── Result Tabs ─── */
+        .result-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 24px; overflow-x: auto; }
+        .result-tab { padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--mid-gray); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: var(--transition); background: none; border-top: none; border-left: none; border-right: none; font-family: var(--font-main); }
+        .result-tab:hover { color: var(--secondary); }
+        .result-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .result-tab__count { display: inline-flex; align-items: center; justify-content: center; background: var(--light-gray); color: var(--mid-gray); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 20px; margin-left: 6px; }
+        .result-tab.active .result-tab__count { background: var(--primary); color: var(--white); }
+
+        /* ─── Active Filters ─── */
+        .active-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .active-filter-tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: #fdf5f9; border: 1px solid var(--primary); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--primary); }
+        .active-filter-tag button { background: none; border: none; cursor: pointer; color: var(--primary); font-size: 14px; line-height: 1; padding: 0; display: flex; align-items: center; }
+        .active-filter-tag button:hover { color: var(--primary-dark); }
+
+        /* ─── Product Grid ─── */
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .product-grid.list-view { grid-template-columns: 1fr; }
+
+        /* ─── Product Card ─── */
+        .product-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; }
+        .product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+        .product-card__img { position: relative; aspect-ratio: 4/3; background: var(--light-gray); overflow: hidden; }
+        .product-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .product-card:hover .product-card__img img { transform: scale(1.04); }
+        .product-card__badge { position: absolute; top: 10px; left: 10px; background: var(--primary); color: var(--white); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .product-card__badge.new { background: #38a169; }
+        .product-card__badge.sale { background: var(--primary); }
+        .product-card__wishlist { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.12); opacity: 0; transition: opacity 0.2s; }
+        .product-card:hover .product-card__wishlist { opacity: 1; }
+        .product-card__body { padding: 14px 16px; }
+        .product-card__brand { font-size: 11px; font-weight: 600; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+        .product-card__name { font-size: 14px; font-weight: 600; color: var(--secondary); line-height: 1.3; margin-bottom: 6px; }
+        .product-card__dims { font-size: 12px; color: var(--mid-gray); margin-bottom: 10px; }
+        .product-card__footer { display: flex; align-items: center; justify-content: space-between; }
+        .product-card__price { font-size: 16px; font-weight: 700; color: var(--secondary); }
+        .product-card__price span { font-size: 11px; font-weight: 400; color: var(--mid-gray); }
+        .product-card__add { width: 32px; height: 32px; background: var(--secondary); color: var(--white); border: none; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .product-card__add:hover { background: var(--primary); transform: scale(1.1); }
+
+        /* List View Card */
+        .product-grid.list-view .product-card { display: grid; grid-template-columns: 160px 1fr; }
+        .product-grid.list-view .product-card__img { aspect-ratio: unset; height: 140px; }
+        .product-grid.list-view .product-card__body { display: flex; flex-direction: column; justify-content: space-between; padding: 16px 20px; }
+
+        /* ─── Category Cards ─── */
+        .category-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+        .category-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; text-align: center; }
+        .category-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        .category-card__img { aspect-ratio: 16/9; background: var(--light-gray); overflow: hidden; }
+        .category-card__img img { width: 100%; height: 100%; object-fit: cover; }
+        .category-card__body { padding: 12px; }
+        .category-card__name { font-size: 13px; font-weight: 700; color: var(--secondary); }
+        .category-card__count { font-size: 12px; color: var(--mid-gray); }
+
+        /* ─── Brand Results ─── */
+        .brand-results { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 32px; }
+        .brand-result-card { background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; transition: var(--transition); }
+        .brand-result-card:hover { box-shadow: var(--shadow-hover); border: 1px solid var(--primary); }
+        .brand-result-card__logo { height: 36px; display: flex; align-items: center; justify-content: center; }
+        .brand-result-card__logo img { max-height: 36px; max-width: 100px; object-fit: contain; filter: grayscale(20%); }
+        .brand-result-card__name { font-size: 12px; font-weight: 600; color: var(--mid-gray); text-align: center; }
+
+        /* ─── Section Heading ─── */
+        .section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .section-heading h2 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; }
+        .section-heading a { font-size: 13px; color: var(--primary); font-weight: 600; }
+        .section-heading a:hover { text-decoration: underline; }
+
+        /* ─── Zero Results State ─── */
+        .zero-results { background: var(--white); border-radius: 12px; padding: 60px 24px; text-align: center; box-shadow: var(--shadow); display: none; }
+        .zero-results__icon { font-size: 52px; margin-bottom: 20px; }
+        .zero-results__title { font-family: var(--font-serif); font-size: 24px; margin-bottom: 10px; }
+        .zero-results__text { color: var(--mid-gray); max-width: 480px; margin: 0 auto 28px; }
+        .zero-results__suggestions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 28px; }
+        .suggestion-chip { padding: 8px 16px; background: var(--light-gray); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--secondary); cursor: pointer; transition: var(--transition); border: 1.5px solid transparent; }
+        .suggestion-chip:hover { border-color: var(--primary); color: var(--primary); background: #fdf5f9; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; font-family: var(--font-main); }
+        .btn--primary { background: var(--primary); color: var(--white); }
+        .btn--primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn--outline { background: transparent; color: var(--secondary); border: 1.5px solid var(--secondary); }
+        .btn--outline:hover { background: var(--secondary); color: var(--white); }
+
+        /* ─── Pagination ─── */
+        .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 36px; }
+        .page-btn { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius); border: 1.5px solid var(--border); background: var(--white); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); color: var(--secondary); }
+        .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .page-btn.active { background: var(--primary); border-color: var(--primary); color: var(--white); }
+        .page-btn.arrow { font-size: 18px; }
+
+        /* ─── Mobile Filter Toggle ─── */
+        .mobile-filter-btn { display: none; align-items: center; gap: 8px; padding: 10px 16px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; font-family: var(--font-main); color: var(--secondary); }
+        .mobile-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .mobile-filter-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+        .mobile-filter-drawer { position: fixed; left: 0; top: 0; bottom: 0; width: 300px; background: var(--white); z-index: 201; overflow-y: auto; padding: 20px; transform: translateX(-100%); transition: transform 0.3s ease; }
+        .mobile-filter-drawer.open { transform: translateX(0); }
+        .mobile-filter-overlay.open { display: block; }
+        .mobile-filter-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .mobile-filter-header h3 { font-family: var(--font-serif); font-size: 18px; }
+        .mobile-filter-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--mid-gray); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .category-results { grid-template-columns: repeat(3, 1fr); }
+            .brand-results { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 860px) {
+            .search-page { grid-template-columns: 1fr; }
+            .sidebar { display: none; position: static; }
+            .mobile-filter-btn { display: flex; }
+        }
+        @media (max-width: 600px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .category-results { grid-template-columns: repeat(2, 1fr); }
+            .brand-results { grid-template-columns: repeat(3, 1fr); }
+            .results-meta { flex-direction: column; align-items: flex-start; }
+            .product-grid.list-view .product-card { grid-template-columns: 100px 1fr; }
+            .product-grid.list-view .product-card__img { height: 110px; }
+        }
+        @media (max-width: 400px) {
+            .product-grid { grid-template-columns: 1fr; }
+            .brand-results { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav class="breadcrumb">
+    <div class="breadcrumb__inner">
+        <a href="index.html">Početna</a>
+        <span class="breadcrumb__sep">›</span>
+        <span class="breadcrumb__current" id="breadcrumbQuery">Pretraga</span>
+    </div>
+</nav>
+
+<!-- ===== SEARCH HEADER ===== -->
+<div class="search-header">
+    <div class="search-header__inner">
+        <p class="search-header__query" id="searchQueryLabel">Rezultati za: <strong id="queryDisplay">"mermerne pločice"</strong></p>
+        <div class="search-bar-wrap">
+            <input type="search" class="search-bar-input" id="searchInput" value="mermerne pločice" placeholder="Pretražite proizvode, brendove, kategorije...">
+            <button class="search-bar-btn" onclick="runSearch()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Traži
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="search-page">
+
+    <!-- ─── Sidebar Filters ─── -->
+    <aside class="sidebar" id="desktopSidebar">
+
+        <div class="filter-panel">
+            <div class="filter-panel__title" onclick="toggleFilter(this)">
+                Kategorija
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="filter-panel__body">
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> Pločice <span class="filter-checkbox__count">18</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Sanitarije <span class="filter-checkbox__count">4</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Baterije <span class="filter-checkbox__count">2</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Kade i Tuš Kabine <span class="filter-checkbox__count">1</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Kupatilski Nameštaj <span class="filter-checkbox__count">1</span></label>
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <div class="filter-panel__title" onclick="toggleFilter(this)">
+                Brend
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="filter-panel__body">
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> Tau Ceramica <span class="filter-checkbox__count">7</span></label>
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> Arcana <span class="filter-checkbox__count">5</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Ribesalbes <span class="filter-checkbox__count">4</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> New Tiles <span class="filter-checkbox__count">2</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> WoW Design <span class="filter-checkbox__count">2</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Villeroy &amp; Boch <span class="filter-checkbox__count">1</span></label>
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <div class="filter-panel__title" onclick="toggleFilter(this)">
+                Dimenzija
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="filter-panel__body">
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> 60×60 cm <span class="filter-checkbox__count">9</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> 80×80 cm <span class="filter-checkbox__count">5</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> 120×60 cm <span class="filter-checkbox__count">4</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> 30×60 cm <span class="filter-checkbox__count">3</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> 120×120 cm <span class="filter-checkbox__count">2</span></label>
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <div class="filter-panel__title" onclick="toggleFilter(this)">
+                Završna obrada
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="filter-panel__body">
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> Polished <span class="filter-checkbox__count">10</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Matt <span class="filter-checkbox__count">7</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Lappato <span class="filter-checkbox__count">5</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Satin <span class="filter-checkbox__count">2</span></label>
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <div class="filter-panel__title" onclick="toggleFilter(this)">
+                Cena (RSD / m²)
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="filter-panel__body">
+                <div class="price-range">
+                    <input type="range" min="800" max="12000" value="12000" step="200" oninput="updatePriceLabel(this)">
+                    <div class="price-range__labels">
+                        <span>800 RSD</span>
+                        <span id="priceMax">12.000 RSD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <div class="filter-panel__title" onclick="toggleFilter(this)">
+                Primena
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="filter-panel__body">
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> Pod <span class="filter-checkbox__count">12</span></label>
+                <label class="filter-checkbox"><input type="checkbox" checked onchange="applyFilters()"> Zid <span class="filter-checkbox__count">10</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Enterijer <span class="filter-checkbox__count">16</span></label>
+                <label class="filter-checkbox"><input type="checkbox" onchange="applyFilters()"> Eksterijer <span class="filter-checkbox__count">4</span></label>
+            </div>
+        </div>
+
+        <button class="filter-clear" onclick="clearFilters()">Ukloni sve filtere</button>
+    </aside>
+
+    <!-- ─── Results Area ─── -->
+    <main class="results-area">
+
+        <!-- Mobile Filter Button -->
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+            <button class="mobile-filter-btn" onclick="openMobileFilters()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+                Filteri
+            </button>
+        </div>
+
+        <!-- Active Filter Tags -->
+        <div class="active-filters" id="activeFilters">
+            <span class="active-filter-tag">Pločice <button onclick="removeFilter(this)">×</button></span>
+            <span class="active-filter-tag">Tau Ceramica <button onclick="removeFilter(this)">×</button></span>
+            <span class="active-filter-tag">60×60 cm <button onclick="removeFilter(this)">×</button></span>
+            <span class="active-filter-tag">Polished <button onclick="removeFilter(this)">×</button></span>
+        </div>
+
+        <!-- Results Meta Bar -->
+        <div class="results-meta">
+            <p class="results-count"><strong id="resultCount">26</strong> rezultata za <strong id="resultQuery">"mermerne pločice"</strong></p>
+            <div class="results-controls">
+                <select class="sort-select" onchange="applySort(this.value)">
+                    <option value="relevance">Relevantnost</option>
+                    <option value="price_asc">Cena: rastuće</option>
+                    <option value="price_desc">Cena: opadajuće</option>
+                    <option value="newest">Najnovije</option>
+                    <option value="popular">Najpopularnije</option>
+                </select>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid prikaz">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    </button>
+                    <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="Lista prikaz">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Tabs -->
+        <div class="result-tabs" id="resultTabs">
+            <button class="result-tab active" onclick="switchTab('all', this)">Sve <span class="result-tab__count">26</span></button>
+            <button class="result-tab" onclick="switchTab('products', this)">Proizvodi <span class="result-tab__count">18</span></button>
+            <button class="result-tab" onclick="switchTab('categories', this)">Kategorije <span class="result-tab__count">3</span></button>
+            <button class="result-tab" onclick="switchTab('brands', this)">Brendovi <span class="result-tab__count">5</span></button>
+        </div>
+
+        <!-- ZERO RESULTS STATE -->
+        <div class="zero-results" id="zeroResults">
+            <div class="zero-results__icon">🔍</div>
+            <h2 class="zero-results__title">Nema rezultata</h2>
+            <p class="zero-results__text">Nismo pronašli ništa za vaš upit. Pokušajte sa nekim od predloga ili pregledajte naše kategorije.</p>
+            <div class="zero-results__suggestions">
+                <span class="suggestion-chip" onclick="searchFor('mermerne pločice')">mermerne pločice</span>
+                <span class="suggestion-chip" onclick="searchFor('bele pločice 60x60')">bele pločice 60x60</span>
+                <span class="suggestion-chip" onclick="searchFor('Tau Ceramica')">Tau Ceramica</span>
+                <span class="suggestion-chip" onclick="searchFor('tuš kabina')">tuš kabina</span>
+                <span class="suggestion-chip" onclick="searchFor('Grohe baterija')">Grohe baterija</span>
+                <span class="suggestion-chip" onclick="searchFor('podne pločice')">podne pločice</span>
+            </div>
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                <a href="categories.html" class="btn btn--primary">Pregledajte kategorije</a>
+                <a href="kontakt.html" class="btn btn--outline">Kontaktirajte nas</a>
+            </div>
+        </div>
+
+        <!-- RESULTS CONTENT -->
+        <div id="resultsContent">
+
+            <!-- Categories Section -->
+            <div id="categoriesSection">
+                <div class="section-heading">
+                    <h2>Kategorije</h2>
+                    <a href="categories.html">Sve kategorije →</a>
+                </div>
+                <div class="category-results">
+                    <a href="plocice.html" class="category-card">
+                        <div class="category-card__img"><img src="https://placehold.co/200x112/f0ebe3/888?text=Pločice" alt="Pločice" loading="lazy"></div>
+                        <div class="category-card__body"><p class="category-card__name">Pločice</p><p class="category-card__count">18 rezultata</p></div>
+                    </a>
+                    <a href="sanitarije.html" class="category-card">
+                        <div class="category-card__img"><img src="https://placehold.co/200x112/e8e0d5/888?text=Sanitarije" alt="Sanitarije" loading="lazy"></div>
+                        <div class="category-card__body"><p class="category-card__name">Sanitarije</p><p class="category-card__count">4 rezultata</p></div>
+                    </a>
+                    <a href="kade_tus_kabine.html" class="category-card">
+                        <div class="category-card__img"><img src="https://placehold.co/200x112/ddd8d0/888?text=Kade" alt="Kade" loading="lazy"></div>
+                        <div class="category-card__body"><p class="category-card__name">Kade i Tuš Kabine</p><p class="category-card__count">1 rezultat</p></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Brands Section -->
+            <div id="brandsSection">
+                <div class="section-heading">
+                    <h2>Brendovi</h2>
+                    <a href="brendovi.html">Svi brendovi →</a>
+                </div>
+                <div class="brand-results">
+                    <div class="brand-result-card">
+                        <div class="brand-result-card__logo"><img src="images/logos/tau-ceramica.webp" alt="Tau Ceramica" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-size:12px; font-weight:700;">TAU</span></div>
+                        <span class="brand-result-card__name">Tau Ceramica</span>
+                    </div>
+                    <div class="brand-result-card">
+                        <div class="brand-result-card__logo"><img src="images/logos/arcana.webp" alt="Arcana" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-size:12px; font-weight:700;">ARCANA</span></div>
+                        <span class="brand-result-card__name">Arcana</span>
+                    </div>
+                    <div class="brand-result-card">
+                        <div class="brand-result-card__logo"><img src="images/logos/ribesalbes.webp" alt="Ribesalbes" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-size:12px; font-weight:700;">RIBESALBES</span></div>
+                        <span class="brand-result-card__name">Ribesalbes</span>
+                    </div>
+                    <div class="brand-result-card">
+                        <div class="brand-result-card__logo"><img src="images/logos/new-tiles.webp" alt="New Tiles" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-size:12px; font-weight:700;">NEW TILES</span></div>
+                        <span class="brand-result-card__name">New Tiles</span>
+                    </div>
+                    <div class="brand-result-card">
+                        <div class="brand-result-card__logo"><img src="images/logos/villeroy-boch.webp" alt="Villeroy & Boch" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><span style="display:none; font-size:12px; font-weight:700;">V&B</span></div>
+                        <span class="brand-result-card__name">Villeroy &amp; Boch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Section -->
+            <div id="productsSection">
+                <div class="section-heading">
+                    <h2>Proizvodi</h2>
+                    <span id="productsCount" style="font-size:13px; color:var(--mid-gray);">18 rezultata</span>
+                </div>
+                <div class="product-grid" id="productGrid">
+
+                    <a href="product-carrara-white.html" class="product-card">
+                        <div class="product-card__img">
+                            <img src="https://placehold.co/300x225/f0ebe3/888?text=Carrara+White" alt="Carrara White" loading="lazy">
+                            <span class="product-card__badge new">Novo</span>
+                            <span class="product-card__wishlist">♡</span>
+                        </div>
+                        <div class="product-card__body">
+                            <p class="product-card__brand">Tau Ceramica</p>
+                            <h3 class="product-card__name">Carrara White Polished 60×60</h3>
+                            <p class="product-card__dims">60×60 cm · Polished · Pod/Zid</p>
+                            <div class="product-card__footer">
+                                <p class="product-card__price">2.720 <span>RSD/m²</span></p>
+                                <button class="product-card__add" onclick="event.preventDefault(); addToCart('Carrara White')">+</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="product-card">
+                        <div class="product-card__img">
+                            <img src="https://placehold.co/300x225/ede8e0/888?text=Calacatta+Gold" alt="Calacatta Gold" loading="lazy">
+                            <span class="product-card__wishlist">♡</span>
+                        </div>
+                        <div class="product-card__body">
+                            <p class="product-card__brand">Arcana</p>
+                            <h3 class="product-card__name">Calacatta Gold Lappato 80×80</h3>
+                            <p class="product-card__dims">80×80 cm · Lappato · Pod/Zid</p>
+                            <div class="product-card__footer">
+                                <p class="product-card__price">4.180 <span>RSD/m²</span></p>
+                                <button class="product-card__add" onclick="event.preventDefault(); addToCart('Calacatta Gold')">+</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="product-card">
+                        <div class="product-card__img">
+                            <img src="https://placehold.co/300x225/e8e3da/888?text=Statuario" alt="Statuario" loading="lazy">
+                            <span class="product-card__badge sale">Akcija</span>
+                            <span class="product-card__wishlist">♡</span>
+                        </div>
+                        <div class="product-card__body">
+                            <p class="product-card__brand">Tau Ceramica</p>
+                            <h3 class="product-card__name">Statuario Polished 120×60</h3>
+                            <p class="product-card__dims">120×60 cm · Polished · Zid</p>
+                            <div class="product-card__footer">
+                                <p class="product-card__price">3.640 <span>RSD/m²</span></p>
+                                <button class="product-card__add" onclick="event.preventDefault(); addToCart('Statuario')">+</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="product-card">
+                        <div class="product-card__img">
+                            <img src="https://placehold.co/300x225/f2ede5/888?text=Bianco+Venatino" alt="Bianco Venatino" loading="lazy">
+                            <span class="product-card__wishlist">♡</span>
+                        </div>
+                        <div class="product-card__body">
+                            <p class="product-card__brand">New Tiles</p>
+                            <h3 class="product-card__name">Bianco Venatino Matt 60×60</h3>
+                            <p class="product-card__dims">60×60 cm · Matt · Pod/Zid</p>
+                            <div class="product-card__footer">
+                                <p class="product-card__price">2.950 <span>RSD/m²</span></p>
+                                <button class="product-card__add" onclick="event.preventDefault(); addToCart('Bianco Venatino')">+</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="product-card">
+                        <div class="product-card__img">
+                            <img src="https://placehold.co/300x225/ede9e1/888?text=Arabescato" alt="Arabescato" loading="lazy">
+                            <span class="product-card__wishlist">♡</span>
+                        </div>
+                        <div class="product-card__body">
+                            <p class="product-card__brand">Arcana</p>
+                            <h3 class="product-card__name">Arabescato Satin 120×120</h3>
+                            <p class="product-card__dims">120×120 cm · Satin · Pod</p>
+                            <div class="product-card__footer">
+                                <p class="product-card__price">5.800 <span>RSD/m²</span></p>
+                                <button class="product-card__add" onclick="event.preventDefault(); addToCart('Arabescato')">+</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="product-card">
+                        <div class="product-card__img">
+                            <img src="https://placehold.co/300x225/e5e0d8/888?text=Marquina" alt="Marquina" loading="lazy">
+                            <span class="product-card__wishlist">♡</span>
+                        </div>
+                        <div class="product-card__body">
+                            <p class="product-card__brand">Ribesalbes</p>
+                            <h3 class="product-card__name">Marquina Black Polished 60×60</h3>
+                            <p class="product-card__dims">60×60 cm · Polished · Zid</p>
+                            <div class="product-card__footer">
+                                <p class="product-card__price">3.120 <span>RSD/m²</span></p>
+                                <button class="product-card__add" onclick="event.preventDefault(); addToCart('Marquina')">+</button>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button class="page-btn arrow">‹</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn arrow">›</button>
+            </div>
+
+        </div><!-- /resultsContent -->
+
+    </main>
+</div>
+
+<!-- ===== MOBILE FILTER DRAWER ===== -->
+<div class="mobile-filter-overlay" id="mobileOverlay" onclick="closeMobileFilters()"></div>
+<div class="mobile-filter-drawer" id="mobileDrawer">
+    <div class="mobile-filter-header">
+        <h3>Filteri</h3>
+        <button class="mobile-filter-close" onclick="closeMobileFilters()">×</button>
+    </div>
+    <!-- Same filters repeated for mobile -->
+    <div class="filter-panel">
+        <div class="filter-panel__title" onclick="toggleFilter(this)">Kategorija <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="filter-panel__body">
+            <label class="filter-checkbox"><input type="checkbox" checked> Pločice <span class="filter-checkbox__count">18</span></label>
+            <label class="filter-checkbox"><input type="checkbox"> Sanitarije <span class="filter-checkbox__count">4</span></label>
+            <label class="filter-checkbox"><input type="checkbox"> Baterije <span class="filter-checkbox__count">2</span></label>
+        </div>
+    </div>
+    <div class="filter-panel">
+        <div class="filter-panel__title" onclick="toggleFilter(this)">Brend <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="filter-panel__body">
+            <label class="filter-checkbox"><input type="checkbox" checked> Tau Ceramica <span class="filter-checkbox__count">7</span></label>
+            <label class="filter-checkbox"><input type="checkbox" checked> Arcana <span class="filter-checkbox__count">5</span></label>
+            <label class="filter-checkbox"><input type="checkbox"> Ribesalbes <span class="filter-checkbox__count">4</span></label>
+        </div>
+    </div>
+    <div class="filter-panel">
+        <div class="filter-panel__title" onclick="toggleFilter(this)">Dimenzija <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="filter-panel__body">
+            <label class="filter-checkbox"><input type="checkbox" checked> 60×60 cm <span class="filter-checkbox__count">9</span></label>
+            <label class="filter-checkbox"><input type="checkbox"> 80×80 cm <span class="filter-checkbox__count">5</span></label>
+            <label class="filter-checkbox"><input type="checkbox"> 120×60 cm <span class="filter-checkbox__count">4</span></label>
+        </div>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:20px;">
+        <button class="btn btn--primary" style="flex:1; justify-content:center;" onclick="closeMobileFilters()">Primeni filtere</button>
+    </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--secondary); color:var(--white); padding:12px 24px; border-radius:8px; font-size:14px; font-weight:500; z-index:2000; transition:transform 0.3s ease; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,0.2);"></div>
+
+<script>
+    // ─── Read query from URL ───
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q') || params.get('s') || 'mermerne pločice';
+        document.getElementById('searchInput').value = q;
+        document.getElementById('queryDisplay').textContent = `"${q}"`;
+        document.getElementById('resultQuery').textContent = `"${q}"`;
+        document.getElementById('breadcrumbQuery').textContent = `Pretraga: "${q}"`;
+        document.title = `Pretraga: "${q}" — Saya Group`;
+    })();
+
+    // ─── Run Search ───
+    function runSearch() {
+        const q = document.getElementById('searchInput').value.trim();
+        if (!q) return;
+        window.location.href = `pretraga.html?q=${encodeURIComponent(q)}`;
+    }
+    document.getElementById('searchInput').addEventListener('keydown', e => {
+        if (e.key === 'Enter') runSearch();
+    });
+
+    // ─── Search For (suggestion chip) ───
+    function searchFor(term) {
+        window.location.href = `pretraga.html?q=${encodeURIComponent(term)}`;
+    }
+
+    // ─── Tab Switching ───
+    function switchTab(tab, btn) {
+        document.querySelectorAll('.result-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        const cats = document.getElementById('categoriesSection');
+        const brands = document.getElementById('brandsSection');
+        const prods = document.getElementById('productsSection');
+        if (tab === 'all') { cats.style.display=''; brands.style.display=''; prods.style.display=''; }
+        else if (tab === 'products') { cats.style.display='none'; brands.style.display='none'; prods.style.display=''; }
+        else if (tab === 'categories') { cats.style.display=''; brands.style.display='none'; prods.style.display='none'; }
+        else if (tab === 'brands') { cats.style.display='none'; brands.style.display=''; prods.style.display='none'; }
+    }
+
+    // ─── Filter Toggle (collapse) ───
+    function toggleFilter(titleEl) {
+        titleEl.closest('.filter-panel').classList.toggle('collapsed');
+    }
+
+    // ─── Remove Active Filter Tag ───
+    function removeFilter(btn) {
+        btn.closest('.active-filter-tag').remove();
+        applyFilters();
+    }
+
+    // ─── Apply Filters (prototype: just show toast) ───
+    function applyFilters() {
+        showToast('Filteri primenjeni');
+    }
+
+    // ─── Clear All Filters ───
+    function clearFilters() {
+        document.querySelectorAll('.filter-checkbox input').forEach(cb => cb.checked = false);
+        document.getElementById('activeFilters').innerHTML = '';
+        showToast('Svi filteri uklonjeni');
+    }
+
+    // ─── Price Range Label ───
+    function updatePriceLabel(input) {
+        document.getElementById('priceMax').textContent = parseInt(input.value).toLocaleString('sr-RS') + ' RSD';
+    }
+
+    // ─── Sort ───
+    function applySort(val) {
+        showToast('Sortiranje primenjeno: ' + val);
+    }
+
+    // ─── View Toggle ───
+    function setView(mode) {
+        const grid = document.getElementById('productGrid');
+        document.getElementById('gridViewBtn').classList.toggle('active', mode === 'grid');
+        document.getElementById('listViewBtn').classList.toggle('active', mode === 'list');
+        grid.classList.toggle('list-view', mode === 'list');
+    }
+
+    // ─── Add to Cart ───
+    function addToCart(name) {
+        showToast(`"${name}" dodat u korpu ✓`);
+    }
+
+    // ─── Mobile Filters ───
+    function openMobileFilters() {
+        document.getElementById('mobileDrawer').classList.add('open');
+        document.getElementById('mobileOverlay').classList.add('open');
+    }
+    function closeMobileFilters() {
+        document.getElementById('mobileDrawer').classList.remove('open');
+        document.getElementById('mobileOverlay').classList.remove('open');
+    }
+
+    // ─── Toast ───
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.style.transform = 'translateX(-50%) translateY(0)';
+        clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(() => {
+            t.style.transform = 'translateX(-50%) translateY(80px)';
+        }, 2800);
+    }
+</script>
+</body>
+</html>
