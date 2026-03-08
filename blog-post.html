@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trendovi u dizajnu kupatila za 2025. godinu — šta donose nove kolekcije i kako primeniti najnovije trendove u vašem prostoru.">
+    <title>Trendovi u Dizajnu Kupatila za 2025. — Saya Group Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-main); color: var(--secondary); background: var(--white); line-height: 1.7; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb {
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            font-size: 0.82rem;
+            color: var(--mid-gray);
+        }
+        .breadcrumb__inner { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--primary); }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* ─── Post Hero ─── */
+        .post-hero {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 64px 0 0;
+        }
+        .post-hero__inner { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .post-hero__cats { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .post-hero__cat {
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+        .post-hero__title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+        .post-hero__excerpt {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+        .post-hero__meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .post-hero__meta-item { display: flex; align-items: center; gap: 6px; }
+        .post-hero__author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .post-hero__author-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        .post-hero__author-name { font-weight: 600; color: var(--white); }
+        .post-hero__author-role { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+
+        /* ─── Featured Image ─── */
+        .post-featured-img {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+            transform: translateY(40px);
+        }
+        .post-featured-img__placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            color: rgba(255,255,255,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .post-featured-img__placeholder svg { width: 64px; height: 64px; }
+        .post-featured-img__placeholder span { font-size: 0.9rem; }
+
+        /* ─── Main Layout ─── */
+        .post-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 56px;
+            padding: 80px 0 64px;
+            align-items: start;
+        }
+
+        /* ─── Article Content ─── */
+        .post-content h2 {
+            font-family: var(--font-serif);
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin: 40px 0 16px;
+            color: var(--secondary);
+            scroll-margin-top: 80px;
+        }
+        .post-content h3 {
+            font-family: var(--font-sans);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 28px 0 12px;
+            color: var(--secondary);
+        }
+        .post-content p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .post-content ul, .post-content ol {
+            margin: 0 0 20px 24px;
+        }
+        .post-content li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .post-content blockquote {
+            border-left: 4px solid var(--primary);
+            background: var(--background);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .post-content blockquote p {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--secondary);
+            margin: 0;
+        }
+        .post-content .img-block {
+            margin: 32px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .post-content .img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #f0ede8 0%, #e8e4de 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--mid-gray);
+        }
+        .post-content .img-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
+        .post-content .img-caption {
+            font-size: 0.82rem;
+            color: var(--mid-gray);
+            text-align: center;
+            padding: 10px 16px;
+            background: var(--light-gray);
+            font-style: italic;
+        }
+        .post-content .tip-box {
+            background: rgba(197,38,105,0.06);
+            border: 1px solid rgba(197,38,105,0.2);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 28px 0;
+        }
+        .post-content .tip-box__head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        .post-content .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.9rem;
+        }
+        .post-content .info-table th {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .post-content .info-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .post-content .info-table tr:nth-child(even) td { background: var(--light-gray); }
+
+        /* ─── Share Bar ─── */
+        .share-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .share-bar__label { font-size: 0.85rem; font-weight: 600; color: var(--mid-gray); }
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: var(--font-main);
+        }
+        .share-btn--fb { background: #1877F2; color: white; }
+        .share-btn--fb:hover { background: #1464d8; }
+        .share-btn--ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .share-btn--wa { background: #25D366; color: white; }
+        .share-btn--wa:hover { background: #1db954; }
+        .share-btn--copy { background: var(--light-gray); color: var(--secondary); border: 1.5px solid var(--border); }
+        .share-btn--copy:hover { background: var(--border); }
+
+        /* ─── Author Box ─── */
+        .author-box {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 28px;
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .author-box__avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .author-box__name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .author-box__role { font-size: 0.82rem; color: var(--primary); font-weight: 600; margin-bottom: 10px; }
+        .author-box__bio { font-size: 0.88rem; color: #555; line-height: 1.6; }
+
+        /* ─── Related Products ─── */
+        .related-products {
+            background: var(--background);
+            padding: 48px 0;
+            margin: 0 -24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        .related-products__title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .related-products__title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .related-products__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .rp-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .rp-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+        .rp-card__img {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f0ede8 0%, #e8e4de 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--mid-gray);
+        }
+        .rp-card__img svg { width: 36px; height: 36px; opacity: 0.4; }
+        .rp-card__body { padding: 14px; }
+        .rp-card__name { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+        .rp-card__price { font-size: 0.82rem; color: var(--primary); font-weight: 700; margin-bottom: 10px; }
+        .rp-card__btn {
+            display: block;
+            text-align: center;
+            padding: 8px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .rp-card__btn:hover { background: var(--primary); }
+
+        /* ─── Related Posts ─── */
+        .related-posts { margin: 48px 0 0; }
+        .related-posts__title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .related-posts__title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .related-posts__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .rpost-card {
+            display: flex;
+            gap: 14px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        .rpost-card:hover { border-color: var(--primary); box-shadow: var(--shadow); }
+        .rpost-card__img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #f0ede8 0%, #e8e4de 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--mid-gray);
+        }
+        .rpost-card__img svg { width: 28px; height: 28px; opacity: 0.4; }
+        .rpost-card__cat { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .rpost-card__title { font-size: 0.88rem; font-weight: 600; line-height: 1.4; color: var(--secondary); transition: var(--transition); }
+        .rpost-card:hover .rpost-card__title { color: var(--primary); }
+        .rpost-card__date { font-size: 0.75rem; color: var(--mid-gray); margin-top: 6px; }
+
+        /* ─── Sidebar ─── */
+        .post-sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 28px; }
+        .sidebar-widget {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .sidebar-widget__head {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 14px 18px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .sidebar-widget__body { padding: 18px; }
+
+        /* TOC */
+        .toc-list { list-style: none; }
+        .toc-item { padding: 6px 0; border-bottom: 1px solid var(--border); }
+        .toc-item:last-child { border-bottom: none; }
+        .toc-link {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .toc-link:hover { color: var(--primary); }
+        .toc-link.active { color: var(--primary); font-weight: 600; }
+        .toc-num { font-size: 0.75rem; color: var(--mid-gray); min-width: 18px; padding-top: 2px; }
+
+        /* Progress */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+            .post-layout { grid-template-columns: 1fr; }
+            .post-sidebar { position: static; }
+            .related-products__grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .post-hero { padding: 40px 0 0; }
+            .post-featured-img { transform: translateY(24px); }
+            .post-layout { padding: 48px 0 48px; }
+            .related-products__grid { grid-template-columns: repeat(2, 1fr); }
+            .related-posts__grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; align-items: center; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .related-products__grid { grid-template-columns: 1fr 1fr; }
+            .share-bar { gap: 8px; }
+            .share-btn { padding: 7px 12px; font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb__inner">
+            <a href="index.html">Početna</a>
+            <span style="color: var(--border);">›</span>
+            <a href="blog.html">Blog i Saveti</a>
+            <span style="color: var(--border);">›</span>
+            <a href="blog.html">Trendovi u Dizajnu</a>
+            <span style="color: var(--border);">›</span>
+            <span>Trendovi u Dizajnu Kupatila za 2025.</span>
+        </div>
+    </div>
+</nav>
+
+<!-- POST HERO -->
+<header class="post-hero">
+    <div class="post-hero__inner">
+        <div class="post-hero__cats">
+            <span class="post-hero__cat">Trendovi u Dizajnu</span>
+            <span class="post-hero__cat" style="background: var(--accent); color: var(--secondary);">2025.</span>
+        </div>
+        <h1 class="post-hero__title">Trendovi u Dizajnu Kupatila za 2025: Šta Donosi Nova Sezona</h1>
+        <p class="post-hero__excerpt">Ove godine dominiraju prirodni materijali, tople boje i minimalizam sa karakterom. Istražujemo najzanimljivije trendove koje smo primetili na vodećim sajmovima i u kolekcijama brendova poput Tau Ceramica, Ribesalbes i Villeroy&Boch.</p>
+        <div class="post-hero__meta">
+            <div class="post-hero__author">
+                <div class="post-hero__author-avatar">SK</div>
+                <div>
+                    <div class="post-hero__author-name">Saya Group Tim</div>
+                    <div class="post-hero__author-role">Stručni savetnici za keramiku</div>
+                </div>
+            </div>
+            <div class="post-hero__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                15. Februar 2025.
+            </div>
+            <div class="post-hero__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                8 min čitanja
+            </div>
+            <div class="post-hero__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                2.4k pregleda
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- FEATURED IMAGE -->
+<div class="post-featured-img">
+    <div class="post-featured-img__placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Istaknuta Slika Članka (1200x675px)</span>
+    </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="container">
+    <div class="post-layout">
+
+        <!-- ARTICLE -->
+        <article class="post-content">
+
+            <h2 id="uvod">Uvod: Zašto su Trendovi Važni pri Izboru Pločica</h2>
+            <p>Kupatilo je prostor koji renoviramo jednom u 10 do 15 godina. Zbog toga je izbor pločica i opreme dugoročna odluka koja treba da bude i funkcionalna i vremenski otporna. Praćenje trendova nije samo estetska vežba — to je i praktičan alat koji pomaže da se izaberu materijali koji neće izgledati zastarelo za pet godina.</p>
+            <p>Na osnovu kolekcija koje smo pratili na sajmu Cersaie u Bolonji, kao i novih linija brendova koje distribuiramo, izdvajamo pet ključnih trendova koji će obeležiti 2025. godinu.</p>
+
+            <div class="img-block">
+                <div class="img-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                </div>
+                <div class="img-caption">Kolekcija Tau Ceramica Marmol — prirodni kamen u savremenom formatu 120x60 cm</div>
+            </div>
+
+            <h2 id="trend1">1. Tople Boje i Terako Tonovi</h2>
+            <p>Hladni beli i sivi enterijeri koji su dominirali prethodnih godina polako ustupaju mesto toplijim nijansama. Bež, terako, pesak i blago roze tonovi postaju novi neutralni. Ova promena nije slučajna — istraživanja pokazuju da korisnici sve više traže prostor koji deluje kao utočište, a ne kao klinički čist prostor.</p>
+            <p>Brendovi poput Ribesalbes i New Tiles su ove godine predstavili kolekcije koje savršeno uhvataju ovaj ton. Posebno se ističu pločice u formatu 10x10 cm sa mat završnom obradom koje daju teksturu i toplinu malim kupatilima.</p>
+
+            <blockquote>
+                <p>"Tople boje ne znače nužno tamne prostorije. Uz pravilno osvetljenje i beli sanitarni program, terako tonovi mogu da otvore prostor jednako efikasno kao i bela keramika."</p>
+            </blockquote>
+
+            <h2 id="trend2">2. Veliki Formati i Minimalni Fugni</h2>
+            <p>Format 120x60 cm i 120x120 cm je bio trend prošle godine, ali 2025. idemo korak dalje. Brendovi sve češće nude formate 160x80 cm i čak 320x160 cm za podne površine bez vidljivih fugni. Ovo daje osećaj kontinuiranog kamena ili betona i vizuelno povećava prostor.</p>
+
+            <div class="tip-box">
+                <div class="tip-box__head">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Stručni savet
+                </div>
+                <p style="font-size: 0.9rem; color: #444; margin: 0;">Za formate veće od 90x90 cm, obavezno proverite ravnost podloge pre ugradnje. Preporučujemo nivelišući sistem za fugne i epoksidnu masu za fugovanje koja je otpornija na prljavštinu od klasičnih cementnih fuga.</p>
+            </div>
+
+            <h2 id="trend3">3. Imitacija Prirodnih Materijala</h2>
+            <p>Digitalna štampa na keramici dostigla je nivo gde je gotovo nemoguće razlikovati pločicu od prirodnog kamena, drveta ili betona golim okom. Tau Ceramica i Arcana su u ovome posebno napredovale — njihove kolekcije koje imitiraju travertin, mramor i rđavi metal su ove godine na vrhuncu.</p>
+
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>Materijal koji se imitira</th>
+                        <th>Prednost keramike</th>
+                        <th>Preporučeni brend</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mramor</td>
+                        <td>Bez održavanja, ne upija mrlje</td>
+                        <td>Tau Ceramica, Arcana</td>
+                    </tr>
+                    <tr>
+                        <td>Travertin</td>
+                        <td>Otporan na mraz (fasade)</td>
+                        <td>Ribesalbes, New Tiles</td>
+                    </tr>
+                    <tr>
+                        <td>Drvo</td>
+                        <td>Vodootporan, za mokre prostorije</td>
+                        <td>WoW Design, Adex</td>
+                    </tr>
+                    <tr>
+                        <td>Beton</td>
+                        <td>Bez pukotina i skupljanja</td>
+                        <td>Natucer, Cerlat</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="trend4">4. Mozaik i Dekorativne Pločice kao Akcent</h2>
+            <p>Umesto celih zidova u jednoj pločici, sve popularniji pristup je kombinovanje neutralnih velikih formata sa dekorativnim akcentima. Jedan zid u tuš kabini sa mozaikom, ili niša iznad kade sa ručno rađenim pločicama — ovo daje prostoru karakter bez pretrpavanja.</p>
+            <p>Onix, evropski lider u staklenom mozaiku, i Adex sa svojom linijom ručno glaziranih pločica su brendovi koje posebno preporučujemo za ove aplikacije.</p>
+
+            <div class="img-block">
+                <div class="img-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                </div>
+                <div class="img-caption">Kombinacija neutralnog travertina i staklenog mozaika Onix — primer iz naše galerije inspiracija</div>
+            </div>
+
+            <h2 id="trend5">5. Održivost i Ekološki Sertifikati</h2>
+            <p>Sve veći broj kupaca, posebno u B2B segmentu, pita za ekološke sertifikate i sadržaj recikliranih materijala u pločicama. Brendovi poput Tau Ceramica i Geberit su već dobili ISO 14001 sertifikate i aktivno komuniciraju svoju ekološku politiku.</p>
+            <p>Ovo nije samo trend — istraživanja pokazuju da je održivost četvrti najvažniji faktor pri izboru materijala za arhitekte i projektante (BIMobject istraživanje, 2024).</p>
+
+            <!-- Share Bar -->
+            <div class="share-bar">
+                <span class="share-bar__label">Podelite:</span>
+                <button class="share-btn share-btn--fb">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    Facebook
+                </button>
+                <button class="share-btn share-btn--wa">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    WhatsApp
+                </button>
+                <button class="share-btn share-btn--copy" onclick="copyLink()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    Kopiraj Link
+                </button>
+            </div>
+
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="author-box__avatar">S</div>
+                <div>
+                    <div class="author-box__name">Saya Group Tim</div>
+                    <div class="author-box__role">Stručni savetnici za keramiku i kupatilsku opremu</div>
+                    <div class="author-box__bio">Tim Saya Group sa 13+ godina iskustva u distribuciji premium keramičkih pločica i kupatilske opreme. Pratimo najnovije trendove direktno sa sajmova Cersaie, Cevisama i Batibouw.</div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products">
+                <h3 class="related-products__title">Proizvodi iz Ovog Članka</h3>
+                <div class="related-products__grid">
+                    <a href="product-carrara-white.html" class="rp-card">
+                        <div class="rp-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div class="rp-card__body">
+                            <div class="rp-card__name">Tau Ceramica Marmol Blanco 120x60</div>
+                            <div class="rp-card__price">od 3.200 RSD/m²</div>
+                            <span class="rp-card__btn">Pogledaj Proizvod</span>
+                        </div>
+                    </a>
+                    <a href="product-carrara-white.html" class="rp-card">
+                        <div class="rp-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div class="rp-card__body">
+                            <div class="rp-card__name">Ribesalbes Terako Matt 10x10</div>
+                            <div class="rp-card__price">od 1.850 RSD/m²</div>
+                            <span class="rp-card__btn">Pogledaj Proizvod</span>
+                        </div>
+                    </a>
+                    <a href="product-carrara-white.html" class="rp-card">
+                        <div class="rp-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div class="rp-card__body">
+                            <div class="rp-card__name">Onix Mozaik Stakleni 2.5x2.5</div>
+                            <div class="rp-card__price">od 4.500 RSD/m²</div>
+                            <span class="rp-card__btn">Pogledaj Proizvod</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="related-posts">
+                <h3 class="related-posts__title">Slični Članci</h3>
+                <div class="related-posts__grid">
+                    <a href="blog-post.html" class="rpost-card">
+                        <div class="rpost-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div>
+                            <div class="rpost-card__cat">Saveti</div>
+                            <div class="rpost-card__title">Kako Izabrati Prave Pločice za Malu Kupatilu</div>
+                            <div class="rpost-card__date">10. Mart 2025.</div>
+                        </div>
+                    </a>
+                    <a href="blog-post.html" class="rpost-card">
+                        <div class="rpost-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div>
+                            <div class="rpost-card__cat">Pločice</div>
+                            <div class="rpost-card__title">Porcelanski Granit vs. Keramika: Šta Odabrati</div>
+                            <div class="rpost-card__date">2. Mart 2025.</div>
+                        </div>
+                    </a>
+                    <a href="blog-post.html" class="rpost-card">
+                        <div class="rpost-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div>
+                            <div class="rpost-card__cat">Brendovi</div>
+                            <div class="rpost-card__title">Nova Kolekcija Tau Ceramica 2025.</div>
+                            <div class="rpost-card__date">5. Februar 2025.</div>
+                        </div>
+                    </a>
+                    <a href="blog-post.html" class="rpost-card">
+                        <div class="rpost-card__img">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                        </div>
+                        <div>
+                            <div class="rpost-card__cat">Kupatilo</div>
+                            <div class="rpost-card__title">Walk-in Tuš Kabine: Prednosti i Saveti</div>
+                            <div class="rpost-card__date">10. Februar 2025.</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="post-sidebar">
+
+            <!-- Table of Contents -->
+            <div class="sidebar-widget">
+                <div class="sidebar-widget__head">Sadržaj Članka</div>
+                <div class="sidebar-widget__body">
+                    <ul class="toc-list">
+                        <li class="toc-item">
+                            <a href="#uvod" class="toc-link">
+                                <span class="toc-num">01</span>
+                                Uvod: Zašto su Trendovi Važni
+                            </a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#trend1" class="toc-link">
+                                <span class="toc-num">02</span>
+                                Tople Boje i Terako Tonovi
+                            </a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#trend2" class="toc-link">
+                                <span class="toc-num">03</span>
+                                Veliki Formati i Minimalni Fugni
+                            </a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#trend3" class="toc-link">
+                                <span class="toc-num">04</span>
+                                Imitacija Prirodnih Materijala
+                            </a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#trend4" class="toc-link">
+                                <span class="toc-num">05</span>
+                                Mozaik i Dekorativne Pločice
+                            </a>
+                        </li>
+                        <li class="toc-item">
+                            <a href="#trend5" class="toc-link">
+                                <span class="toc-num">06</span>
+                                Održivost i Ekološki Sertifikati
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CTA Widget -->
+            <div style="background: var(--secondary); color: white; border-radius: 12px; padding: 24px; text-align: center;">
+                <div style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;">Videli ste nešto što vam se sviđa?</div>
+                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 18px;">Posetite naš salon ili pregledajte kompletan asortiman online.</p>
+                <a href="categories.html" style="display: block; background: var(--primary); color: white; padding: 11px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; margin-bottom: 8px; transition: var(--transition);">Pregledaj Proizvode</a>
+                <a href="kontakt.html" style="display: block; background: rgba(255,255,255,0.1); color: white; padding: 11px; border-radius: 8px; font-weight: 600; font-size: 0.88rem;">Zakažite Posetu</a>
+            </div>
+
+        </aside>
+    </div>
+</div>
+
+<script>
+    // Reading Progress Bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('readingProgress').style.width = scrolled + '%';
+    });
+
+    // Active TOC link on scroll
+    const headings = document.querySelectorAll('.post-content h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        headings.forEach(h => {
+            if (window.scrollY >= h.offsetTop - 120) current = h.id;
+        });
+        tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+        });
+    });
+
+    // Copy link
+    function copyLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            const btn = document.querySelector('.share-btn--copy');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg> Kopirano!';
+            setTimeout(() => btn.innerHTML = orig, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>

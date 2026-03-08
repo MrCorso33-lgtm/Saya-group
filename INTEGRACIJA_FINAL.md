@@ -205,3 +205,30 @@ $brands = get_terms($brand_args);
 - **Optimizacija:** Pošto će stranica imati više query-ja, razmislite o keširanju rezultata za kategorije i brendove pomoću WordPress Transients API-ja da se smanji opterećenje baze.
 
 Ovaj pristup vam daje potpunu kontrolu nad izgledom i osećajem stranice, dok istovremeno koristite moćne backend alate za upravljanje podacima i AJAX-om, što je idealan balans između custom rešenja i efikasnosti.
+
+
+## 7. Blog
+
+Blog je ključan za SEO i građenje poverenja, što je potvrđeno u oba istraživačka dokumenta. Sastoji se od dve komponente: arhivske stranice (`blog.html`) i templejta za pojedinačni post (`blog-post.html`).
+
+### 7.1. Arhitektura
+
+| Komponenta | Šta smo napisali u kodu | Kako ide u WP |
+| :--- | :--- | :--- |
+| **Arhiva (`blog.html`)** | Hero sa pretragom, sticky filter po kategorijama, istaknuti post, grid ostalih postova, sidebar sa popularnim postovima i tagovima, paginacija. | `home.php` ili `index.php` u child theme-u. Glavni query se modifikuje da prikazuje postove. |
+| **Pojedinačni post (`blog-post.html`)** | Sticky `Table of Contents` (TOC), `reading-progress` bar, `share` dugmad, `author box`, `related products` i `related posts`. | `single.php` u child theme-u. Sadržaj se vuče iz `the_content()`. |
+| **JS funkcionalnost** | `filterCat()` za filter na arhivi, `readingProgress` i `active TOC` na single postu. | Prebaciti u poseban `.js` fajl, učitati samo na blog stranicama. |
+
+### 7.2. WordPress Integracija
+
+1.  **Templejti**: Kreirati `home.php` (za arhivu) i `single.php` (za post) u child theme-u. Kopirati naš HTML u ove fajlove.
+2.  **Glavna petlja (Loop)**: U `home.php`, standardna WordPress petlja (`if ( have_posts() ) : while ( have_posts() ) : the_post();`) se koristi za prikaz postova u gridu. Istaknuti post se može definisati kao "sticky post" u WordPressu.
+3.  **Sidebar**: Popularni postovi se mogu dobiti preko `WP_Query` sa `meta_key=post_views_count` (ako se koristi plugin za brojanje pregleda) ili po broju komentara. Tagovi se vuku sa `get_the_tags()`.
+4.  **Single Post**: Sadržaj se prikazuje sa `the_content()`. TOC se može generisati JS-om koji prolazi kroz `h2` tagove u sadržaju, ili preko plugina kao što je `Easy Table of Contents`.
+5.  **Related Products/Posts**: Za povezane proizvode, koristiti `ACF` (Advanced Custom Fields) `Relationship` polje u postu. Za povezane postove, koristiti `get_posts()` sa istim kategorijama ili tagovima.
+
+### 7.3. Best Practices
+
+-   **Ne koristiti Elementor**: Blog je suviše dinamičan za Elementor. `home.php` i `single.php` daju potpunu kontrolu i bolje performanse.
+-   **Optimizacija slika**: Sve slike (featured, unutar posta) moraju biti optimizovane i servirane u WebP formatu, idealno preko plugina kao što je `Imagify` ili `Smush`.
+-   **Lazy Loading**: Slike i komentari (ako se koristi Disqus ili slično) moraju imati `loading="lazy"` da bi se ubrzalo početno učitavanje stranice.

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Saveti, trendovi i inspiracija za uređenje kupatila i izbor keramičkih pločica. Stručni blog tima Saya Group.">
+    <title>Blog i Saveti — Saya Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C52669;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+            --transition: all 0.3s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-main); color: var(--secondary); background: var(--white); line-height: 1.7; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb {
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            font-size: 0.82rem;
+            color: var(--mid-gray);
+        }
+        .breadcrumb__inner { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .breadcrumb a { color: var(--primary); }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb__sep { color: var(--border); }
+
+        /* ─── Hero ─── */
+        .blog-hero {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 64px 0 48px;
+            text-align: center;
+        }
+        .blog-hero__label {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .blog-hero__title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .blog-hero__sub {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 560px;
+            margin: 0 auto 32px;
+        }
+        .blog-hero__search {
+            display: flex;
+            max-width: 480px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .blog-hero__search input {
+            flex: 1;
+            padding: 14px 22px;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            font-family: var(--font-main);
+        }
+        .blog-hero__search button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 14px 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .blog-hero__search button:hover { background: #a81e58; }
+
+        /* ─── Category Filter ─── */
+        .cat-filter {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .cat-filter__inner {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            overflow-x: auto;
+            padding: 14px 24px;
+            scrollbar-width: none;
+        }
+        .cat-filter__inner::-webkit-scrollbar { display: none; }
+        .cat-btn {
+            white-space: nowrap;
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: 1.5px solid var(--border);
+            background: var(--white);
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-main);
+        }
+        .cat-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .cat-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+        /* ─── Featured Post ─── */
+        .featured-section { padding: 56px 0 0; }
+        .featured-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .featured-label span {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+        }
+        .featured-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .featured-post {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            background: var(--secondary);
+            color: var(--white);
+        }
+        .featured-post__img {
+            position: relative;
+            min-height: 420px;
+            background: #2a2a2a;
+            overflow: hidden;
+        }
+        .featured-post__img-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3d3d3d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            color: rgba(255,255,255,0.3);
+        }
+        .featured-post__img-placeholder svg { width: 64px; height: 64px; }
+        .featured-post__img-placeholder span { font-size: 0.85rem; }
+        .featured-post__badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 4px;
+        }
+        .featured-post__content {
+            padding: 48px 48px 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .featured-post__cat {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .featured-post__title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+        .featured-post__excerpt {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+        .featured-post__meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 28px;
+        }
+        .featured-post__meta span { display: flex; align-items: center; gap: 5px; }
+        .btn-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 13px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            align-self: flex-start;
+        }
+        .btn-read:hover { background: #a81e58; transform: translateX(4px); }
+        .btn-read svg { width: 16px; height: 16px; }
+
+        /* ─── Posts Grid ─── */
+        .posts-section { padding: 48px 0 64px; }
+        .posts-section__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .posts-section__title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .sort-select {
+            padding: 8px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            background: var(--white);
+            cursor: pointer;
+            outline: none;
+            font-family: var(--font-main);
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .post-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .post-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+        .post-card__img {
+            position: relative;
+            aspect-ratio: 16/10;
+            background: var(--light-gray);
+            overflow: hidden;
+        }
+        .post-card__img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--mid-gray);
+            background: linear-gradient(135deg, #f0ede8 0%, #e8e4de 100%);
+        }
+        .post-card__img-placeholder svg { width: 40px; height: 40px; opacity: 0.5; }
+        .post-card__img-placeholder span { font-size: 0.75rem; opacity: 0.6; }
+        .post-card__cat-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        .post-card__read-time {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            color: var(--white);
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+        }
+        .post-card__body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+        .post-card__meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            color: var(--mid-gray);
+            margin-bottom: 10px;
+        }
+        .post-card__meta span { display: flex; align-items: center; gap: 4px; }
+        .post-card__title {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+        .post-card:hover .post-card__title { color: var(--primary); }
+        .post-card__excerpt {
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .post-card__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+        .post-card__author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--mid-gray);
+        }
+        .post-card__author-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .post-card__link {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+        }
+        .post-card__link:hover { gap: 8px; }
+
+        /* ─── Sidebar Layout ─── */
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 48px;
+            padding: 56px 0 80px;
+            align-items: start;
+        }
+
+        /* ─── Sidebar ─── */
+        .sidebar { display: flex; flex-direction: column; gap: 32px; }
+        .sidebar-widget {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .sidebar-widget__head {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 16px 20px;
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .sidebar-widget__body { padding: 20px; }
+        .popular-post {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .popular-post:last-child { border-bottom: none; padding-bottom: 0; }
+        .popular-post__num {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--border);
+            line-height: 1;
+            min-width: 32px;
+        }
+        .popular-post__title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+        .popular-post:hover .popular-post__title { color: var(--primary); }
+        .popular-post__date { font-size: 0.75rem; color: var(--mid-gray); margin-top: 4px; }
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            padding: 5px 12px;
+            border-radius: 50px;
+            border: 1.5px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--secondary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .tag:hover { border-color: var(--primary); color: var(--primary); background: rgba(197,38,105,0.05); }
+        .newsletter-widget { background: var(--secondary); color: var(--white); border-radius: 12px; padding: 28px; text-align: center; }
+        .newsletter-widget h3 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 8px; }
+        .newsletter-widget p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 18px; }
+        .newsletter-widget input {
+            width: 100%;
+            padding: 11px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        .newsletter-widget button {
+            width: 100%;
+            padding: 11px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-widget button:hover { background: #a81e58; }
+
+        /* ─── Pagination ─── */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 40px 0 0;
+        }
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-main);
+        }
+        .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .page-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .page-btn.wide { width: auto; padding: 0 16px; }
+
+        /* ─── CTA Banner ─── */
+        .blog-cta {
+            background: var(--background);
+            border-top: 1px solid var(--border);
+            padding: 64px 0;
+            text-align: center;
+        }
+        .blog-cta__title { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+        .blog-cta__sub { color: var(--mid-gray); margin-bottom: 28px; }
+        .blog-cta__btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            padding: 13px 28px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .btn-primary:hover { background: #a81e58; transform: translateY(-2px); }
+        .btn-outline {
+            padding: 13px 28px;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .btn-outline:hover { background: var(--secondary); color: var(--white); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+            .blog-layout { grid-template-columns: 1fr; }
+            .sidebar { display: grid; grid-template-columns: 1fr 1fr; }
+            .newsletter-widget { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            .featured-post { grid-template-columns: 1fr; }
+            .featured-post__img { min-height: 240px; }
+            .featured-post__content { padding: 28px; }
+            .posts-grid { grid-template-columns: 1fr 1fr; }
+            .sidebar { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 540px) {
+            .posts-grid { grid-template-columns: 1fr; }
+            .blog-hero { padding: 40px 0 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb__inner">
+            <a href="index.html">Početna</a>
+            <span class="breadcrumb__sep">›</span>
+            <span>Blog i Saveti</span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="blog-hero">
+    <div class="container">
+        <span class="blog-hero__label">Stručni Blog</span>
+        <h1 class="blog-hero__title">Saveti, Trendovi i Inspiracija</h1>
+        <p class="blog-hero__sub">Sve što treba da znate o keramičkim pločicama, uređenju kupatila i najnovijim trendovima u dizajnu.</p>
+        <div class="blog-hero__search">
+            <input type="search" placeholder="Pretražite blog..." id="blogSearch">
+            <button onclick="searchBlog()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORY FILTER -->
+<div class="cat-filter">
+    <div class="container">
+        <div class="cat-filter__inner">
+            <button class="cat-btn active" onclick="filterCat(this, 'all')">Sve</button>
+            <button class="cat-btn" onclick="filterCat(this, 'trendovi')">Trendovi u Dizajnu</button>
+            <button class="cat-btn" onclick="filterCat(this, 'saveti')">Saveti i Vodiči</button>
+            <button class="cat-btn" onclick="filterCat(this, 'plocice')">Keramičke Pločice</button>
+            <button class="cat-btn" onclick="filterCat(this, 'kupatilo')">Uređenje Kupatila</button>
+            <button class="cat-btn" onclick="filterCat(this, 'brendovi')">Brendovi i Novosti</button>
+            <button class="cat-btn" onclick="filterCat(this, 'b2b')">Za Profesionalce</button>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURED POST -->
+<section class="featured-section">
+    <div class="container">
+        <div class="featured-label">
+            <span>Istaknuti Članak</span>
+        </div>
+        <a href="blog-post.html" class="featured-post">
+            <div class="featured-post__img">
+                <div class="featured-post__img-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                    <span>Slika Istaknuta</span>
+                </div>
+                <span class="featured-post__badge">Istaknuto</span>
+            </div>
+            <div class="featured-post__content">
+                <div class="featured-post__cat">Trendovi u Dizajnu</div>
+                <h2 class="featured-post__title">Trendovi u Dizajnu Kupatila za 2025: Šta Donosi Nova Sezona</h2>
+                <p class="featured-post__excerpt">Ove godine dominiraju prirodni materijali, tople boje i minimalizam sa karakterom. Istražujemo najzanimljivije trendove koje smo primetili na vodećim sajmovima i u kolekcijama brendova poput Tau Ceramica, Ribesalbes i Villeroy&Boch.</p>
+                <div class="featured-post__meta">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                        15. Februar 2025.
+                    </span>
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        8 min čitanja
+                    </span>
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        2.4k pregleda
+                    </span>
+                </div>
+                <span class="btn-read">
+                    Pročitajte Članak
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- POSTS + SIDEBAR -->
+<div class="container">
+    <div class="blog-layout">
+
+        <!-- MAIN POSTS -->
+        <main>
+            <div class="posts-section__header">
+                <h2 class="posts-section__title">Svi Članci</h2>
+                <select class="sort-select" onchange="sortPosts(this.value)">
+                    <option value="newest">Najnoviji</option>
+                    <option value="popular">Najpopularniji</option>
+                    <option value="reading">Najkraće čitanje</option>
+                </select>
+            </div>
+
+            <div class="posts-grid" id="postsGrid">
+
+                <!-- Post 1 -->
+                <article class="post-card" data-cat="saveti">
+                    <a href="blog-post.html">
+                        <div class="post-card__img">
+                            <div class="post-card__img-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                <span>Slika Članka</span>
+                            </div>
+                            <span class="post-card__cat-badge">Saveti</span>
+                            <span class="post-card__read-time">5 min</span>
+                        </div>
+                    </a>
+                    <div class="post-card__body">
+                        <div class="post-card__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                10. Mart 2025.
+                            </span>
+                        </div>
+                        <a href="blog-post.html">
+                            <h3 class="post-card__title">Kako Izabrati Prave Pločice za Malu Kupatilu: Kompletni Vodič</h3>
+                        </a>
+                        <p class="post-card__excerpt">Mala kupatila zahtevaju pametne odluke. Saznajte koje dimenzije, boje i uzorci vizuelno povećavaju prostor i kako da izbeglnete najčešće greške pri izboru.</p>
+                        <div class="post-card__footer">
+                            <div class="post-card__author">
+                                <div class="post-card__author-avatar">SK</div>
+                                <span>Saya tim</span>
+                            </div>
+                            <a href="blog-post.html" class="post-card__link">
+                                Čitaj
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post-card" data-cat="plocice">
+                    <a href="blog-post.html">
+                        <div class="post-card__img">
+                            <div class="post-card__img-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                <span>Slika Članka</span>
+                            </div>
+                            <span class="post-card__cat-badge">Pločice</span>
+                            <span class="post-card__read-time">7 min</span>
+                        </div>
+                    </a>
+                    <div class="post-card__body">
+                        <div class="post-card__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                2. Mart 2025.
+                            </span>
+                        </div>
+                        <a href="blog-post.html">
+                            <h3 class="post-card__title">Porcelanski Granit vs. Keramika: Šta Odabrati i Zašto</h3>
+                        </a>
+                        <p class="post-card__excerpt">Detaljno poređenje dva najpopularnija materijala za pločice. Tvrdoća, otpornost na vlagu, cena i estetika — sve što treba da znate pre kupovine.</p>
+                        <div class="post-card__footer">
+                            <div class="post-card__author">
+                                <div class="post-card__author-avatar">SK</div>
+                                <span>Saya tim</span>
+                            </div>
+                            <a href="blog-post.html" class="post-card__link">
+                                Čitaj
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post-card" data-cat="trendovi">
+                    <a href="blog-post.html">
+                        <div class="post-card__img">
+                            <div class="post-card__img-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                <span>Slika Članka</span>
+                            </div>
+                            <span class="post-card__cat-badge">Trendovi</span>
+                            <span class="post-card__read-time">6 min</span>
+                        </div>
+                    </a>
+                    <div class="post-card__body">
+                        <div class="post-card__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                22. Februar 2025.
+                            </span>
+                        </div>
+                        <a href="blog-post.html">
+                            <h3 class="post-card__title">Bež i Terako Tonovi: Zašto Tople Boje Dominiraju Kupatilima u 2025.</h3>
+                        </a>
+                        <p class="post-card__excerpt">Hladni beli enterijeri polako ustupaju mesto toplim, prirodnim tonovima. Istražujemo zašto je ovaj trend toliko popularan i kako ga primeniti u vašem prostoru.</p>
+                        <div class="post-card__footer">
+                            <div class="post-card__author">
+                                <div class="post-card__author-avatar">SK</div>
+                                <span>Saya tim</span>
+                            </div>
+                            <a href="blog-post.html" class="post-card__link">
+                                Čitaj
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="post-card" data-cat="b2b">
+                    <a href="blog-post.html">
+                        <div class="post-card__img">
+                            <div class="post-card__img-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                <span>Slika Članka</span>
+                            </div>
+                            <span class="post-card__cat-badge" style="background: var(--secondary);">Za Profesionalce</span>
+                            <span class="post-card__read-time">10 min</span>
+                        </div>
+                    </a>
+                    <div class="post-card__body">
+                        <div class="post-card__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                18. Februar 2025.
+                            </span>
+                        </div>
+                        <a href="blog-post.html">
+                            <h3 class="post-card__title">Specifikacija Keramičkih Pločica u BIM Projektima: Praktični Vodič za Arhitekte</h3>
+                        </a>
+                        <p class="post-card__excerpt">Kako efikasno specifikovati keramičke pločice u Revit i ArchiCAD projektima. Tehnički parametri, tolerancije i dokumentacija koja ubrzava proces nabavke.</p>
+                        <div class="post-card__footer">
+                            <div class="post-card__author">
+                                <div class="post-card__author-avatar">SK</div>
+                                <span>Saya tim</span>
+                            </div>
+                            <a href="blog-post.html" class="post-card__link">
+                                Čitaj
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="post-card" data-cat="kupatilo">
+                    <a href="blog-post.html">
+                        <div class="post-card__img">
+                            <div class="post-card__img-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                <span>Slika Članka</span>
+                            </div>
+                            <span class="post-card__cat-badge">Kupatilo</span>
+                            <span class="post-card__read-time">4 min</span>
+                        </div>
+                    </a>
+                    <div class="post-card__body">
+                        <div class="post-card__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                10. Februar 2025.
+                            </span>
+                        </div>
+                        <a href="blog-post.html">
+                            <h3 class="post-card__title">Walk-in Tuš Kabine: Prednosti, Dimenzije i Saveti za Ugradnju</h3>
+                        </a>
+                        <p class="post-card__excerpt">Walk-in tuš kabine su postale standard modernog kupatila. Objašnjavamo sve o dimenzijama, odvodima, staklenim pregradama i kombinacijama sa pločicama.</p>
+                        <div class="post-card__footer">
+                            <div class="post-card__author">
+                                <div class="post-card__author-avatar">SK</div>
+                                <span>Saya tim</span>
+                            </div>
+                            <a href="blog-post.html" class="post-card__link">
+                                Čitaj
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="post-card" data-cat="brendovi">
+                    <a href="blog-post.html">
+                        <div class="post-card__img">
+                            <div class="post-card__img-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                <span>Slika Članka</span>
+                            </div>
+                            <span class="post-card__cat-badge" style="background: var(--accent); color: var(--secondary);">Brendovi</span>
+                            <span class="post-card__read-time">5 min</span>
+                        </div>
+                    </a>
+                    <div class="post-card__body">
+                        <div class="post-card__meta">
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                5. Februar 2025.
+                            </span>
+                        </div>
+                        <a href="blog-post.html">
+                            <h3 class="post-card__title">Nova Kolekcija Tau Ceramica 2025: Prirodni Kamen u Digitalnom Dobu</h3>
+                        </a>
+                        <p class="post-card__excerpt">Tau Ceramica predstavlja novu kolekciju koja savršeno imitira prirodni kamen. Detaljan pregled novih formata, završnih obrada i primena u savremenim enterijrima.</p>
+                        <div class="post-card__footer">
+                            <div class="post-card__author">
+                                <div class="post-card__author-avatar">SK</div>
+                                <span>Saya tim</span>
+                            </div>
+                            <a href="blog-post.html" class="post-card__link">
+                                Čitaj
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn wide">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span style="color: var(--mid-gray); padding: 0 4px;">...</span>
+                <button class="page-btn">8</button>
+                <button class="page-btn wide">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- Popular Posts -->
+            <div class="sidebar-widget">
+                <div class="sidebar-widget__head">Popularni Članci</div>
+                <div class="sidebar-widget__body">
+                    <div class="popular-post">
+                        <div class="popular-post__num">01</div>
+                        <div>
+                            <a href="blog-post.html"><div class="popular-post__title">Trendovi u Dizajnu Kupatila za 2025.</div></a>
+                            <div class="popular-post__date">15. Feb 2025.</div>
+                        </div>
+                    </div>
+                    <div class="popular-post">
+                        <div class="popular-post__num">02</div>
+                        <div>
+                            <a href="blog-post.html"><div class="popular-post__title">Porcelanski Granit vs. Keramika</div></a>
+                            <div class="popular-post__date">2. Mar 2025.</div>
+                        </div>
+                    </div>
+                    <div class="popular-post">
+                        <div class="popular-post__num">03</div>
+                        <div>
+                            <a href="blog-post.html"><div class="popular-post__title">Walk-in Tuš Kabine: Kompletni Vodič</div></a>
+                            <div class="popular-post__date">10. Feb 2025.</div>
+                        </div>
+                    </div>
+                    <div class="popular-post">
+                        <div class="popular-post__num">04</div>
+                        <div>
+                            <a href="blog-post.html"><div class="popular-post__title">Specifikacija Pločica u BIM Projektima</div></a>
+                            <div class="popular-post__date">18. Feb 2025.</div>
+                        </div>
+                    </div>
+                    <div class="popular-post">
+                        <div class="popular-post__num">05</div>
+                        <div>
+                            <a href="blog-post.html"><div class="popular-post__title">Bež i Terako Tonovi u Kupatilu</div></a>
+                            <div class="popular-post__date">22. Feb 2025.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter-widget">
+                <h3>Budite u Toku</h3>
+                <p>Primajte nove savete i trendove direktno u inbox. Bez spama.</p>
+                <input type="email" placeholder="Vaša email adresa">
+                <button>Pretplatite Se</button>
+            </div>
+
+            <!-- Tag Cloud -->
+            <div class="sidebar-widget">
+                <div class="sidebar-widget__head">Tagovi</div>
+                <div class="sidebar-widget__body">
+                    <div class="tag-cloud">
+                        <span class="tag">Pločice</span>
+                        <span class="tag">Kupatilo</span>
+                        <span class="tag">Dizajn</span>
+                        <span class="tag">Trendovi 2025</span>
+                        <span class="tag">Porcelan</span>
+                        <span class="tag">Renovacija</span>
+                        <span class="tag">Tau Ceramica</span>
+                        <span class="tag">Walk-in Tuš</span>
+                        <span class="tag">Grohe</span>
+                        <span class="tag">Mozaik</span>
+                        <span class="tag">Terako</span>
+                        <span class="tag">Arhitektura</span>
+                        <span class="tag">BIM</span>
+                        <span class="tag">Mermerne Pločice</span>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+</div>
+
+<!-- CTA -->
+<section class="blog-cta">
+    <div class="container">
+        <h2 class="blog-cta__title">Pronašli ste inspiraciju?</h2>
+        <p class="blog-cta__sub">Pogledajte naš asortiman ili zakažite posetu salonu za stručni savet.</p>
+        <div class="blog-cta__btns">
+            <a href="categories.html" class="btn-primary">Pregledajte Proizvode</a>
+            <a href="kontakt.html" class="btn-outline">Zakažite Posetu</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    function filterCat(btn, cat) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cards = document.querySelectorAll('.post-card');
+        cards.forEach(card => {
+            if (cat === 'all' || card.dataset.cat === cat) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function searchBlog() {
+        const q = document.getElementById('blogSearch').value.trim();
+        if (q) window.location.href = `pretraga.html?q=${encodeURIComponent(q)}`;
+    }
+
+    document.getElementById('blogSearch').addEventListener('keydown', e => {
+        if (e.key === 'Enter') searchBlog();
+    });
+
+    function sortPosts(val) {
+        // Placeholder — in WP this triggers a new query
+        console.log('Sort by:', val);
+    }
+</script>
+
+</body>
+</html>
