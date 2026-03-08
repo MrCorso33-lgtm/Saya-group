@@ -1,110 +1,73 @@
-# Uputstvo za Integraciju HTML Prototipa u WordPress
+# Uputstvo za Integraciju HTML Prototipa u WordPress (Custom-Code-First)
 
 **Autor:** Manus AI
 **Datum:** 08. Mart 2026.
+**Verzija:** 2.0
 
-## 1. Uvod
+## 1. Uvod i Filozofija
 
-Ovaj dokument pruža detaljno uputstvo za integraciju statičkog HTML/CSS/JS prototipa u postojeću WordPress instalaciju sa **Elementor Pro** i **Crocoblock (JetEngine)** pluginovima. Cilj je da se iskoristi maksimalan potencijal postojećih alata za kreiranje dinamičkog sajta koji je lak za održavanje, uz zadržavanje dizajna i funkcionalnosti prototipa.
+Ovaj dokument pruža uputstvo za integraciju statičkog HTML prototipa u WordPress, prateći **"Custom Code First"** filozofiju. Cilj je da se iskoristi naš postojeći, optimizovan kod za frontend (header, footer, search, mega meni), a da se pluginovi (Elementor, Crocoblock) koriste isključivo tamo gde su neophodni — za upravljanje dinamičkim podacima i kompleksnim backend funkcionalnostima (WooCommerce, CPT, AJAX filteri).
 
-## 2. Analiza postojećih pluginova
+Ovim pristupom zadržavamo potpunu kontrolu nad performansama i izgledom ključnih delova sajta, dok istovremeno koristimo moćne alate za ono što oni najbolje rade.
 
-Na osnovu pregleda `plugins.php` stranice, identifikovan je sledeći ključni set alata:
+## 2. Analiza postojećih pluginova i njihov opseg
 
-| Plugin | Svrha | Status |
+Pluginovi se koriste samo za ono što je apsolutno neophodno.
+
+| Plugin | Svrha | Opseg korišćenja |
 | :--- | :--- | :--- |
-| **Elementor Pro** | Glavni page builder | Aktivan |
-| **WooCommerce** | E-commerce platforma | Aktivan |
-| **JetEngine** | Kreiranje Custom Post Types (CPT), taksonomija, meta polja | Aktivan |
-| **JetSmartFilters** | Napredno filtriranje (AJAX) | Aktivan |
-| **JetWooBuilder** | Template-i za WooCommerce stranice | Aktivan |
-| **JetProductGallery** | Galerije za proizvode | Aktivan |
-| **JetCompareWishlist** | Funkcionalnost poređenja i liste želja | Aktivan |
-| **JetSearch** | Napredna pretraga (AJAX) | Aktivan |
-| **JetMenu** | Kreiranje mega menija | Aktivan |
+| **Elementor Pro** | Page Builder za sadržaj | Koristi se za kreiranje tela (body) stranica, **ne za header/footer** |
+| **WooCommerce** | E-commerce platforma | Osnova za proizvode, korpu, plaćanje |
+| **JetEngine** | Dinamički podaci | **Neophodan** za CPT (Projekti), taksonomije (Brendovi) i meta polja |
+| **JetSmartFilters** | AJAX Filteri | **Neophodan** za filtriranje proizvoda i projekata |
+| **JetWooBuilder** | Templejti za WooCommerce | **Neophodan** za dinamičke stranice kategorija i proizvoda |
+| **JetProductGallery** | Galerije za proizvode | Preporučeno za napredne galerije na PDP-u |
+| **JetCompareWishlist** | Lista želja / Poređenje | Koristi se |
+| ~~JetSearch~~ | ~~Pretraga~~ | **Ne koristi se.** Koristimo našu custom implementaciju. |
+| ~~JetMenu~~ | ~~Meni~~ | **Ne koristi se.** Koristimo našu custom implementaciju. |
 
-Ovaj set alata je **idealan** za implementaciju svih funkcionalnosti iz prototipa bez potrebe za dodatnim pluginovima.
+## 3. Strategija integracije
 
-## 3. Strategija integracije: Od statike do dinamike
+### 3.1. Header, Footer i Meni (100% Custom Code)
 
-Osnovna strategija je da se statički HTML elementi zamene dinamičkim Elementor widgetima i JetEngine listingima. Globalni stilovi (fontovi, boje) će biti definisani u Elementor Site Settings, a specifični stilovi će biti dodati kao Custom CSS gde je potrebno.
+Naš postojeći kod za header, footer i mega meni je već napisan i optimizovan. Nema potrebe za JetMenu ili Elementor Header/Footer.
 
-### 3.1. Globalni stilovi (Elementor Site Settings)
+1.  **Kreiranje `header.php` i `footer.php`:** U vašem WordPress child theme-u, kreirajte fajlove `header.php` i `footer.php`.
+2.  **Kopiranje koda:**
+    *   Iz `index.html` prototipa, kopirajte sav kod od početka do `<main>` taga u `header.php`.
+    *   Kopirajte sav kod od `</main>` taga do kraja u `footer.php`.
+3.  **WordPress Funkcije:**
+    *   U `header.php`, zamenite statički `<title>` tag sa `wp_head();`.
+    *   U `footer.php`, pre `</body>` taga, dodajte `wp_footer();`.
+4.  **Meni:** Statički meni u `header.php` zamenite sa `wp_nav_menu()`. Biće potrebno registrovati novu menu lokaciju u `functions.php` i potencijalno napisati custom Walker klasu da bi se HTML struktura mega menija poklopila 100% sa našim CSS-om.
 
-Prvi korak je definisanje globalnih stilova u Elementor-u kako bi se osigurala konzistentnost. Idite na **WordPress Dashboard → Elementor → Settings → Site Settings**.
+### 3.2. Pretraga (100% Custom Code)
 
-- **Global Colors:** Unesite sve boje iz `:root` CSS varijabli prototipa (`--primary`, `--secondary`, `--background` itd.).
-- **Global Fonts:** Definišite globalne fontove (Playfair Display za naslove, Montserrat za tekst).
-- **Typography:** Podesite osnovnu tipografiju za Body, H1, H2, H3 itd.
-- **Buttons:** Stilizuhte globalni izgled dugmadi.
+Naš header već ima search bar i prateći CSS/JS. Ne treba nam JetSearch.
 
-### 3.2. Kreiranje Header-a i Footer-a (JetThemeCore)
+1.  **Forma:** U `header.php`, `action` atribut forme za pretragu treba da pokazuje na home URL: `action="<?php echo home_url( '/' ); ?>"`.
+2.  **Kreiranje `search.php`:** Kreirajte `search.php` fajl u vašem child theme-u. Ovo je templejt koji će WordPress automatski koristiti za prikaz rezultata pretrage.
+3.  **WordPress Loop:** Unutar `search.php`, koristite standardni WordPress loop da prikažete rezultate (`if ( have_posts() ) : while ( have_posts() ) : the_post(); ...`). Stilizuhte prikaz rezultata koristeći postojeći CSS.
+4.  **AJAX (Opciono):** Ako želite da zadržite AJAX funkcionalnost (rezultati uživo), biće potrebno napisati custom JavaScript koji šalje upite na WordPress REST API ili `admin-ajax.php` i prikazuje rezultate.
 
-Prototip namerno nema header i footer. Potrebno ih je kreirati kao globalne templejte.
+### 3.3. Globalni stilovi (Elementor + Custom CSS)
 
-1. Idite na **Crocoblock → JetThemeCore → Theme Builder**.
-2. Kreirajte novi **Header** templejt i dodelite ga na **Entire Site**.
-3. Koristite **JetMenu** widget da rekreirate navigaciju iz prototipa, uključujući mega meni za brendove.
-4. Kreirajte novi **Footer** templejt i dodelite ga na **Entire Site**.
+1.  **Elementor Site Settings:** Unesite globalne boje i fontove iz prototipa da bi Elementor widgeti bili konzistentni.
+2.  **Glavni CSS:** CSS za header, footer i ostale custom elemente treba da se učitava preko `functions.php` (`wp_enqueue_style`).
 
-## 4. Integracija po stranicama
+## 4. Integracija po stranicama (Ažurirani pristup)
 
-### 4.1. Homepage (`index.html`)
+Za sve stranice, koristite `get_header();` na početku i `get_footer();` na kraju templejta.
 
-1. Kreirajte novu stranicu u WordPressu i otvorite je sa Elementorom.
-2. **Hero sekcija:** Koristite Elementor-ov **Slides** widget.
-3. **Featured Categories:** Koristite JetEngine **Listing Grid** widget. Kreirajte Listing Item templejt koji prikazuje WooCommerce kategorije (slika, naziv).
-4. **Novi Proizvodi / Popularni Proizvodi:** Koristite JetWooBuilder **Products Grid** widget.
-5. **Inspirišite Se Našim Projektima:** Koristite JetEngine **Listing Grid**. Biće potrebno kreirati CPT "Projekti" (vidi sekciju 5.1).
-6. **Brendovi:** Koristite **Image Carousel** widget sa logoima brendova.
+| Stranica | Implementacija | Pluginovi |
+| :--- | :--- | :--- |
+| **Homepage** | Elementor za body. | Elementor, JetEngine (za listinge) |
+| **Kategorije** | JetWooBuilder Category Template. | JetWooBuilder, JetSmartFilters |
+| **Proizvod (PDP)** | JetWooBuilder Single Product Template. | JetWooBuilder, JetProductGallery |
+| **Brendovi** | Elementor + JetEngine Listing Grid za taksonomiju "Brendovi". | Elementor, JetEngine, JetSmartFilters |
+| **Inspiracija** | Elementor + JetEngine Listing Grid za CPT "Projekti". | Elementor, JetEngine, JetSmartFilters |
+| **Single Projekat** | JetThemeCore Single Post Template za CPT "Projekti". | JetThemeCore, JetEngine |
 
-### 4.2. Stranica Pretrage (`pretraga.html`)
+## 5. Zaključak (Revidirano)
 
-**JetSearch** je ključan za ovu funkcionalnost.
-
-1. U header-u, zamenite statičku search ikonu sa **JetSearch AJAX Search** widgetom.
-2. U podešavanjima widgeta, definišite koje sve post type-ove želite da pretražuje (Products, Posts, Pages, Projekti, Brendovi).
-3. Stilizuhte rezultate koji se pojavljuju uživo (live search) da se poklapaju sa dizajnom prototipa.
-4. Nije potrebno kreirati posebnu `pretraga.html` stranicu — JetSearch sve radi kroz AJAX overlay.
-
-### 4.3. Stranice Kategorija (`plocice.html`, `sanitarije.html`...)
-
-Ovo su WooCommerce arhivske stranice.
-
-1. Idite na **Crocoblock → JetWooBuilder** i kreirajte novi **Category Template**.
-2. Dodelite templejt svim željenim kategorijama proizvoda.
-3. Unutar templejta, koristite **Products Loop** widget iz JetWooBuilder-a da prikažete proizvode.
-4. **Filteri:** Sa leve strane, dodajte **JetSmartFilters** widgete (Sorting, Rating, Price Range, Checkboxes za atribute kao što su dimenzije, boja, završna obrada).
-
-### 4.4. Stranica Proizvoda (PDP - `product-carrara-white.html`)
-
-1. Idite na **Crocoblock → JetWooBuilder** i kreirajte novi **Single Product Template**.
-2. Koristite **JetProductGallery** widget za glavnu sliku i thumbnail-e.
-3. Koristite standardne WooCommerce widgete iz JetWooBuilder-a za naziv, cenu, opis, Add to Cart dugme.
-4. Za tabove (Opis, Specifikacije, Recenzije), koristite **Tabs** widget i u njega ubacite dinamičke podatke.
-
-### 4.5. Stranica Brendova (`brendovi.html`)
-
-1. Kreirajte novu taksonomiju "Brendovi" preko **JetEngine → Taxonomies** i povežite je sa **Products**.
-2. Svakom proizvodu dodelite odgovarajući brend.
-3. Kreirajte novu stranicu "Brendovi" i otvorite je sa Elementorom.
-4. Koristite **JetEngine Listing Grid** da prikažete sve termine iz taksonomije "Brendovi".
-5. Kreirajte **Listing Item** templejt za jedan brend (logo, naziv, opis, link ka arhivi).
-6. **Filter po kategoriji:** Dodajte **JetSmartFilters Checkboxes** widget koji filtrira brendove na osnovu WooCommerce kategorije proizvoda sa kojima su povezani.
-
-### 4.6. Stranice Inspiracije (`inspiracija.html`, `inspiracija-projekat.html`)
-
-Ovo zahteva kreiranje Custom Post Type-a.
-
-1. **Kreiranje CPT:** Idite na **JetEngine → Post Types** i kreirajte novi CPT pod nazivom "Projekti".
-2. **Meta Polja:** Dodajte meta polja za projekat: `prostor` (Kupatilo, Kuhinja...), `stil` (Moderno, Klasično...), `povrsina`, `lokacija`.
-3. **Povezivanje sa proizvodima:** Najvažniji korak. Dodajte **Related Posts** meta polje koje će vam omogućiti da za svaki projekat odaberete više proizvoda iz WooCommerce-a.
-4. **Arhiva (`inspiracija.html`):** Kreirajte novu stranicu i koristite **JetEngine Listing Grid** da prikažete sve "Projekti" postove. Dodajte **JetSmartFilters** za prostor i stil.
-5. **Single Projekat (`inspiracija-projekat.html`):** Kreirajte **Single Post Template** u JetThemeCore za CPT "Projekti".
-   - **Galerija:** Koristite standardni gallery widget.
-   - **Hotspots:** Elementor Pro ima **Image Hotspot** widget. Možete ga koristiti, ali za dinamičko povezivanje sa proizvodima, biće potrebno malo Custom JS-a ili alternativni pristup.
-   - **"Proizvodi iz ovog projekta":** Koristite **JetEngine Listing Grid** koji prikazuje povezane proizvode (iz koraka 3).
-
-## 5. Zaključak
-
-Kombinacija Elementor Pro i Crocoblock paketa pruža sve potrebne alate za vernu i funkcionalnu implementaciju HTML prototipa. Ključ uspeha leži u pravilnom postavljanju dinamičkih relacija kroz JetEngine (CPT, taksonomije, meta polja) i korišćenju JetWooBuilder-a za templejte WooCommerce stranica. Ovim pristupom, sajt će biti ne samo vizuelno identičan prototipu, već i potpuno dinamičan i lak za buduće ažuriranje od strane klijenta.
+Ovaj hibridni pristup je optimalan. Zadržavamo potpunu kontrolu i performanse nad ključnim delovima sajta (header, footer, search) koristeći naš postojeći, provereni kod. Istovremeno, delegiramo upravljanje kompleksnim, dinamičkim podacima (proizvodi, filteri, CPT) moćnim pluginovima koji su za to i napravljeni. Rezultat je sajt koji je brz, lak za održavanje i skalabilan.
