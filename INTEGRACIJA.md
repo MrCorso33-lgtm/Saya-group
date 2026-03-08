@@ -23,7 +23,7 @@ Pluginovi se koriste samo za ono što je apsolutno neophodno.
 | **JetWooBuilder** | Templejti za WooCommerce | **Neophodan** za dinamičke stranice kategorija i proizvoda |
 | **JetProductGallery** | Galerije za proizvode | Preporučeno za napredne galerije na PDP-u |
 | **JetCompareWishlist** | Lista želja / Poređenje | Koristi se |
-| ~~JetSearch~~ | ~~Pretraga~~ | **Ne koristi se.** Koristimo našu custom implementaciju. |
+| **JetSearch** | Pretraga (backend) | **Neophodan** — naš custom frontend poziva JetSearch REST endpoint |
 | ~~JetMenu~~ | ~~Meni~~ | **Ne koristi se.** Koristimo našu custom implementaciju. |
 
 ## 3. Strategija integracije
@@ -41,14 +41,14 @@ Naš postojeći kod za header, footer i mega meni je već napisan i optimizovan.
     *   U `footer.php`, pre `</body>` taga, dodajte `wp_footer();`.
 4.  **Meni:** Statički meni u `header.php` zamenite sa `wp_nav_menu()`. Biće potrebno registrovati novu menu lokaciju u `functions.php` i potencijalno napisati custom Walker klasu da bi se HTML struktura mega menija poklopila 100% sa našim CSS-om.
 
-### 3.2. Pretraga (100% Custom Code)
+### 3.2. Pretraga (Custom Frontend + JetSearch Backend)
 
-Naš header već ima search bar i prateći CSS/JS. Ne treba nam JetSearch.
+Naš header ima potpuno custom search UI (mega dropdown, keyboard navigacija, highlight, loading state). JetSearch se koristi **isključivo kao data source** — naš JS poziva njegov REST endpoint i prikazuje rezultate u našem custom dropdownu.
 
-1.  **Forma:** U `header.php`, `action` atribut forme za pretragu treba da pokazuje na home URL: `action="<?php echo home_url( '/' ); ?>"`.
-2.  **Kreiranje `search.php`:** Kreirajte `search.php` fajl u vašem child theme-u. Ovo je templejt koji će WordPress automatski koristiti za prikaz rezultata pretrage.
-3.  **WordPress Loop:** Unutar `search.php`, koristite standardni WordPress loop da prikažete rezultate (`if ( have_posts() ) : while ( have_posts() ) : the_post(); ...`). Stilizuhte prikaz rezultata koristeći postojeći CSS.
-4.  **AJAX (Opciono):** Ako želite da zadržite AJAX funkcionalnost (rezultati uživo), biće potrebno napisati custom JavaScript koji šalje upite na WordPress REST API ili `admin-ajax.php` i prikazuje rezultate.
+1.  **Aktivacija:** U kodu headera, u `CONFIG` objektu, promenite `prototypeMode: true` u `prototypeMode: false` i dodajte `apiUrl` koji pokazuje na JetSearch REST endpoint.
+2.  **JetSearch endpoint:** JetSearch izlaže REST API na adresi `/wp-json/jet-search/v1/search`. Naš `doSearch()` funkcija treba da šalje GET request na ovaj endpoint sa parametrima `search_query`, `post_type=product` i `posts_per_page=5`.
+3.  **Mapiranje odgovora:** JetSearch vraća JSON sa listom postova. Potrebno je mapirati polja (`post_title`, `permalink`, `price`, `thumbnail`) na naše `MOCK_PRODUCTS` strukturu.
+4.  **Rezultati pretrage (stranica):** Za stranicu sa svim rezultatima (kada korisnik pritisne Enter), koristite standardni WordPress `search.php` templejt u child theme-u, stilizovan prema prototipu.
 
 ### 3.3. Globalni stilovi (Elementor + Custom CSS)
 
