@@ -89,3 +89,32 @@ Naš `index.html` je podeljen na `header.php` i `footer.php`.
 | **Forme (Kontakt, Newsletter)** | Contact Form 7 ili WPForms + naši stilovi | Pouzdano i sigurno rešenje za forme. |
 
 Ovaj pristup minimizuje zavisnost od page buildera za ključne strukturne elemente, čime se dobija brz, unikatan i profesionalan sajt koji je lak za buduće održavanje.
+
+
+## 5. E-commerce Flow: Korpa, Plaćanje, Lista Želja
+
+Ove stranice su srce e-commerce funkcionalnosti. Pristup je hibridni: koristimo WooCommerce za backend logiku, a naš kod za frontend prikaz.
+
+### 5.1. Korpa (`/korpa/`)
+
+- **Implementacija:** Kreira se standardna WordPress stranica i dodeljuje joj se uloga "Cart Page" u WooCommerce podešavanjima (`WooCommerce > Settings > Advanced`).
+- **Templejt:** Kreira se custom templejt `woocommerce/cart/cart.php` u child theme-u. Unutar ovog fajla, preuzimamo HTML iz našeg `korpa.html` prototipa i integrišemo ga sa WooCommerce hook-ovima i funkcijama. Naš JS za quantity update (`changeQty`, `recalcSummary`) se modifikuje da koristi WooCommerce AJAX za ažuriranje korpe, umesto da samo menja vrednosti u DOM-u.
+- **Plugin:** **WooCommerce** (osnovna funkcionalnost).
+
+### 5.2. Plaćanje (`/placanje/`)
+
+- **Implementacija:** Slično kao korpa, stranica se dodeljuje u `WooCommerce > Settings > Advanced`.
+- **Templejt:** Kreira se custom templejt `woocommerce/checkout/form-checkout.php` u child theme-u. Naš HTML iz `placanje.html` se koristi kao osnova. Polja forme se povezuju sa WooCommerce checkout poljima. Naš JS za validaciju (`submitOrder`) se dopunjuje WooCommerce validacijom.
+- **Načini plaćanja:** U `WooCommerce > Settings > Payments`, aktiviraju se samo "Cash on delivery" i "Local pickup". Nema potrebe za dodatnim pluginovima.
+- **Plugin:** **WooCommerce** (osnovna funkcionalnost).
+
+### 5.3. Lista Želja (`/lista-zelja/`)
+
+- **Implementacija:** Koristi se **JetCompareWishlist** plugin, koji već imaš.
+- **Stranica:** Kreira se stranica i u nju se dodaje shortcode `[jet_wishlist]`.
+- **Templejt (napredni pristup):** Da bi se postigao naš custom dizajn, kreira se templejt za JetEngine Listing Grid koji prikazuje wishlist iteme. U Listing Item-u se koristi naš HTML za karticu proizvoda. Ovaj Listing Grid se onda prikazuje na stranici umesto default shortcode-a.
+- **"Pretvori u ponudu" dugme:** Ovo je custom funkcionalnost. U templejtu za wishlist item, dodaje se dugme koje na klik:
+    1. Skuplja sve proizvode iz liste želja (naziv, količina, SKU).
+    2. Preusmerava korisnika na `/kontakt/` stranicu.
+    3. Prosleđuje podatke kroz URL parametre, koje naš JS na kontakt stranici čita i automatski popunjava u poruci B2B forme.
+- **Plugin:** **JetCompareWishlist** (za backend logiku) + **JetEngine** (za custom prikaz).
