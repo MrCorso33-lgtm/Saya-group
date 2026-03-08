@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plaćanje - Saya Group</title>
+    <meta name="description" content="Završite vašu porudžbinu na Saya Group. Plaćanje pouzećem ili preuzimanje u salonu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C52669;
+            --primary-dark: #a01f56;
+            --secondary: #1A1A1A;
+            --background: #F7F2EC;
+            --accent: #D4AF37;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --mid-gray: #888;
+            --border: #E0E0E0;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --radius: 8px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-main); color: var(--secondary); background: var(--light-gray); line-height: 1.7; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── Breadcrumb ─── */
+        .breadcrumb { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 0; }
+        .breadcrumb__inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mid-gray); }
+        .breadcrumb__inner a { color: var(--mid-gray); transition: color 0.2s; }
+        .breadcrumb__inner a:hover { color: var(--primary); }
+        .breadcrumb__sep { color: #ccc; }
+        .breadcrumb__current { color: var(--secondary); font-weight: 500; }
+
+        /* ─── Progress Steps ─── */
+        .checkout-progress { background: var(--white); border-bottom: 1px solid var(--border); padding: 20px 0; }
+        .checkout-progress__inner { max-width: 600px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: center; }
+        .progress-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative; }
+        .progress-step:not(:last-child)::after { content: ''; position: absolute; top: 16px; left: calc(50% + 16px); right: calc(-50% + 16px); height: 2px; background: var(--border); z-index: 0; }
+        .progress-step.done:not(:last-child)::after { background: var(--primary); }
+        .progress-step__dot { width: 32px; height: 32px; border-radius: 50%; background: var(--border); color: var(--mid-gray); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; z-index: 1; position: relative; }
+        .progress-step.active .progress-step__dot { background: var(--primary); color: var(--white); }
+        .progress-step.done .progress-step__dot { background: var(--secondary); color: var(--white); }
+        .progress-step__label { font-size: 11px; font-weight: 600; color: var(--mid-gray); text-align: center; white-space: nowrap; }
+        .progress-step.active .progress-step__label { color: var(--primary); }
+        .progress-step.done .progress-step__label { color: var(--secondary); }
+
+        /* ─── Main Layout ─── */
+        .checkout-page { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; display: grid; grid-template-columns: 1fr 380px; gap: 28px; align-items: start; }
+
+        /* ─── Section Card ─── */
+        .checkout-section { background: var(--white); border-radius: 12px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 20px; }
+        .checkout-section:last-child { margin-bottom: 0; }
+        .section-title { font-family: var(--font-serif); font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section-number { width: 28px; height: 28px; background: var(--secondary); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+
+        /* ─── Form ─── */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .form-row.full { grid-template-columns: 1fr; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-label { font-size: 13px; font-weight: 600; color: var(--secondary); }
+        .form-label .req { color: var(--primary); margin-left: 2px; }
+        .form-input, .form-select, .form-textarea {
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-family: var(--font-main);
+            color: var(--secondary);
+            background: var(--white);
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--primary); }
+        .form-input::placeholder, .form-textarea::placeholder { color: #bbb; }
+        .form-textarea { resize: vertical; min-height: 90px; }
+        .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23888' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; appearance: none; }
+        .form-hint { font-size: 12px; color: var(--mid-gray); }
+
+        /* ─── Payment Options ─── */
+        .payment-option {
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .payment-option.selected { border-color: var(--primary); }
+        .payment-option__header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+        }
+        .payment-option__header input[type="radio"] { accent-color: var(--primary); width: 16px; height: 16px; flex-shrink: 0; }
+        .payment-option__icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .payment-option__text { flex: 1; }
+        .payment-option__name { font-size: 15px; font-weight: 600; }
+        .payment-option__desc { font-size: 12px; color: var(--mid-gray); }
+        .payment-option__body {
+            display: none;
+            padding: 0 18px 18px;
+            border-top: 1px solid var(--border);
+            background: #fafafa;
+        }
+        .payment-option.selected .payment-option__body { display: block; }
+        .payment-info-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--secondary);
+            line-height: 1.7;
+        }
+        .payment-info-box strong { color: var(--primary); }
+
+        /* ─── Delivery Options ─── */
+        .delivery-option { border: 1.5px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; transition: var(--transition); cursor: pointer; }
+        .delivery-option.selected { border-color: var(--primary); }
+        .delivery-option__header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
+        .delivery-option__header input[type="radio"] { accent-color: var(--primary); width: 16px; height: 16px; flex-shrink: 0; }
+        .delivery-option__icon { width: 40px; height: 40px; background: var(--light-gray); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .delivery-option__text { flex: 1; }
+        .delivery-option__name { font-size: 15px; font-weight: 600; }
+        .delivery-option__desc { font-size: 12px; color: var(--mid-gray); }
+        .delivery-option__price { font-size: 14px; font-weight: 700; color: #38a169; }
+        .delivery-option__body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); background: #fafafa; }
+        .delivery-option.selected .delivery-option__body { display: block; }
+        .store-info { margin-top: 14px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; font-size: 13px; line-height: 1.7; }
+        .store-info strong { display: block; font-size: 14px; margin-bottom: 4px; }
+
+        /* ─── Order Note ─── */
+        .order-note-toggle { background: none; border: none; font-size: 13px; color: var(--primary); cursor: pointer; font-family: var(--font-main); font-weight: 600; padding: 0; display: flex; align-items: center; gap: 6px; }
+        .order-note-toggle:hover { opacity: 0.8; }
+        .order-note-area { margin-top: 12px; display: none; }
+        .order-note-area.open { display: block; }
+
+        /* ─── Order Summary (sidebar) ─── */
+        .order-summary { background: var(--white); border-radius: 12px; padding: 28px; box-shadow: var(--shadow); position: sticky; top: 24px; }
+        .order-summary__title { font-family: var(--font-serif); font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+        .order-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; }
+        .order-item__img { width: 52px; height: 52px; border-radius: var(--radius); background: var(--light-gray); overflow: hidden; flex-shrink: 0; position: relative; }
+        .order-item__img img { width: 100%; height: 100%; object-fit: cover; }
+        .order-item__badge { position: absolute; top: -6px; right: -6px; background: var(--secondary); color: var(--white); font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .order-item__info { flex: 1; min-width: 0; }
+        .order-item__name { font-size: 13px; font-weight: 600; line-height: 1.3; }
+        .order-item__variant { font-size: 11px; color: var(--mid-gray); }
+        .order-item__price { font-size: 14px; font-weight: 700; flex-shrink: 0; }
+        .summary-divider { height: 1px; background: var(--border); margin: 16px 0; }
+        .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; }
+        .summary-row__label { color: var(--mid-gray); }
+        .summary-row__value { font-weight: 600; }
+        .summary-row--total { font-size: 16px; margin-top: 4px; }
+        .summary-row--total .summary-row__value { color: var(--primary); font-size: 22px; font-weight: 700; }
+
+        /* ─── Submit Button ─── */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; font-family: var(--font-main); white-space: nowrap; }
+        .btn--primary { background: var(--primary); color: var(--white); }
+        .btn--primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn--ghost { background: transparent; color: var(--mid-gray); border: 1.5px solid var(--border); }
+        .btn--ghost:hover { border-color: var(--primary); color: var(--primary); }
+        .submit-btn { width: 100%; justify-content: center; padding: 15px; font-size: 16px; margin-top: 8px; }
+        .terms-note { font-size: 12px; color: var(--mid-gray); text-align: center; margin-top: 12px; line-height: 1.6; }
+        .terms-note a { color: var(--primary); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 900px) {
+            .checkout-page { grid-template-columns: 1fr; }
+            .order-summary { position: static; order: -1; }
+        }
+        @media (max-width: 560px) {
+            .form-row { grid-template-columns: 1fr; }
+            .checkout-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav class="breadcrumb">
+    <div class="breadcrumb__inner">
+        <a href="index.html">Početna</a>
+        <span class="breadcrumb__sep">›</span>
+        <a href="korpa.html">Korpa</a>
+        <span class="breadcrumb__sep">›</span>
+        <span class="breadcrumb__current">Plaćanje</span>
+    </div>
+</nav>
+
+<!-- ===== CHECKOUT PROGRESS ===== -->
+<div class="checkout-progress">
+    <div class="checkout-progress__inner">
+        <div class="progress-step done">
+            <div class="progress-step__dot">✓</div>
+            <span class="progress-step__label">Korpa</span>
+        </div>
+        <div class="progress-step active">
+            <div class="progress-step__dot">2</div>
+            <span class="progress-step__label">Plaćanje</span>
+        </div>
+        <div class="progress-step">
+            <div class="progress-step__dot">3</div>
+            <span class="progress-step__label">Potvrda</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="checkout-page">
+
+    <!-- Left: Checkout Form -->
+    <div>
+
+        <!-- 1. Kontakt podaci -->
+        <div class="checkout-section">
+            <h2 class="section-title">
+                <span class="section-number">1</span>
+                Kontakt podaci
+            </h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Ime <span class="req">*</span></label>
+                    <input type="text" class="form-input" placeholder="Vaše ime" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prezime <span class="req">*</span></label>
+                    <input type="text" class="form-input" placeholder="Vaše prezime" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Telefon <span class="req">*</span></label>
+                    <input type="tel" class="form-input" placeholder="+381 6x xxx xxxx" required>
+                    <span class="form-hint">Koristimo za potvrdu porudžbine i dostavu</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email adresa</label>
+                    <input type="email" class="form-input" placeholder="vasa@email.com">
+                    <span class="form-hint">Za slanje potvrde porudžbine (opciono)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Adresa dostave -->
+        <div class="checkout-section" id="deliveryAddressSection">
+            <h2 class="section-title">
+                <span class="section-number">2</span>
+                Adresa dostave
+            </h2>
+            <div class="form-row full">
+                <div class="form-group">
+                    <label class="form-label">Ulica i broj <span class="req">*</span></label>
+                    <input type="text" class="form-input" placeholder="npr. Bulevar Oslobođenja 123" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Grad <span class="req">*</span></label>
+                    <input type="text" class="form-input" placeholder="Beograd" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Poštanski broj</label>
+                    <input type="text" class="form-input" placeholder="11000">
+                </div>
+            </div>
+            <div class="form-row full">
+                <div class="form-group">
+                    <label class="form-label">Napomena za dostavljača</label>
+                    <input type="text" class="form-input" placeholder="npr. 3. sprat, stan 12, interfon 12">
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Način dostave -->
+        <div class="checkout-section">
+            <h2 class="section-title">
+                <span class="section-number">3</span>
+                Način dostave
+            </h2>
+
+            <label class="delivery-option selected" onclick="selectDelivery('courier', this)">
+                <div class="delivery-option__header">
+                    <input type="radio" name="delivery" value="courier" checked>
+                    <div class="delivery-option__icon">🚚</div>
+                    <div class="delivery-option__text">
+                        <p class="delivery-option__name">Dostava kurirskom službom</p>
+                        <p class="delivery-option__desc">1–3 radna dana · Beograd i okolina</p>
+                    </div>
+                    <span class="delivery-option__price">Besplatno</span>
+                </div>
+                <div class="delivery-option__body">
+                    <div class="payment-info-box">
+                        Dostava je <strong>besplatna</strong> za porudžbine iznad 50.000 RSD. Za manje porudžbine, cena dostave se dogovara. Naš tim će vas kontaktirati radi dogovora termina dostave.
+                    </div>
+                </div>
+            </label>
+
+            <label class="delivery-option" onclick="selectDelivery('store', this)">
+                <div class="delivery-option__header">
+                    <input type="radio" name="delivery" value="store">
+                    <div class="delivery-option__icon">🏪</div>
+                    <div class="delivery-option__text">
+                        <p class="delivery-option__name">Preuzimanje u salonu</p>
+                        <p class="delivery-option__desc">Odmah dostupno · Surčinska 94, Novi Beograd</p>
+                    </div>
+                    <span class="delivery-option__price">Besplatno</span>
+                </div>
+                <div class="delivery-option__body">
+                    <div class="store-info">
+                        <strong>Saya Group Salon — Novi Beograd</strong>
+                        Surčinska 94, 11070 Novi Beograd<br>
+                        Pon–Pet: 08:00–20:00 · Sub: 08:00–15:00 · Ned: 09:00–15:00<br>
+                        Tel: <a href="tel:+381113131313" style="color:var(--primary);">+381 11 313 13 13</a>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <!-- 4. Način plaćanja -->
+        <div class="checkout-section">
+            <h2 class="section-title">
+                <span class="section-number">4</span>
+                Način plaćanja
+            </h2>
+
+            <label class="payment-option selected" onclick="selectPayment('cod', this)">
+                <div class="payment-option__header">
+                    <input type="radio" name="payment" value="cod" checked>
+                    <div class="payment-option__icon">💵</div>
+                    <div class="payment-option__text">
+                        <p class="payment-option__name">Plaćanje pouzećem</p>
+                        <p class="payment-option__desc">Platite gotovinom pri preuzimanju</p>
+                    </div>
+                </div>
+                <div class="payment-option__body">
+                    <div class="payment-info-box">
+                        Platite gotovinom dostavljaču pri preuzimanju pošiljke. <strong>Nema skrivenih troškova.</strong> Iznos koji plaćate je tačno onaj koji vidite u pregledu porudžbine.
+                    </div>
+                </div>
+            </label>
+
+            <label class="payment-option" onclick="selectPayment('store', this)">
+                <div class="payment-option__header">
+                    <input type="radio" name="payment" value="store">
+                    <div class="payment-option__icon">🏪</div>
+                    <div class="payment-option__text">
+                        <p class="payment-option__name">Plaćanje u salonu</p>
+                        <p class="payment-option__desc">Gotovina ili kartica pri preuzimanju u salonu</p>
+                    </div>
+                </div>
+                <div class="payment-option__body">
+                    <div class="payment-info-box">
+                        Platite pri preuzimanju u našem salonu u Novom Beogradu. Prihvatamo <strong>gotovinu i sve kartice</strong> (Visa, Mastercard, Dina). Dostupno i plaćanje na rate (do 12 rata bez kamate za iznose iznad 30.000 RSD).
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        <!-- 5. Napomena uz porudžbinu -->
+        <div class="checkout-section">
+            <h2 class="section-title" style="margin-bottom:0; padding-bottom:0; border:none;">
+                <span class="section-number">5</span>
+                Napomena uz porudžbinu
+            </h2>
+            <div style="margin-top:16px;">
+                <button class="order-note-toggle" onclick="toggleNote(this)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Dodaj napomenu (opciono)
+                </button>
+                <div class="order-note-area" id="orderNoteArea">
+                    <textarea class="form-textarea" placeholder="Posebni zahtevi, napomene za montažu, specifično vreme dostave..."></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Right: Order Summary -->
+    <aside>
+        <div class="order-summary">
+            <h2 class="order-summary__title">Vaša porudžbina</h2>
+
+            <!-- Order Items -->
+            <div class="order-item">
+                <div class="order-item__img">
+                    <img src="https://placehold.co/52x52/f0ebe3/888?text=T" alt="Carrara White" loading="lazy">
+                    <span class="order-item__badge">14</span>
+                </div>
+                <div class="order-item__info">
+                    <p class="order-item__name">Carrara White Polished 60×60</p>
+                    <p class="order-item__variant">Tau Ceramica · 14 m²</p>
+                </div>
+                <span class="order-item__price">38.080 RSD</span>
+            </div>
+
+            <div class="order-item">
+                <div class="order-item__img">
+                    <img src="https://placehold.co/52x52/e8e0d5/888?text=G" alt="Grohe" loading="lazy">
+                    <span class="order-item__badge">1</span>
+                </div>
+                <div class="order-item__info">
+                    <p class="order-item__name">Essence Single-Lever Basin Mixer</p>
+                    <p class="order-item__variant">Grohe · Chrome</p>
+                </div>
+                <span class="order-item__price">18.400 RSD</span>
+            </div>
+
+            <div class="order-item">
+                <div class="order-item__img">
+                    <img src="https://placehold.co/52x52/ddd8d0/888?text=K" alt="Kolpa San" loading="lazy">
+                    <span class="order-item__badge">1</span>
+                </div>
+                <div class="order-item__info">
+                    <p class="order-item__name">Kado Freestanding Bath 170×75</p>
+                    <p class="order-item__variant">Kolpa San · Bela</p>
+                </div>
+                <span class="order-item__price">89.900 RSD</span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-row">
+                <span class="summary-row__label">Međuzbir</span>
+                <span class="summary-row__value">146.380 RSD</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-row__label">Dostava</span>
+                <span class="summary-row__value" style="color:#38a169;">Besplatno</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row summary-row--total">
+                <span class="summary-row__label">Ukupno</span>
+                <span class="summary-row__value">146.380 RSD</span>
+            </div>
+            <p style="font-size:12px; color:var(--mid-gray); margin-bottom:20px; margin-top:6px;">Uključuje PDV.</p>
+
+            <button class="btn btn--primary submit-btn" onclick="submitOrder()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Potvrdi porudžbinu
+            </button>
+
+            <p class="terms-note">
+                Klikom na dugme potvrđujete da ste pročitali i prihvatili naše
+                <a href="#">Uslove korišćenja</a> i <a href="#">Politiku privatnosti</a>.
+            </p>
+
+            <div class="summary-divider"></div>
+
+            <!-- Trust -->
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:center; gap:10px; font-size:12px; color:var(--mid-gray);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38a169" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Vaši podaci su zaštićeni i neće biti deljeni
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; font-size:12px; color:var(--mid-gray);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38a169" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Podrška: +381 11 313 13 13 (Pon–Ned)
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; font-size:12px; color:var(--mid-gray);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38a169" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+                    Besplatni povrat u roku od 14 dana
+                </div>
+            </div>
+        </div>
+    </aside>
+
+</main>
+
+<script>
+    // ─── Delivery Selection ───
+    function selectDelivery(type, el) {
+        document.querySelectorAll('.delivery-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+        // Show/hide address section
+        const addrSection = document.getElementById('deliveryAddressSection');
+        if (type === 'store') {
+            addrSection.style.opacity = '0.4';
+            addrSection.style.pointerEvents = 'none';
+        } else {
+            addrSection.style.opacity = '1';
+            addrSection.style.pointerEvents = 'auto';
+        }
+    }
+
+    // ─── Payment Selection ───
+    function selectPayment(type, el) {
+        document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    // ─── Order Note Toggle ───
+    function toggleNote(btn) {
+        const area = document.getElementById('orderNoteArea');
+        area.classList.toggle('open');
+        if (area.classList.contains('open')) {
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg> Ukloni napomenu';
+        } else {
+            btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Dodaj napomenu (opciono)';
+        }
+    }
+
+    // ─── Submit Order ───
+    function submitOrder() {
+        // Basic validation
+        const required = document.querySelectorAll('input[required]');
+        let valid = true;
+        required.forEach(input => {
+            if (!input.value.trim()) {
+                input.style.borderColor = '#e53e3e';
+                valid = false;
+            } else {
+                input.style.borderColor = '';
+            }
+        });
+        if (!valid) {
+            alert('Molimo popunite sva obavezna polja.');
+            return;
+        }
+        // Redirect to confirmation page (prototype)
+        window.location.href = 'zahvalnica.html';
+    }
+</script>
+</body>
+</html>
